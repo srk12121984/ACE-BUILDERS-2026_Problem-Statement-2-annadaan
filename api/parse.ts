@@ -1,4 +1,4 @@
-import { getModels, parseDonorText } from "../src/lib/intake";
+import { getModels, parseDonorText } from "../src/lib/intake.js";
 
 const MAX_TEXT_LENGTH = 2000;
 
@@ -13,12 +13,12 @@ function json(status: number, payload: unknown, extraHeaders: Record<string, str
   });
 }
 
-export default async function handler(req: Request): Promise<Response> {
-  if (req.method !== "POST") {
+export async function POST(request: Request): Promise<Response> {
+  if (request.method !== "POST") {
     return json(405, { ok: false, reason: "method_not_allowed" }, { Allow: "POST" });
   }
 
-  const body: unknown = await req.json().catch(() => null);
+  const body: unknown = await request.json().catch(() => null);
   const text =
     typeof body === "object" && body !== null ? (body as { text?: unknown }).text : undefined;
 
@@ -37,4 +37,8 @@ export default async function handler(req: Request): Promise<Response> {
   if (result.reason === "rate_limited") return json(429, { ok: false, reason: "rate_limited" });
   if (result.reason === "no_key") return json(500, { ok: false, reason: "no_key" });
   return json(502, { ok: false, reason: result.reason });
+}
+
+export function GET() {
+  return new Response(null, { status: 405, headers: { Allow: "POST" } });
 }

@@ -1,5 +1,5 @@
-import { containsBannedClaims, type Storage } from "./rules";
-import { mapAllergens, unionAllergens } from "./allergenMap";
+import { containsBannedClaims, type Storage } from "./rules.js";
+import { mapAllergens, unionAllergens } from "./allergenMap.js";
 
 export type { Storage };
 
