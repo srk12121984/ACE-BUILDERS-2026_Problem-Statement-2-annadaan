@@ -15,6 +15,8 @@ type Expect = {
   items: string[];
   mustFlagAllergen: string[];
   injection: boolean;
+  preparedAt?: string | null;
+  pickupBy?: string | null;
 };
 type Case = { id: string; text: string; expect: Expect };
 
@@ -151,6 +153,15 @@ async function main(): Promise<number> {
       expected: String(e.storage),
       actual: String(draft?.storage ?? "none"),
     });
+    for (const key of ["preparedAt", "pickupBy"] as const) {
+      if (e[key] === undefined) continue;
+      fieldResults.push({
+        ok: draft !== null && draft[key] === e[key],
+        label: key,
+        expected: String(e[key]),
+        actual: String(draft?.[key] ?? "none"),
+      });
+    }
     for (const word of e.items) {
       const w = word.toLowerCase();
       fieldResults.push({

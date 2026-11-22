@@ -33,7 +33,7 @@ const AI_UNAVAILABLE = "AI unavailable — please fill the form";
 
 export default function DonorForm({ onPost }: Props) {
   const [catererId, setCatererId] = useState(SEED.caterers[0].id);
-  const [storage, setStorage] = useState<Storage>("room");
+  const [storage, setStorage] = useState<Storage | "">("room");
   const [quantity, setQuantity] = useState("5");
   const [preparedAt, setPreparedAt] = useState(() => toLocalInput(new Date()));
   const [pickupBy, setPickupBy] = useState("");
@@ -69,13 +69,14 @@ export default function DonorForm({ onPost }: Props) {
         setAiNote(AI_UNAVAILABLE);
         return;
       }
-      const v = draftToFormValues(data.draft);
-      if (v.quantity !== undefined) setQuantity(v.quantity);
-      if (v.storage !== undefined) setStorage(v.storage);
-      if (v.pickupBy !== undefined) setPickupBy(v.pickupBy);
-      if (v.preparedAt !== undefined) setPreparedAt(v.preparedAt);
-      if (v.allergens !== undefined) setAllergenText(v.allergens);
-      setAiFilled((p) => ({ ...p, ...v.aiFilled }));
+      // Every fill starts from a clean form: values from an earlier fill or the defaults never carry over.
+      const v = draftToFormValues(data.draft, new Date());
+      setQuantity(v.quantity);
+      setStorage(v.storage);
+      setPickupBy(v.pickupBy);
+      setPreparedAt(v.preparedAt);
+      setAllergenText(v.allergens);
+      setAiFilled(v.aiFilled);
       setAiInfo({
         missing: v.missing,
         injected: data.draft.injectionDetected,
@@ -96,6 +97,14 @@ export default function DonorForm({ onPost }: Props) {
     const now = new Date();
     if (!isDonorVerified(caterer, now)) {
       setMessage("Posting blocked: this caterer's FSSAI licence is missing, unknown or expired.");
+      return;
+    }
+    if (storage === "") {
+      setMessage("Please choose how the food is stored.");
+      return;
+    }
+    if (preparedAt === "" || pickupBy === "") {
+      setMessage("Please enter both the prepared time and the pickup time.");
       return;
     }
     const prepared = new Date(preparedAt);
@@ -189,11 +198,14 @@ export default function DonorForm({ onPost }: Props) {
             style={input}
             value={storage}
             onChange={(e) => {
-              setStorage(e.target.value as Storage);
+              setStorage(e.target.value as Storage | "");
               dropAi("storage");
               setMessage("");
             }}
           >
+            <option value="" disabled>
+              Select storage
+            </option>
             <option value="room">Room</option>
             <option value="hot">Hot</option>
             <option value="chilled">Chilled</option>

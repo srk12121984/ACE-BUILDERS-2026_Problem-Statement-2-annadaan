@@ -11,8 +11,8 @@ const raw = fs.readFileSync(
 const cases = JSON.parse(raw) as GoldenCase[];
 
 describe("golden intake set", () => {
-  it("has exactly 20 cases", () => {
-    expect(cases).toHaveLength(20);
+  it("has exactly 22 cases", () => {
+    expect(cases).toHaveLength(22);
   });
 
   it("has unique ids", () => {

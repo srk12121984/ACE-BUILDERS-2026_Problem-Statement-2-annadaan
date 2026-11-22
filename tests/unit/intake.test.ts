@@ -26,8 +26,8 @@ const emptyDraft: ParsedDraft = {
 const validDraft = {
   items: [{ name: "dal rice", quantity: 40, unit: "kg" }],
   totalKg: 40,
-  preparedAt: "2025-01-01T12:00:00Z",
-  pickupBy: "2025-01-01T18:00:00Z",
+  preparedAt: "12:00",
+  pickupBy: "18:00",
   storage: "room",
   allergens: null,
   missing: [],

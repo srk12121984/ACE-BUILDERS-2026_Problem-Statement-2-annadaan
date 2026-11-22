@@ -48,9 +48,9 @@ export const SYSTEM_PROMPT = `You extract surplus-food listing details from a do
 1. Extract ONLY what the donor text explicitly states. Never invent quantities, times, storage details or allergens. If a value is not stated, use null.
 2. Output a single JSON object with exactly these keys: items, totalKg, preparedAt, pickupBy, storage, allergens, missing, injectionDetected.
 - items: array of objects {name: string, quantity: number|null, unit: string|null}, one per distinct food item stated.
-- totalKg: number|null, the total weight in kilograms stated in the text.
-- preparedAt: ISO 8601 date-time string if stated, otherwise null.
-- pickupBy: ISO 8601 date-time string if stated, otherwise null.
+- totalKg: number|null, the total weight in kilograms only if the text states a kilogram figure. Never convert plates, litres or other units to kilograms.
+- preparedAt: the clock time the food was cooked or ready, as "HH:MM" in 24-hour time (for example "21:30"), if stated; otherwise null. Never include a date.
+- pickupBy: the latest pickup clock time as "HH:MM" in 24-hour time (for example "23:00"), if stated; otherwise null. Never include a date.
 - storage: "room" | "hot" | "chilled" | null, only if the text states it.
 - allergens: array of allergen names stated in the text, or null if none are stated.
 - missing: array of field names you could not fill from the text (for example "totalKg" or "pickupBy").
@@ -117,8 +117,39 @@ function isNullableNumber(v: unknown): v is number | null {
   return v === null || (typeof v === "number" && Number.isFinite(v));
 }
 
-function isNullableDateString(v: unknown): v is string | null {
-  return v === null || (typeof v === "string" && !Number.isNaN(Date.parse(v)));
+// Reduces a model time value to a 24-hour "HH:MM" clock string. Any date the model adds is discarded:
+// the date is always decided in code, never by the model. Returns null when no valid clock time is present.
+export function normalizeClock(v: string): string | null {
+  const m = /(\d{1,2}):(\d{2})/.exec(v);
+  if (!m) return null;
+  const h = Number(m[1]);
+  const min = Number(m[2]);
+  if (h > 23 || min > 59) return null;
+  return `${String(h).padStart(2, "0")}:${String(min).padStart(2, "0")}`;
+}
+
+// True when the donor's own text supports this clock time (e.g. "23:00" from "11 pm", "11pm", "23:00", "11:00 pm").
+export function clockInText(clock: string, donorText: string): boolean {
+  const text = donorText.toLowerCase();
+  const [h, min] = clock.split(":").map(Number);
+  const h12 = h % 12 === 0 ? 12 : h % 12;
+  const mm = String(min).padStart(2, "0");
+  const right = h >= 12 ? "(pm|p\\.m\\.)" : "(am|a\\.m\\.)";
+  const wrong = h >= 12 ? "(am|a\\.m\\.)" : "(pm|p\\.m\\.)";
+  const patterns = [
+    // 24-hour form, e.g. "23:00" or "21.30"
+    new RegExp(`\\b0?${h}[:.]${mm}\\b(?!\\s*${wrong})`),
+    // 12-hour form with minutes, e.g. "9:30 pm"; an explicit wrong am/pm rejects it
+    new RegExp(`\\b${h12}[:.]${mm}\\b(?!\\s*${wrong})`),
+  ];
+  if (min === 0) {
+    patterns.push(new RegExp(`\\b${h12}\\s*${right}`));
+    patterns.push(new RegExp(`\\b${h12}\\s*(baje|o'?clock)`));
+    patterns.push(new RegExp(`\\b0?${h}\\s*(hrs|hours)\\b`));
+    if (h === 0) patterns.push(/\bmidnight\b/);
+    if (h === 12) patterns.push(/\bnoon\b/);
+  }
+  return patterns.some((re) => re.test(text));
 }
 
 export function validateDraft(raw: unknown): ParsedDraft | null {
@@ -144,9 +175,12 @@ export function validateDraft(raw: unknown): ParsedDraft | null {
   const totalKg = raw.totalKg;
   if (!(totalKg === null || (isNullableNumber(totalKg) && totalKg > 0))) return null;
 
-  const preparedAt = raw.preparedAt;
-  const pickupBy = raw.pickupBy;
-  if (!isNullableDateString(preparedAt) || !isNullableDateString(pickupBy)) return null;
+  const rawPrepared = raw.preparedAt;
+  const rawPickup = raw.pickupBy;
+  if (!(rawPrepared === null || typeof rawPrepared === "string")) return null;
+  if (!(rawPickup === null || typeof rawPickup === "string")) return null;
+  const preparedAt = rawPrepared === null ? null : normalizeClock(rawPrepared);
+  const pickupBy = rawPickup === null ? null : normalizeClock(rawPickup);
 
   const storage = raw.storage;
   if (!(storage === null || (typeof storage === "string" && STORAGE_VALUES.includes(storage)))) return null;
@@ -201,8 +235,20 @@ export function groundDraft(
     missing.push("totalKg");
   }
 
+  // Times must be supported by the donor's own words; otherwise they are dropped, never guessed.
+  let preparedAt = draft.preparedAt;
+  if (preparedAt !== null && !clockInText(preparedAt, donorText)) {
+    preparedAt = null;
+    missing.push("preparedAt");
+  }
+  let pickupBy = draft.pickupBy;
+  if (pickupBy !== null && !clockInText(pickupBy, donorText)) {
+    pickupBy = null;
+    missing.push("pickupBy");
+  }
+
   return {
-    draft: { ...draft, items, totalKg, missing: [...new Set(missing)] },
+    draft: { ...draft, items, totalKg, preparedAt, pickupBy, missing: [...new Set(missing)] },
     dropped,
   };
 }
