@@ -1,0 +1,295 @@
+{
+  "pages": [
+    {
+      "name": "Home",
+      "route": "/",
+      "description": "Signed-in landing page that shows each person the next thing to do for their role.",
+      "personas": [
+        "Caterer Manager",
+        "NGO / Shelter / Community Kitchen Coordinator",
+        "Volunteer Driver",
+        "CSR Sponsor",
+        "Internal Platform Admin"
+      ],
+      "uses": {
+        "Caterer Manager": "start a new post and see their open listings",
+        "NGO / Shelter / Community Kitchen Coordinator": "see incoming offers waiting for a reply",
+        "Volunteer Driver": "see nearby pickups to take",
+        "CSR Sponsor": "open the sponsor dashboard",
+        "Internal Platform Admin": "see what needs review"
+      }
+    },
+    {
+      "name": "Login",
+      "route": "/login",
+      "description": "Sign-in screen where people enter the app, including the role switcher used in the demo. Also on this screen: Add a Forgot password link that calls POST /api/auth/forgot-password and shows the same confirmation whether or not the account exists.",
+      "personas": [
+        "Caterer Manager",
+        "NGO / Shelter / Community Kitchen Coordinator",
+        "Volunteer Driver",
+        "CSR Sponsor",
+        "Internal Platform Admin"
+      ],
+      "uses": {
+        "Caterer Manager": "sign in to post surplus",
+        "NGO / Shelter / Community Kitchen Coordinator": "sign in to see offers",
+        "Volunteer Driver": "sign in to see pickups",
+        "CSR Sponsor": "sign in to see the dashboard",
+        "Internal Platform Admin": "sign in to run admin tasks"
+      }
+    },
+    {
+      "name": "Sign Up",
+      "route": "/signup",
+      "description": "Open sign-up where people create their own account to use Annadaan. Also on this screen: On Caterer sign-up, after POST /api/auth/register, call POST /api/my/donors with name, zone and contact so the donor business is created unverified. Also on this screen: Send zone and contact with POST /api/auth/register so they are stored on the user; POST /api/auth/register must accept them.",
+      "personas": [
+        "Caterer Manager",
+        "CSR Sponsor"
+      ],
+      "uses": {
+        "Caterer Manager": "create a donor account",
+        "CSR Sponsor": "create a sponsor account"
+      }
+    },
+    {
+      "name": "Profile",
+      "route": "/profile",
+      "description": "Where a person sees and changes their own details, enters a licence number and signs out. Also on this screen: Add a Change password section that calls POST /api/auth/change-password after the current password is checked. Also on this screen: Add zone and contact fields to Personal details, saved through PATCH /api/auth/me, which must accept them. Also on this screen: For a receiver coordinator, show the linked receiver organisation's registration number, verification status and expiry (read only), loaded from GET /api/my/receivers.",
+      "personas": [
+        "Caterer Manager",
+        "NGO / Shelter / Community Kitchen Coordinator",
+        "Volunteer Driver",
+        "CSR Sponsor",
+        "Internal Platform Admin"
+      ],
+      "uses": {
+        "Caterer Manager": "enter FSSAI number and see the verified badge; sign out",
+        "NGO / Shelter / Community Kitchen Coordinator": "check own details and FSSAI status; sign out",
+        "Volunteer Driver": "update availability and vehicle; sign out",
+        "CSR Sponsor": "update own details; sign out",
+        "Internal Platform Admin": "update own details; sign out"
+      }
+    },
+    {
+      "name": "Users",
+      "route": "/users",
+      "description": "Where accounts are added and invited, roles are given, and accounts are deactivated. Also on this screen: Add Receivers, Volunteers and Donors sections listing them from GET /api/admin/receivers, GET /api/admin/volunteers and GET /api/admin/donors, with edit through the PATCH endpoints and deactivate or reactivate through is_active. Also on this screen: Add a Reactivate action on deactivated accounts that calls POST /api/admin/users/{userId}/reactivate.",
+      "personas": [
+        "Internal Platform Admin"
+      ],
+      "uses": {
+        "Internal Platform Admin": "add receivers and volunteers, give roles, deactivate accounts"
+      }
+    },
+    {
+      "name": "Listings",
+      "route": "/listings",
+      "description": "List of surplus food listings with their status and consume-by time.",
+      "personas": [
+        "Caterer Manager",
+        "Internal Platform Admin"
+      ],
+      "uses": {
+        "Caterer Manager": "see own posts and their status; open one to act on it",
+        "Internal Platform Admin": "see all listings and filter for flagged ones"
+      }
+    },
+    {
+      "name": "Listing Detail",
+      "route": "/listings/[id]",
+      "description": "One listing with its handling card, live status, donation record and the donor's actions. Also on this screen: When a volunteer is assigned, show the one-time handover code to the donor, returned by GET /api/my/listings/{listingId} in its offer summary, with a note to give it to the volunteer at collection. Also on this screen: Show Cancel listing also when the listing is claimed, with a warning that the volunteer is stood down and the receiver is told, calling POST /api/my/listings/{listingId}/cancel. Also on this screen: Add an Edit action while the listing is posted and unclaimed, letting the donor change pickup-by time, storage, pickup point and items through PATCH /api/my/listings/{listingId} and the item endpoints. Also on this screen: For the admin, add a Flag listing action with a reason that calls POST /api/listings/{listingId}/flag-reviews. Also on this screen: For the platform admin, add a Flag listing action with a reason that calls POST /api/listings/{listingId}/flag-reviews, then shows the flag in the Admin flags panel. Also on this screen: In the Admin flags panel, add a Raise flag form (reason and details) that calls POST /api/listings/{listingId}/flag-reviews and shows the new flag. Also on this screen: While the listing is posted and not yet claimed, let the donor edit pickup-by time, storage and items, saving through PATCH /api/my/listings/{listingId} and the items endpoints (POST, PATCH, DELETE /api/my/listings/{listingId}/items). Also on this screen: In the admin flags panel, add a Flag listing action with a reason that calls POST /api/listings/{listingId}/flag-reviews and shows the flag with its time. Also on this screen: In the admin flags panel, add a Flag listing action with a reason that calls POST /api/listings/{listingId}/flag-reviews and shows the flag.",
+      "personas": [
+        "Caterer Manager",
+        "Internal Platform Admin"
+      ],
+      "uses": {
+        "Caterer Manager": "read the handling card, follow status, cancel while Posted, download the donation record",
+        "Internal Platform Admin": "review the listing's details and flags"
+      }
+    },
+    {
+      "name": "Listing Confirmation",
+      "route": "/listings/[id]/confirm",
+      "description": "Confirmation screen where the donor checks each AI-filled field against the original text before the listing is posted. Also on this screen: Add editable zone and allergen fields that save through PATCH /api/my/listings/{listingId}, which must accept zone and allergens, with allergens still defaulting to 'unknown — ask donor'.",
+      "personas": [
+        "Caterer Manager"
+      ],
+      "uses": {
+        "Caterer Manager": "check AI-filled fields against the original text, correct them, confirm before posting"
+      }
+    },
+    {
+      "name": "Donor Post",
+      "route": "/listings/new",
+      "description": "Form and free-text entry where a donor posts what food, how much and the pickup-by time in under a minute.",
+      "personas": [
+        "Caterer Manager"
+      ],
+      "uses": {
+        "Caterer Manager": "type or speak the surplus, or fill the 3-field form, then submit"
+      }
+    },
+    {
+      "name": "Offers",
+      "route": "/offers",
+      "description": "Ranked offers of surplus food sent to a receiver, each with the reason it was chosen. Also on this screen: Add a Decline control on each offer card that calls POST /api/my/offers/{offerId}/decline. Also on this screen: Add a Reported problems section listing the receiver's flags with status and admin decision, from GET /api/my/flag-reviews. Also on this screen: The Decline control on each offer card opens an optional reason field, and submitting calls POST /api/my/offers/{offerId}/decline with that reason.",
+      "personas": [
+        "NGO / Shelter / Community Kitchen Coordinator"
+      ],
+      "uses": {
+        "NGO / Shelter / Community Kitchen Coordinator": "review ranked offers and their reasons; open one to accept"
+      }
+    },
+    {
+      "name": "Offer Detail",
+      "route": "/offers/[id]",
+      "description": "One offer with its handling card, accept action, volunteer ETA and delivery confirmation. Also on this screen: After accepting, add a Cancel my claim action that calls POST /api/my/offers/{offerId}/cancel and shows that the next match is offered if time allows. Also on this screen: Show the recorded food temperature, storage type and an out-of-range warning, returned by GET /api/my/offers/{offerId}, with the receiver's choice to accept or reject. Also on this screen: Add a Decline action with an optional reason that calls POST /api/my/offers/{offerId}/decline and shows the next match if one is offered. Also on this screen: Add a servings received input to the Delivery confirmation section, saved through POST /api/my/offers/{offerId}/confirm-delivery. Also on this screen: The out-of-range temperature warning gets accept and reject buttons that call POST /api/my/offers/{offerId}/temperature-decision and show the saved decision. Also on this screen: Show the donor's name, zone and FSSAI-verified donor badge, loaded from GET /api/donors/{donorId}. Also on this screen: When the recorded temperature is out of range, show the warning with Accept and Reject buttons that call POST /api/my/offers/{offerId}/temperature-decision, then show the logged decision. Also on this screen: When the recorded temperature is out of range, show Accept and Reject buttons that call POST /api/my/offers/{offerId}/temperature-decision and display the logged decision and its time. Also on this screen: When the food temperature is out of range, show Accept and Reject buttons that call POST /api/my/offers/{offerId}/temperature-decision, and display the saved decision with its time from offers.temperature_decided_at. Also on this screen: When the food temperature is out of range, show accept and reject buttons that call POST /api/my/offers/{offerId}/temperature-decision and show the logged decision.",
+      "personas": [
+        "NGO / Shelter / Community Kitchen Coordinator"
+      ],
+      "uses": {
+        "NGO / Shelter / Community Kitchen Coordinator": "read handling card and allergens; accept the offer; confirm servings received; flag a mismatch or report the donor"
+      }
+    },
+    {
+      "name": "Pickups",
+      "route": "/pickups",
+      "description": "List of pickups assigned to a volunteer, sorted by nearness and time.",
+      "personas": [
+        "Volunteer Driver"
+      ],
+      "uses": {
+        "Volunteer Driver": "see nearby pickups assigned to them; open one to collect"
+      }
+    },
+    {
+      "name": "Pickup Detail",
+      "route": "/pickups/[id]",
+      "description": "One pickup showing the exact pickup point, the handover code entry and status updates. Also on this screen: Show the donor's masked contact on the pickup summary, returned by GET /api/my/pickups/{pickupId} along with the donor name. Also on this screen: Make the Mark handed over button call POST /api/my/pickups/{pickupId}/handed-over and show that the receiver confirms delivery next. Also on this screen: Show the receiving organisation's name, zone and need level for the drop-off, loaded from GET /api/receivers/{receiverId}.",
+      "personas": [
+        "Volunteer Driver"
+      ],
+      "uses": {
+        "Volunteer Driver": "see the exact pickup point; enter the donor's handover code; update status to collected and delivered"
+      }
+    },
+    {
+      "name": "Live Status Board",
+      "route": "/live-status-board",
+      "description": "Live board showing each listing's status for all parties, with every change logged.",
+      "personas": [
+        "Caterer Manager",
+        "NGO / Shelter / Community Kitchen Coordinator",
+        "Volunteer Driver",
+        "Internal Platform Admin"
+      ],
+      "uses": {
+        "Caterer Manager": "follow listing status through to Delivered",
+        "NGO / Shelter / Community Kitchen Coordinator": "see what is coming and its status",
+        "Volunteer Driver": "see status of assigned pickups",
+        "Internal Platform Admin": "monitor status changes across the platform"
+      }
+    },
+    {
+      "name": "Impact",
+      "route": "/impact",
+      "description": "Impact of each rescue, with meals, kg and CO2e, each number's stated assumption and the assumption version used. Also on this screen: Add a Download delivery records action per rescue that calls GET /api/impact-records/{impactRecordId}/donation-record. Also on this screen: Add a panel listing the published assumption versions from GET /api/assumption-sets (kg per meal, emission factor, rule-table version) and the rule-table rows from GET /api/rule-tables that the consume-by deadline uses.",
+      "personas": [
+        "CSR Sponsor"
+      ],
+      "uses": {
+        "CSR Sponsor": "review each rescue's impact and its assumptions and version"
+      }
+    },
+    {
+      "name": "Weekly Impact Report",
+      "route": "/weekly-impact-report",
+      "description": "Weekly report for a donor showing their delivered rescues' meals, kg and CO2e with the assumptions used.",
+      "personas": [
+        "Caterer Manager"
+      ],
+      "uses": {
+        "Caterer Manager": "read the weekly impact report and share it with clients"
+      }
+    },
+    {
+      "name": "Sponsor Dashboard",
+      "route": "/sponsor-dashboard",
+      "description": "Dashboard of impact totals by zone and per week, with quarterly summaries for sponsored zones.",
+      "personas": [
+        "CSR Sponsor"
+      ],
+      "uses": {
+        "CSR Sponsor": "view impact totals by zone and review quarterly summaries for sponsored zones"
+      }
+    },
+    {
+      "name": "FSSAI Verification",
+      "route": "/fssai-verification",
+      "description": "Screen where donor and receiver FSSAI licence or registration numbers are verified and their expiry is tracked.",
+      "personas": [
+        "Internal Platform Admin"
+      ],
+      "uses": {
+        "Internal Platform Admin": "verify FSSAI numbers for donors and receivers; watch expiry dates"
+      }
+    },
+    {
+      "name": "Flag Review",
+      "route": "/flag-review",
+      "description": "Queue of flagged listings and locked handovers waiting for an admin decision. Also on this screen: Add a Guardrail breaches tab listing rejected and invalid intake calls from GET /api/admin/agent-calls, with the banned claim or injected instruction shown and an action to mark it reviewed. Also on this screen: Add an ETA at risk tab listing offers whose volunteer ETA is later than the deadline minus 15 minutes, with a Reassign action that calls POST /api/admin/offers/{offerId}/reassign-volunteer. Also on this screen: In the decision panel, add a Deactivate account action for the listing's donor owner that calls POST /api/admin/users/{userId}/deactivate. Also on this screen: The ETA at risk tab lists offers from GET /api/admin/offers/at-risk, and each row has a Reassign action calling POST /api/admin/offers/{offerId}/reassign-volunteer. Also on this screen: On each row of the ETA at risk tab, add a Reassign action that calls POST /api/admin/offers/{offerId}/reassign-volunteer to assign an available volunteer or record a receiver collection or donor drop-off. Also on this screen: In the ETA at risk tab, add a Reassign volunteer action per offer that calls POST /api/admin/offers/{offerId}/reassign-volunteer and shows the logged status event.",
+      "personas": [
+        "Internal Platform Admin"
+      ],
+      "uses": {
+        "Internal Platform Admin": "review flagged listings and locked handovers and decide on each"
+      }
+    },
+    {
+      "name": "Assumptions",
+      "route": "/assumptions",
+      "description": "Screen to edit assumption values and rule tables, each change versioned.",
+      "personas": [
+        "Internal Platform Admin"
+      ],
+      "uses": {
+        "Internal Platform Admin": "edit kg per meal, emission factor and rule tables; publish a new version"
+      }
+    },
+    {
+      "name": "Internal Metrics",
+      "route": "/internal-metrics",
+      "description": "Internal page showing the funnel events and section 4 metrics computed from them. Also on this screen: Show each receiver's share of offers sent over the chosen period, from GET /api/admin/internal-metrics. Also on this screen: Switching to the weekly snapshot and choosing a week calls GET /api/admin/internal-metrics/weekly and shows its figures beside the live ones. Also on this screen: Add a period picker and a per-receiver share table, read from GET /api/admin/offer-share-by-receiver.",
+      "personas": [
+        "Internal Platform Admin"
+      ],
+      "uses": {
+        "Internal Platform Admin": "review funnel events and success metrics"
+      }
+    },
+    {
+      "name": "Usage",
+      "route": "/usage",
+      "description": "Page showing token usage and cost, with the 70% budget alert.",
+      "personas": [
+        "Internal Platform Admin"
+      ],
+      "uses": {
+        "Internal Platform Admin": "check daily token usage against the budget alert"
+      }
+    },
+    {
+      "name": "Reset Password",
+      "route": "/reset-password",
+      "description": "Sets a new password from the emailed link using POST /api/auth/reset-password, rejecting expired or reused links; also how newly added users set their first password.",
+      "personas": [
+        "Caterer Manager",
+        "NGO / Shelter / Community Kitchen Coordinator",
+        "Volunteer Driver",
+        "CSR Sponsor",
+        "Internal Platform Admin"
+      ],
+      "uses": {}
+    }
+  ]
+}

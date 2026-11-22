@@ -1,0 +1,340 @@
+{
+  "version": 1,
+  "items": [
+    {
+      "id": "bl-mwrol9s0-i",
+      "title": "Sponsor dashboard by zone with quarterly summaries",
+      "detail": "CSR sponsors need impact totals by zone and week, plus quarterly summaries for sponsored zones (FR-15, P1).",
+      "step": "pages",
+      "source": "plan",
+      "priority": "medium",
+      "effort": "L",
+      "tokens": 204718,
+      "status": "open",
+      "why": "Zone and week rollups, quarterly summaries and sponsored-zone views make this a whole part, and the core rescue loop does not need it.",
+      "covers": {
+        "pages": [
+          "/sponsor-dashboard"
+        ],
+        "endpoints": [
+          "GET /api/sponsor-dashboard"
+        ]
+      },
+      "note": "Saved for after the first build."
+    },
+    {
+      "id": "bl-mwrol9s0-j",
+      "title": "Weekly impact report with generated wording and number checks",
+      "detail": "Donors get a weekly report of their delivered rescues with meals, kg and CO2e, written with an LLM and checked against the numbers (FR-14, P1).",
+      "step": "pages",
+      "source": "plan",
+      "priority": "medium",
+      "effort": "L",
+      "tokens": 204731,
+      "status": "open",
+      "why": "It needs weekly totals, a number check, a fallback template and report wording, so it is a large feature that the core loop does not depend on.",
+      "covers": {
+        "pages": [
+          "/weekly-impact-report"
+        ],
+        "endpoints": [
+          "GET /api/my/weekly-impact-report"
+        ]
+      },
+      "note": "Saved for after the first build."
+    },
+    {
+      "id": "bl-mwrol9s0-k",
+      "title": "Edit assumption values and rule tables with published versions",
+      "detail": "Admins can edit assumption values and rule tables, with each change versioned and reports stating the version used (FR-16, P1).",
+      "step": "pages",
+      "source": "plan",
+      "priority": "medium",
+      "effort": "L",
+      "tokens": 204724,
+      "status": "open",
+      "why": "Versioned publishing of rules that drive deadlines and impact is a whole admin part, and the first build can run on seeded versions.",
+      "covers": {
+        "pages": [
+          "/assumptions"
+        ],
+        "endpoints": [
+          "POST /api/assumption-sets",
+          "POST /api/rule-tables"
+        ]
+      },
+      "note": "Saved for after the first build."
+    },
+    {
+      "id": "bl-mwrpslkg-l",
+      "title": "See a per-event impact report for each caterer event",
+      "detail": "Caterers are promised \"branded weekly and per-event impact reports\" (\"your wedding fed 180 people\"), but only the weekly report exists. No screen or endpoint gives a per-event summary.",
+      "step": "pages",
+      "source": "build",
+      "priority": "medium",
+      "effort": "S",
+      "tokens": 22548,
+      "status": "open"
+    },
+    {
+      "id": "bl-mwrpslkg-m",
+      "title": "City or ward authorities view ward-level reports and export data",
+      "detail": "The business goal says city or ward authorities \"get ward-level reports and data exports\" for waste-diversion data by area. No persona, screen or endpoint serves them; only the sponsor dashboard and sponsor record download exist.",
+      "step": "persona",
+      "source": "build",
+      "priority": "low",
+      "effort": "M",
+      "tokens": 120058,
+      "status": "open"
+    }
+  ],
+  "leftOut": {
+    "at": "2026-11-22T10:15:34.767Z",
+    "items": [
+      {
+        "id": "bl-mwrol9rw-2",
+        "title": "Volunteers find and take open nearby pickups",
+        "detail": "Volunteers need \"nearby tasks\"; the plan's Pickups list shows only pickups already assigned to the caller, and no step lets a volunteer take an open one.",
+        "step": "ble",
+        "source": "plan",
+        "priority": "high",
+        "effort": "M",
+        "tokens": 120042,
+        "status": "open"
+      },
+      {
+        "id": "bl-mwrol9rw-3",
+        "title": "Show in-app notifications to each party when status changes",
+        "detail": "FR-9 requires that \"all parties see each change\", and section 5.1 asks for simulated in-app notifications; the plan has no notification feature.",
+        "step": "ble",
+        "source": "plan",
+        "priority": "high",
+        "effort": "M",
+        "tokens": 120040,
+        "status": "open"
+      },
+      {
+        "id": "bl-mwrol9rw-4",
+        "title": "Expire listings still unclaimed or undelivered at their consume-by time",
+        "detail": "\"Any listing still unclaimed or undelivered at its deadline expires\"; this must run on a clock, and timers must be rebuilt from the database after a restart (E18).",
+        "step": "ble",
+        "source": "plan",
+        "priority": "high",
+        "effort": "M",
+        "tokens": 120049,
+        "status": "open",
+        "needsScheduler": true
+      },
+      {
+        "id": "bl-mwrol9rw-5",
+        "title": "Pass an offer to the next receiver after 5 minutes without reply",
+        "detail": "FR-8 requires that \"no reply in 5 min moves the offer to the next match\"; the plan only moves offers on decline, not on timeout.",
+        "step": "ble",
+        "source": "plan",
+        "priority": "high",
+        "effort": "M",
+        "tokens": 120048,
+        "status": "open",
+        "needsScheduler": true
+      },
+      {
+        "id": "bl-mwrol9rw-6",
+        "title": "Reassign or escalate when a volunteer's ETA slips past the deadline",
+        "detail": "FR-10 and E7 require reassignment when ETA is later than deadline minus 15 min; the plan checks ETA only at claim time.",
+        "step": "ble",
+        "source": "plan",
+        "priority": "high",
+        "effort": "M",
+        "tokens": 120042,
+        "status": "open",
+        "needsScheduler": true
+      },
+      {
+        "id": "bl-mwrol9rw-7",
+        "title": "Split a large listing across up to three receivers",
+        "detail": "E2: a quantity too large for one receiver is \"split across up to 3 receivers, each with its own offer and handover code\".",
+        "step": "ble",
+        "source": "plan",
+        "priority": "medium",
+        "effort": "M",
+        "tokens": 120041,
+        "status": "open"
+      },
+      {
+        "id": "bl-mwrol9rw-8",
+        "title": "Widen the search to 12 km once, then close and tell the donor",
+        "detail": "E3 requires widening the radius from 8 to 12 km, then telling the donor no match was found and closing the listing; the plan has neither step.",
+        "step": "ble",
+        "source": "plan",
+        "priority": "medium",
+        "effort": "S",
+        "tokens": 22552,
+        "status": "open"
+      },
+      {
+        "id": "bl-mwrol9rw-9",
+        "title": "Post by voice note with speech-to-text",
+        "detail": "FR-2 (P0) requires posting \"by free text or voice\", but no speech-to-text service appears in the plan's outside services.",
+        "step": "apis",
+        "source": "plan",
+        "priority": "medium",
+        "effort": "M",
+        "tokens": 120032,
+        "status": "open"
+      },
+      {
+        "id": "bl-mwrol9rw-a",
+        "title": "Remind caterers 30 days before their FSSAI licence expires",
+        "detail": "FR-19 asks for a \"reminder 30 days before\" expiry; the plan has an expiry queue for admins but no reminder sent to donors.",
+        "step": "ble",
+        "source": "plan",
+        "priority": "medium",
+        "effort": "S",
+        "tokens": 22541,
+        "status": "open",
+        "needsScheduler": true
+      },
+      {
+        "id": "bl-mwrol9s0-b",
+        "title": "Log every matching and deadline decision with its inputs",
+        "detail": "Section 5.7 requires \"every status change and agent decision logged with time, actor, inputs and outputs\"; the plan logs LLM calls and status changes only.",
+        "step": "schema",
+        "source": "plan",
+        "priority": "medium",
+        "effort": "M",
+        "tokens": 120044,
+        "status": "open"
+      },
+      {
+        "id": "bl-mwrol9s0-c",
+        "title": "Show internal metrics for donor retention and time to claim",
+        "detail": "Section 4 sets donor retention (posting 3 of 4 weeks) and time to claim targets; the plan's internal metrics endpoint does not compute them.",
+        "step": "atlas",
+        "source": "plan",
+        "priority": "medium",
+        "effort": "S",
+        "tokens": 22544,
+        "status": "open"
+      },
+      {
+        "id": "bl-mwrol9s0-d",
+        "title": "Lower a receiver's reliability score after repeated no-shows",
+        "detail": "Section 5.6 says \"repeat no-shows reduce reliability score\" and fairness needs offer shares monitored; the plan has no reliability update.",
+        "step": "ble",
+        "source": "plan",
+        "priority": "low",
+        "effort": "M",
+        "tokens": 120036,
+        "status": "open"
+      },
+      {
+        "id": "bl-mwrol9s0-e",
+        "title": "Take an optional handover photo at collection",
+        "detail": "FR-11 says handover is confirmed with \"optional photo\"; the collect endpoint takes a code and temperature only.",
+        "step": "atlas",
+        "source": "plan",
+        "priority": "low",
+        "effort": "S",
+        "tokens": 22531,
+        "status": "open"
+      },
+      {
+        "id": "bl-mwrol9s0-f",
+        "title": "Apply an ETA multiplier for rain and late-night travel",
+        "detail": "E17 requires a configurable ETA multiplier in matching when weather or late hours slow travel; the plan has no such setting.",
+        "step": "ble",
+        "source": "plan",
+        "priority": "low",
+        "effort": "S",
+        "tokens": 22539,
+        "status": "open"
+      },
+      {
+        "id": "bl-mwrol9s0-g",
+        "title": "Check handover codes offline and sync later",
+        "detail": "E9 requires the code to be checked offline on the device and synced later, with status \"pending sync\"; the plan assumes a live connection.",
+        "step": "ble",
+        "source": "plan",
+        "priority": "low",
+        "effort": "M",
+        "tokens": 120040,
+        "status": "open"
+      },
+      {
+        "id": "bl-mwrol9s0-h",
+        "title": "Recognise volunteers for their work",
+        "detail": "The volunteer persona gets \"recognition\"; the plan has no recognition shown on the volunteer's pages or profile.",
+        "step": "persona",
+        "source": "plan",
+        "priority": "low",
+        "effort": "S",
+        "tokens": 22528,
+        "status": "open"
+      }
+    ],
+    "deferred": [
+      {
+        "id": "bl-mwrol9s0-i",
+        "title": "Sponsor dashboard by zone with quarterly summaries",
+        "detail": "CSR sponsors need impact totals by zone and week, plus quarterly summaries for sponsored zones (FR-15, P1).",
+        "step": "pages",
+        "source": "plan",
+        "priority": "medium",
+        "effort": "L",
+        "tokens": 204718,
+        "status": "open",
+        "why": "Zone and week rollups, quarterly summaries and sponsored-zone views make this a whole part, and the core rescue loop does not need it.",
+        "covers": {
+          "pages": [
+            "/sponsor-dashboard"
+          ],
+          "endpoints": [
+            "GET /api/sponsor-dashboard"
+          ]
+        }
+      },
+      {
+        "id": "bl-mwrol9s0-j",
+        "title": "Weekly impact report with generated wording and number checks",
+        "detail": "Donors get a weekly report of their delivered rescues with meals, kg and CO2e, written with an LLM and checked against the numbers (FR-14, P1).",
+        "step": "pages",
+        "source": "plan",
+        "priority": "medium",
+        "effort": "L",
+        "tokens": 204731,
+        "status": "open",
+        "why": "It needs weekly totals, a number check, a fallback template and report wording, so it is a large feature that the core loop does not depend on.",
+        "covers": {
+          "pages": [
+            "/weekly-impact-report"
+          ],
+          "endpoints": [
+            "GET /api/my/weekly-impact-report"
+          ]
+        }
+      },
+      {
+        "id": "bl-mwrol9s0-k",
+        "title": "Edit assumption values and rule tables with published versions",
+        "detail": "Admins can edit assumption values and rule tables, with each change versioned and reports stating the version used (FR-16, P1).",
+        "step": "pages",
+        "source": "plan",
+        "priority": "medium",
+        "effort": "L",
+        "tokens": 204724,
+        "status": "open",
+        "why": "Versioned publishing of rules that drive deadlines and impact is a whole admin part, and the first build can run on seeded versions.",
+        "covers": {
+          "pages": [
+            "/assumptions"
+          ],
+          "endpoints": [
+            "POST /api/assumption-sets",
+            "POST /api/rule-tables"
+          ]
+        }
+      }
+    ]
+  },
+  "builtScanAt": "2026-11-22T10:49:16.303Z"
+}

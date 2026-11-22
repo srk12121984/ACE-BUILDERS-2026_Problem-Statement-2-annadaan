@@ -1,0 +1,1941 @@
+{
+  "version": 1,
+  "details": {
+    "/": {
+      "detail": {
+        "purpose": "Signed-in landing page that shows each person the next thing to do for their role. Caterer managers, NGO coordinators, volunteer drivers, CSR sponsors and platform admins each land here to start their work.",
+        "layout": [
+          {
+            "area": "Page header",
+            "contents": "Heading 'Annadaan' with the line 'Connects surplus food from caterers to nearby NGOs, kitchens and volunteers before it spoils.'"
+          },
+          {
+            "area": "Next step card for your role",
+            "contents": "One prominent card with the role's next job. Caterer Manager: 'Start a new post' button. NGO / Shelter / Community Kitchen Coordinator: count of offers waiting for a reply. Volunteer Driver: count of nearby pickups to take. CSR Sponsor: 'Open sponsor dashboard' button. Internal Platform Admin: count of flagged listings and locked handovers waiting for review."
+          },
+          {
+            "area": "Your open work",
+            "contents": "Short list for the role. Caterer Manager: open listings with status and consume-by time. NGO Coordinator: incoming offers with their plain-language reason. Volunteer Driver: nearby pickups sorted by nearness and time. Each row opens its record. CSR Sponsor and Admin have no list here."
+          },
+          {
+            "area": "Main features",
+            "contents": "Row of links to the product's main features: Listings, Offers, Pickups, Sponsor dashboard, Weekly impact report, Flag review, FSSAI verification and Users, each with a 'View all' label."
+          }
+        ],
+        "shows": [
+          {
+            "item": "Open listings (Caterer Manager)",
+            "details": "Each listing's items, status (Posted, Offered, Claimed, Collected, Delivered, Expired, Cancelled) and consume-by time, in the order given by the Listings screen."
+          },
+          {
+            "item": "Incoming offers (NGO / Shelter / Community Kitchen Coordinator)",
+            "details": "Offers waiting for a reply, each with its ranked position and plain-language reason, such as '3.2 km away, can serve 40, arrives 45 min before deadline'."
+          },
+          {
+            "item": "Nearby pickups (Volunteer Driver)",
+            "details": "Pickup tasks assigned to or available to the volunteer, sorted by nearness and time."
+          },
+          {
+            "item": "Counts for the next step",
+            "details": "Number of offers waiting (receiver), nearby pickups (volunteer) and flagged listings plus locked handovers (admin)."
+          }
+        ],
+        "actions": [
+          {
+            "who": "Caterer Manager",
+            "action": "Start a new post",
+            "result": "Opens the post form, free text or form, to post surplus food in under a minute."
+          },
+          {
+            "who": "Caterer Manager",
+            "action": "Open one of their listings",
+            "result": "Opens that listing's detail with its handling card and live status."
+          },
+          {
+            "who": "Everyone",
+            "action": "Open an incoming offer",
+            "result": "Opens the offer with its handling card and accept action."
+          },
+          {
+            "who": "Volunteer Driver",
+            "action": "Open a nearby pickup",
+            "result": "Opens the pickup with its pickup point, handover code entry and status updates."
+          },
+          {
+            "who": "CSR Sponsor",
+            "action": "Open the sponsor dashboard",
+            "result": "Opens impact totals by zone and per week."
+          },
+          {
+            "who": "Internal Platform Admin",
+            "action": "Open the flag review queue",
+            "result": "Opens the queue of flagged listings and locked handovers waiting for a decision."
+          }
+        ],
+        "links": [
+          {
+            "to": "/listings/new",
+            "label": "Start a new post",
+            "when": "Caterer Manager has surplus food after an event."
+          },
+          {
+            "to": "/listings",
+            "label": "View all listings",
+            "when": "Caterer Manager wants every listing and its status."
+          },
+          {
+            "to": "/listings/[id]",
+            "label": "Listing row",
+            "when": "Caterer Manager opens one listing to check its handling card and live status."
+          },
+          {
+            "to": "/offers",
+            "label": "View all offers",
+            "when": "NGO Coordinator wants every ranked offer waiting for a reply."
+          },
+          {
+            "to": "/offers/[id]",
+            "label": "Offer row",
+            "when": "NGO Coordinator reviews an offer and accepts or declines it."
+          },
+          {
+            "to": "/pickups",
+            "label": "View all pickups",
+            "when": "Volunteer Driver wants every pickup assigned to them, sorted by nearness and time."
+          },
+          {
+            "to": "/pickups/[id]",
+            "label": "Pickup row",
+            "when": "Volunteer Driver opens a pickup to enter the handover code and update status."
+          },
+          {
+            "to": "/sponsor-dashboard",
+            "label": "Open sponsor dashboard",
+            "when": "CSR Sponsor reviews impact totals by zone and per week."
+          },
+          {
+            "to": "/weekly-impact-report",
+            "label": "Weekly impact report",
+            "when": "Caterer Manager reads the weekly report to share with clients."
+          },
+          {
+            "to": "/flag-review",
+            "label": "Review flags",
+            "when": "Platform Admin decides on flagged listings and locked handovers."
+          },
+          {
+            "to": "/fssai-verification",
+            "label": "FSSAI verification",
+            "when": "Platform Admin verifies donor and receiver licence numbers and tracks expiry."
+          },
+          {
+            "to": "/users",
+            "label": "Users",
+            "when": "Platform Admin adds accounts, gives roles or deactivates accounts."
+          }
+        ],
+        "states": {
+          "empty": "No open listings, offers or pickups: the role's card shows a plain line such as 'Nothing waiting for you' and keeps its main button.",
+          "loading": "Card and lists show placeholder rows until the signed-in role's data arrives.",
+          "error": "A plain message says the home page could not load and offers a retry; the feature links still work."
+        },
+        "notes": "Only the card and lists for the signed-in role appear. Offers shown to a receiver come only from FSSAI-registered receivers. The screen states no safety or certification wording. Lists show at most a few recent items with a 'View all' link."
+      },
+      "basis": "[\"Home\",\"Signed-in landing page that shows each person the next thing to do for their role.\",[\"CSR Sponsor\",\"Caterer Manager\",\"Internal Platform Admin\",\"NGO / Shelter / Community Kitchen Coordinator\",\"Volunteer Driver\"],[[\"Caterer Manager\",\"start a new post and see their open listings\"],[\"CSR Sponsor\",\"open the sponsor dashboard\"],[\"Internal Platform Admin\",\"see what needs review\"],[\"NGO / Shelter / Community Kitchen Coordinator\",\"see incoming offers waiting for a reply\"],[\"Volunteer Driver\",\"see nearby pickups to take\"]]]",
+      "at": "2026-11-22T09:11:09.721Z"
+    },
+    "/login": {
+      "detail": {
+        "purpose": "Sign-in screen where people enter Annadaan, including the role switcher used in the demo. Each of the four personas and the platform admin starts here before going to their own work.",
+        "layout": [
+          {
+            "area": "Page header",
+            "contents": "Annadaan name and a short line saying who signs in and what the app is for."
+          },
+          {
+            "area": "Sign-in form",
+            "contents": "Account login field, password field, a role switcher for the demo, and a Sign in button."
+          },
+          {
+            "area": "Forgot password",
+            "contents": "A Forgot password link that opens a small form asking for the account login and a Send button."
+          },
+          {
+            "area": "Confirmation message",
+            "contents": "After Send on forgot password, the same confirmation text appears whether or not the account exists."
+          }
+        ],
+        "shows": [],
+        "actions": [
+          {
+            "who": "Everyone",
+            "action": "Enters account login and password, picks a role in the role switcher, and clicks Sign in.",
+            "result": "Signed in as that role and taken to the Home screen."
+          },
+          {
+            "who": "Everyone",
+            "action": "Clicks Forgot password, enters the account login and sends it.",
+            "result": "Calls POST /api/auth/forgot-password and shows the same confirmation whether or not the account exists."
+          }
+        ],
+        "links": [
+          {
+            "to": "/",
+            "label": "Sign in",
+            "when": "After the credentials are accepted and a role is chosen."
+          }
+        ],
+        "states": {
+          "empty": "Blank login and password fields with the role switcher set to its default and Sign in available.",
+          "loading": "Sign in button disabled while the sign-in is checked.",
+          "error": "A sign-in failure message is shown and the password field is cleared."
+        },
+        "notes": "The role switcher is the demo's way to sign in as each persona: Caterer Manager, NGO / Shelter / Community Kitchen Coordinator, Volunteer Driver, CSR Sponsor or Internal Platform Admin. The forgot-password confirmation must not reveal whether the account exists. The emailed reset link leads to the Reset Password screen, not this screen."
+      },
+      "basis": "[\"Login\",\"Sign-in screen where people enter the app, including the role switcher used in the demo. Also on this screen: Add a Forgot password link that calls POST /api/auth/forgot-password and shows the same confirmation whether or not the account exists.\",[\"CSR Sponsor\",\"Caterer Manager\",\"Internal Platform Admin\",\"NGO / Shelter / Community Kitchen Coordinator\",\"Volunteer Driver\"],[[\"Caterer Manager\",\"sign in to post surplus\"],[\"CSR Sponsor\",\"sign in to see the dashboard\"],[\"Internal Platform Admin\",\"sign in to run admin tasks\"],[\"NGO / Shelter / Community Kitchen Coordinator\",\"sign in to see offers\"],[\"Volunteer Driver\",\"sign in to see pickups\"]]]",
+      "at": "2026-11-22T12:33:57.458Z"
+    },
+    "/signup": {
+      "detail": {
+        "purpose": "Lets a new caterer manager or CSR sponsor create their own Annadaan account. For a caterer, the sign-up also creates an unverified donor business that can be verified later.",
+        "layout": [
+          {
+            "area": "Page header",
+            "contents": "Heading 'Create your Annadaan account' with a one-line note that caterers can post surplus food and sponsors can follow impact by zone."
+          },
+          {
+            "area": "Account form",
+            "contents": "Fields: name, email, password, zone (dropdown of the 8 launch zones), contact (phone). Account type choice: Caterer manager or CSR sponsor. Each field has a screen-reader label."
+          },
+          {
+            "area": "Business section (caterer only)",
+            "contents": "Shown when Caterer manager is chosen. Fields: business name, zone, contact. Note that the business is unverified until its FSSAI number is checked on Profile."
+          },
+          {
+            "area": "Submit row",
+            "contents": "Button 'Create account'. Below it: 'Already have an account? Sign in' link to /login."
+          }
+        ],
+        "shows": [
+          {
+            "item": "Zone choices",
+            "details": "Dropdown of the 8 launch zones: Patia, Chandrasekharpur, Saheed Nagar, Nayapalli, Jaydev Vihar, Khandagiri, Old Town, Rasulgarh."
+          },
+          {
+            "item": "Account type",
+            "details": "Caterer manager or CSR sponsor; decides whether the business section appears."
+          }
+        ],
+        "actions": [
+          {
+            "who": "Caterer Manager",
+            "action": "Fills name, email, password, zone and contact, adds the business name and business zone and contact, then taps Create account.",
+            "result": "The account is saved with zone and contact, then the donor business is created unverified. The user is signed in and goes to Home (/)."
+          },
+          {
+            "who": "CSR Sponsor",
+            "action": "Fills name, email, password, zone and contact, then taps Create account.",
+            "result": "The sponsor account is saved with zone and contact and the user is signed in and goes to Home (/)."
+          },
+          {
+            "who": "Caterer Manager",
+            "action": "Taps 'Sign in' under the form instead.",
+            "result": "Opens the Login screen."
+          }
+        ],
+        "links": [
+          {
+            "to": "/login",
+            "label": "Sign in",
+            "when": "When the person already has an account."
+          },
+          {
+            "to": "/",
+            "label": "Create account (on success)",
+            "when": "After the account is created and the person is signed in, they land on their Home page."
+          }
+        ],
+        "states": {
+          "empty": "Empty form with zone dropdown unselected and the business section hidden until Caterer manager is chosen.",
+          "loading": "Create account button is disabled with a progress label while the requests run.",
+          "error": "Inline message beside the failing field or at the top of the form; entered values are kept so the person can retry."
+        },
+        "notes": "Caterer sign-up makes two calls in sequence: POST /api/auth/register with zone and contact, then POST /api/my/donors with name, zone and contact. The donor starts unverified and cannot post until an FSSAI number is verified (FR-17). The FSSAI number is entered later on Profile, not here. Use synthetic names and contact details only. The requirements do not say how the account type is chosen or whether it can be changed later; confirm before build. The requirements do not say what happens if the register call succeeds but the donor call fails; decide before build."
+      },
+      "basis": "[\"Sign Up\",\"Open sign-up where people create their own account to use Annadaan. Also on this screen: On Caterer sign-up, after POST /api/auth/register, call POST /api/my/donors with name, zone and contact so the donor business is created unverified. Also on this screen: Send zone and contact with POST /api/auth/register so they are stored on the user; POST /api/auth/register must accept them.\",[\"CSR Sponsor\",\"Caterer Manager\"],[[\"Caterer Manager\",\"create a donor account\"],[\"CSR Sponsor\",\"create a sponsor account\"]]]",
+      "at": "2026-11-22T12:34:14.343Z"
+    },
+    "/profile": {
+      "detail": {
+        "purpose": "Lets every signed-in person see and change their own details, change their password, and sign out. Caterer managers also enter their FSSAI licence number, and receiver coordinators check their linked organisation's registration status.",
+        "layout": [
+          {
+            "area": "Page header",
+            "contents": "Heading 'Profile' with the signed-in person's name and role under it."
+          },
+          {
+            "area": "Personal details",
+            "contents": "Form with name, zone (one of the launch zones) and contact fields. A 'Save changes' button saves through PATCH /api/auth/me and shows a confirmation on success."
+          },
+          {
+            "area": "Licence number",
+            "contents": "Shown to Caterer Manager. An FSSAI licence or registration number field, the current status (verified badge or not verified), and a 'Save licence number' button."
+          },
+          {
+            "area": "Linked receiver organisation",
+            "contents": "Shown to NGO / Shelter / Community Kitchen Coordinator only, read only. Organisation's registration number, verification status and expiry date, loaded from GET /api/my/receivers."
+          },
+          {
+            "area": "Change password",
+            "contents": "Current password, new password and a 'Change password' button. The current password is checked before the change is made."
+          },
+          {
+            "area": "Sign out",
+            "contents": "A 'Sign out' button at the bottom of the page."
+          }
+        ],
+        "shows": [
+          {
+            "item": "Personal details",
+            "details": "Name, zone and contact, as currently stored on the user. Saved values are shown after a successful save."
+          },
+          {
+            "item": "FSSAI status (Caterer Manager)",
+            "details": "Licence or registration number as entered, and whether it is verified. A verified donor shows the 'FSSAI-verified donor' badge."
+          },
+          {
+            "item": "Linked receiver organisation (coordinator)",
+            "details": "Registration number, verification status and expiry, read only."
+          }
+        ],
+        "actions": [
+          {
+            "who": "Everyone",
+            "action": "Edit name, zone or contact and save",
+            "result": "Saved through PATCH /api/auth/me; the page shows the updated details."
+          },
+          {
+            "who": "Everyone",
+            "action": "Change password: enter current and new password",
+            "result": "Current password is checked; on success the password is changed through POST /api/auth/change-password and a confirmation is shown. If the current password is wrong, the change is refused."
+          },
+          {
+            "who": "Caterer Manager",
+            "action": "Enter FSSAI licence or registration number and save",
+            "result": "The number is stored on the donor's account and its verification status is shown; a verified number shows the 'FSSAI-verified donor' badge. Expired, unverified or mismatched numbers block posting with a clear reason."
+          },
+          {
+            "who": "Everyone",
+            "action": "View linked receiver organisation's registration status",
+            "result": "Read-only registration number, verification status and expiry are shown."
+          },
+          {
+            "who": "Everyone",
+            "action": "Sign out",
+            "result": "The person is signed out and taken to the Login screen."
+          }
+        ],
+        "links": [
+          {
+            "to": "/login",
+            "label": "Sign out",
+            "when": "When the person chooses to sign out of Annadaan."
+          }
+        ],
+        "states": {
+          "empty": "No licence number yet: the licence field is blank with the status 'Not verified' and a short prompt to enter one.",
+          "loading": "Form fields and the linked organisation panel show placeholders until details load from the server.",
+          "error": "A failed save keeps the entered values and shows a plain message; a wrong current password shows an error beside the password fields."
+        },
+        "notes": "Zone is one of the 8 launch zones. Contact is the person's own entry; to other people it is shown masked. Licence name and address must match the donor account (PRD R10). The Volunteer Driver can update availability and vehicle here, but the requirements name no endpoint for this, so confirm before building. The endpoint for saving the licence number is not named in the requirements; confirm before building. Only the Caterer Manager sees the licence section; only the receiver coordinator sees the linked organisation section. Synthetic data only."
+      },
+      "basis": "[\"Profile\",\"Where a person sees and changes their own details, enters a licence number and signs out. Also on this screen: Add a Change password section that calls POST /api/auth/change-password after the current password is checked. Also on this screen: Add zone and contact fields to Personal details, saved through PATCH /api/auth/me, which must accept them. Also on this screen: For a receiver coordinator, show the linked receiver organisation's registration number, verification status and expiry (read only), loaded from GET /api/my/receivers.\",[\"CSR Sponsor\",\"Caterer Manager\",\"Internal Platform Admin\",\"NGO / Shelter / Community Kitchen Coordinator\",\"Volunteer Driver\"],[[\"Caterer Manager\",\"enter FSSAI number and see the verified badge; sign out\"],[\"CSR Sponsor\",\"update own details; sign out\"],[\"Internal Platform Admin\",\"update own details; sign out\"],[\"NGO / Shelter / Community Kitchen Coordinator\",\"check own details and FSSAI status; sign out\"],[\"Volunteer Driver\",\"update availability and vehicle; sign out\"]]]",
+      "at": "2026-11-22T12:34:15.644Z"
+    },
+    "/users": {
+      "detail": {
+        "purpose": "Where the Internal Platform Admin adds people and invites them, gives them roles, edits receiver, volunteer and donor records, and deactivates or reactivates accounts.",
+        "layout": [
+          {
+            "area": "Page header",
+            "contents": "Heading \"Users\" with a one-line description that accounts are added, invited, given roles and deactivated here."
+          },
+          {
+            "area": "Add user form",
+            "contents": "Fields to add a person who uses the app: name, contact and role. Role choices are the personas: Caterer Manager, NGO / Shelter / Community Kitchen Coordinator, Volunteer Driver, CSR Sponsor, Internal Platform Admin. Submit button \"Add and invite\"."
+          },
+          {
+            "area": "Receivers section",
+            "contents": "Heading \"Receivers\" with a table of receiver accounts loaded from GET /api/admin/receivers. Columns: name, type, zone, daily capacity, need level, reliability, account status (active or deactivated). Each row has Edit and Deactivate, or Reactivate when deactivated."
+          },
+          {
+            "area": "Volunteers section",
+            "contents": "Heading \"Volunteers\" with a table loaded from GET /api/admin/volunteers. Columns: name, zone, vehicle, availability windows, account status. Each row has Edit and Deactivate, or Reactivate when deactivated."
+          },
+          {
+            "area": "Donors section",
+            "contents": "Heading \"Donors\" with a table loaded from GET /api/admin/donors. Columns: name, type, zone, masked contact, account status. Each row has Edit and Deactivate, or Reactivate when deactivated."
+          }
+        ],
+        "shows": [
+          {
+            "item": "Receiver accounts",
+            "details": "Listed from GET /api/admin/receivers; fields: name, type, zone, daily capacity, need level, reliability, active or deactivated."
+          },
+          {
+            "item": "Volunteer accounts",
+            "details": "Listed from GET /api/admin/volunteers; fields: name, zone, vehicle, availability windows, active or deactivated."
+          },
+          {
+            "item": "Donor accounts",
+            "details": "Listed from GET /api/admin/donors; fields: name, type, zone, masked contact, active or deactivated."
+          },
+          {
+            "item": "Deactivated accounts",
+            "details": "Shown in their section with status deactivated and a Reactivate action in place of Deactivate."
+          }
+        ],
+        "actions": [
+          {
+            "who": "Internal Platform Admin",
+            "action": "Adds a person and gives them a role",
+            "result": "The account is created and invited; the person sets their first password from the emailed link."
+          },
+          {
+            "who": "Internal Platform Admin",
+            "action": "Edits a receiver, volunteer or donor record",
+            "result": "The change is saved through the matching PATCH endpoint and the row shows the new values."
+          },
+          {
+            "who": "Internal Platform Admin",
+            "action": "Deactivates an account",
+            "result": "The account is set inactive (is_active off) and its row shows as deactivated."
+          },
+          {
+            "who": "Internal Platform Admin",
+            "action": "Reactivates a deactivated account",
+            "result": "POST /api/admin/users/{userId}/reactivate runs and the account is active again."
+          }
+        ],
+        "links": [],
+        "states": {
+          "empty": "No receivers, volunteers or donors yet: each section shows a short line saying none have been added, with the add form still available.",
+          "loading": "Each section shows a loading placeholder until its list has loaded.",
+          "error": "If a list fails to load, that section shows a message with a retry; other sections still show."
+        },
+        "notes": "Only the Internal Platform Admin may use this screen. Deactivation is a switch on the account, not a delete. Newly added users set their first password through the emailed link on the Reset Password screen. Synthetic data only; no real personal details."
+      },
+      "basis": "[\"Users\",\"Where accounts are added and invited, roles are given, and accounts are deactivated. Also on this screen: Add Receivers, Volunteers and Donors sections listing them from GET /api/admin/receivers, GET /api/admin/volunteers and GET /api/admin/donors, with edit through the PATCH endpoints and deactivate or reactivate through is_active. Also on this screen: Add a Reactivate action on deactivated accounts that calls POST /api/admin/users/{userId}/reactivate.\",[\"Internal Platform Admin\"],[[\"Internal Platform Admin\",\"add receivers and volunteers, give roles, deactivate accounts\"]]]",
+      "at": "2026-11-22T12:34:28.684Z"
+    },
+    "/listings": {
+      "detail": {
+        "purpose": "Shows the listings of surplus food with their status and consume-by time. Caterer Managers see their own posts and open one to act on it; Internal Platform Admins see all listings and filter for flagged ones.",
+        "layout": [
+          {
+            "area": "Page header",
+            "contents": "Heading \"Listings\" and a \"Post surplus\" button that opens /listings/new."
+          },
+          {
+            "area": "Filters",
+            "contents": "Status filter with the seven statuses: Posted, Offered, Claimed, Collected, Delivered, Expired, Cancelled. For Internal Platform Admin only, a \"Flagged\" filter that narrows the list to flagged listings."
+          },
+          {
+            "area": "Listings list",
+            "contents": "One row per listing, showing items, total kg or servings, consume-by time and status. Each row opens its listing. Admin rows also show a flagged marker where a listing is flagged."
+          },
+          {
+            "area": "Empty or result message",
+            "contents": "Shown in place of the list when there are no listings or no listings match the filter."
+          }
+        ],
+        "shows": [
+          {
+            "item": "Listing rows",
+            "details": "Per listing: items, total kg or servings, consume-by time, status. Caterer Manager sees only their own listings; Internal Platform Admin sees all listings."
+          },
+          {
+            "item": "Consume-by time",
+            "details": "Shown on every row, as set by the system from the earliest of pickup-by and the rule-table limit."
+          },
+          {
+            "item": "Status",
+            "details": "Current status of each listing from the lifecycle: Posted, Offered, Claimed, Collected, Delivered, Expired, Cancelled."
+          },
+          {
+            "item": "Flagged listings",
+            "details": "Admin only: listings flagged for review, shown with a marker and selectable through the Flagged filter."
+          }
+        ],
+        "actions": [
+          {
+            "who": "Caterer Manager",
+            "action": "Views their own listings and their status.",
+            "result": "The list shows only their posts, with current status and consume-by time."
+          },
+          {
+            "who": "Caterer Manager",
+            "action": "Opens one of their listings.",
+            "result": "Opens that listing's detail screen to act on it."
+          },
+          {
+            "who": "Caterer Manager",
+            "action": "Clicks \"Post surplus\".",
+            "result": "Opens the posting form to post new surplus food."
+          },
+          {
+            "who": "Internal Platform Admin",
+            "action": "Views all listings from all donors.",
+            "result": "The list shows every listing with its status and consume-by time."
+          },
+          {
+            "who": "Internal Platform Admin",
+            "action": "Applies the Flagged filter.",
+            "result": "The list narrows to flagged listings."
+          },
+          {
+            "who": "Internal Platform Admin",
+            "action": "Opens a listing.",
+            "result": "Opens that listing's detail screen."
+          }
+        ],
+        "links": [
+          {
+            "to": "/listings/[id]",
+            "label": "Row (listing item)",
+            "when": "When a person opens a listing to see its handling card, live status and donor actions."
+          },
+          {
+            "to": "/listings/new",
+            "label": "Post surplus",
+            "when": "When a Caterer Manager has new surplus food after an event."
+          }
+        ],
+        "states": {
+          "empty": "No listings yet, with a prompt and \"Post surplus\" button for Caterer Manager.",
+          "loading": "A list placeholder while listings load.",
+          "error": "A message that listings could not be loaded, with a retry option."
+        },
+        "notes": "Caterer Manager sees only their own listings. Internal Platform Admin sees all listings and can filter for flagged ones. Listings are shown with status and consume-by time only; no listing is shown as safe or certified."
+      },
+      "basis": "[\"Listings\",\"List of surplus food listings with their status and consume-by time.\",[\"Caterer Manager\",\"Internal Platform Admin\"],[[\"Caterer Manager\",\"see own posts and their status; open one to act on it\"],[\"Internal Platform Admin\",\"see all listings and filter for flagged ones\"]]]",
+      "at": "2026-11-22T09:11:48.431Z"
+    },
+    "/listings/{}": {
+      "detail": {
+        "purpose": "Shows one surplus food listing with its handling card, live status, donation record and the donor's actions. The Caterer Manager who posted it follows it and can edit or cancel it, and the Internal Platform Admin reviews its details and raises flags.",
+        "layout": [
+          {
+            "area": "Page header",
+            "contents": "Listing title with its current status badge (Posted, Offered, Claimed, Collected, Delivered, Expired or Cancelled), the consume-by time, and a Back to listings link."
+          },
+          {
+            "area": "Handling card",
+            "contents": "Consume-by time, storage guidance, allergens (shown as 'unknown — ask donor' when not known), and the fixed disclaimer 'Not certified safe — follow handling guidance'."
+          },
+          {
+            "area": "Items and pickup",
+            "contents": "Items with quantity (kg or servings), pickup-by time, storage, pickup point and zone. An Edit button appears while the listing is Posted and unclaimed."
+          },
+          {
+            "area": "Live status and log",
+            "contents": "Status timeline listing each change with its time and actor, for example Posted, Offered, Claimed, Collected, Delivered."
+          },
+          {
+            "area": "Volunteer and handover",
+            "contents": "Assigned volunteer name and ETA once a claim is made. The one-time handover code is shown to the donor with a note to give it to the volunteer at collection. Before assignment, the area says no volunteer is assigned yet."
+          },
+          {
+            "area": "Donation record",
+            "contents": "Donor, date, items, quantity, prep time, consume-by time, temperature, quantity distributed and area, with a Download donation record button."
+          },
+          {
+            "area": "Donor actions",
+            "contents": "Edit listing (Posted and unclaimed only), Cancel listing (Posted; also Claimed, with a warning), and Download donation record."
+          },
+          {
+            "area": "Admin flags panel",
+            "contents": "Visible to the Internal Platform Admin only. Lists existing flags with reason and time, a Flag listing button, and a Raise flag form with reason and details fields."
+          }
+        ],
+        "shows": [
+          {
+            "item": "Listing",
+            "details": "Items, total kg or servings, prepared at, pickup-by, consume-by, storage, allergens, zone, pickup point and current status. Consume-by is shown prominently."
+          },
+          {
+            "item": "Handling card",
+            "details": "Consume-by time, storage, allergens, fixed disclaimer. Always visible on the listing."
+          },
+          {
+            "item": "Status events",
+            "details": "Each change with from, to, actor and timestamp, newest first."
+          },
+          {
+            "item": "Assigned volunteer",
+            "details": "Volunteer name and ETA once a claim is made. Exact pickup point is not shown to the donor."
+          },
+          {
+            "item": "Handover code",
+            "details": "The donor's one-time code, shown only after a volunteer is assigned, with the instruction to give it to the volunteer at collection."
+          },
+          {
+            "item": "Donation record",
+            "details": "Donor, date, items, quantity, prep time, consume-by time, temperature, quantity distributed, area."
+          },
+          {
+            "item": "Flags",
+            "details": "For the admin: each flag with reason, details and time raised, in time order."
+          }
+        ],
+        "actions": [
+          {
+            "who": "Caterer Manager",
+            "action": "Edit pickup-by time, storage, pickup point and items while the listing is Posted and unclaimed",
+            "result": "Changes are saved and the status log records them. A quantity change over 20% re-runs matching."
+          },
+          {
+            "who": "Caterer Manager",
+            "action": "Cancel listing while it is Posted",
+            "result": "Status changes to Cancelled and the listing is no longer offered."
+          },
+          {
+            "who": "Caterer Manager",
+            "action": "Cancel listing after a claim, after confirming the warning",
+            "result": "Status changes from Claimed to Cancelled. The volunteer is stood down and the receiver is told."
+          },
+          {
+            "who": "Caterer Manager",
+            "action": "Read the handover code once a volunteer is assigned",
+            "result": "The donor gives the code to the volunteer at collection."
+          },
+          {
+            "who": "Caterer Manager",
+            "action": "Download donation record",
+            "result": "The donation record file is downloaded for the listing."
+          },
+          {
+            "who": "Internal Platform Admin",
+            "action": "Flag listing with a reason and details",
+            "result": "The flag is saved, shown in the admin flags panel with its time, and the listing is queued for review."
+          }
+        ],
+        "links": [
+          {
+            "to": "/listings",
+            "label": "Back to listings",
+            "when": "After reviewing the listing or cancelling it."
+          },
+          {
+            "to": "/live-status-board",
+            "label": "View on live board",
+            "when": "To see this listing's status alongside all parties."
+          },
+          {
+            "to": "/flag-review",
+            "label": "Open flag review queue",
+            "when": "When the admin needs to decide on flags raised on this listing."
+          }
+        ],
+        "states": {
+          "empty": "No volunteer assigned yet, and no flags raised on this listing.",
+          "loading": "Skeleton placeholders for the handling card, status timeline and items while the listing loads.",
+          "error": "Message that the listing could not be loaded, with a retry button. A failed edit or cancel shows the reason and leaves the listing unchanged."
+        },
+        "notes": "Edit is only available while the listing is Posted and unclaimed. Cancel is available while Posted, and after a claim with a warning that the volunteer is stood down and the receiver is told. The handover code is shown only once a volunteer is assigned. The disclaimer is fixed and no wording on this screen may call the food safe or certified. Allergens are never assumed absent. The donor cannot see the exact pickup point. Flags require a reason. The flags panel is visible only to the Internal Platform Admin. Data is synthetic."
+      },
+      "basis": "[\"Listing Detail\",\"One listing with its handling card, live status, donation record and the donor's actions. Also on this screen: When a volunteer is assigned, show the one-time handover code to the donor, returned by GET /api/my/listings/{listingId} in its offer summary, with a note to give it to the volunteer at collection. Also on this screen: Show Cancel listing also when the listing is claimed, with a warning that the volunteer is stood down and the receiver is told, calling POST /api/my/listings/{listingId}/cancel. Also on this screen: Add an Edit action while the listing is posted and unclaimed, letting the donor change pickup-by time, storage, pickup point and items through PATCH /api/my/listings/{listingId} and the item endpoints. Also on this screen: For the admin, add a Flag listing action with a reason that calls POST /api/listings/{listingId}/flag-reviews. Also on this screen: For the platform admin, add a Flag listing action with a reason that calls POST /api/listings/{listingId}/flag-reviews, then shows the flag in the Admin flags panel. Also on this screen: In the Admin flags panel, add a Raise flag form (reason and details) that calls POST /api/listings/{listingId}/flag-reviews and shows the new flag. Also on this screen: While the listing is posted and not yet claimed, let the donor edit pickup-by time, storage and items, saving through PATCH /api/my/listings/{listingId} and the items endpoints (POST, PATCH, DELETE /api/my/listings/{listingId}/items). Also on this screen: In the admin flags panel, add a Flag listing action with a reason that calls POST /api/listings/{listingId}/flag-reviews and shows the flag with its time. Also on this screen: In the admin flags panel, add a Flag listing action with a reason that calls POST /api/listings/{listingId}/flag-reviews and shows the flag.\",[\"Caterer Manager\",\"Internal Platform Admin\"],[[\"Caterer Manager\",\"read the handling card, follow status, cancel while Posted, download the donation record\"],[\"Internal Platform Admin\",\"review the listing's details and flags\"]]]",
+      "at": "2026-11-22T12:34:34.915Z"
+    },
+    "/listings/{}/confirm": {
+      "detail": {
+        "purpose": "The donor (Caterer Manager) checks each AI-filled listing field against the original text or voice transcript, corrects zone and allergens where needed, and confirms before the listing is posted.",
+        "layout": [
+          {
+            "area": "Page header",
+            "contents": "Heading 'Check your listing before it is posted'; a line saying the AI only drafted these fields and nothing is posted until you confirm; listing id or created time."
+          },
+          {
+            "area": "Original text panel",
+            "contents": "The donor's typed text or voice transcript, read-only. Words that each extracted field came from are highlighted."
+          },
+          {
+            "area": "Extracted fields",
+            "contents": "One row per field: items (name and quantity with unit, e.g. 'veg pulao, 60 servings'), pickup-by time, zone (editable), allergens (editable, default 'unknown — ask donor'). Each row carries an 'AI-filled' tag until the donor confirms it. Edit control on zone and allergens."
+          },
+          {
+            "area": "Handling card preview",
+            "contents": "Consume-by time (earliest of pickup-by and rule-table limit), storage guidance, allergens, and the fixed disclaimer 'Not certified safe — follow handling guidance'. Updates when zone or allergens change."
+          },
+          {
+            "area": "Confirm bar",
+            "contents": "Primary button 'Confirm and post listing'. Secondary control to go back and correct the original text or fields. Short note: 'Posting makes this visible to nearby receivers.'"
+          }
+        ],
+        "shows": [
+          {
+            "item": "Original text or voice transcript",
+            "details": "Shown beside the extracted fields, read-only, with source words highlighted per field."
+          },
+          {
+            "item": "Extracted items",
+            "details": "Each item's name, quantity and unit (servings or kg), in the order the donor wrote them; each marked 'AI-filled' until confirmed."
+          },
+          {
+            "item": "Pickup-by time",
+            "details": "Extracted time, marked 'AI-filled' until confirmed."
+          },
+          {
+            "item": "Zone",
+            "details": "Editable; one of the 8 launch zones."
+          },
+          {
+            "item": "Allergens",
+            "details": "Editable per listing; defaults to 'unknown — ask donor' and is never shown as absent unless the donor sets it."
+          },
+          {
+            "item": "Consume-by time and handling card",
+            "details": "Consume-by time, storage, allergens and the fixed disclaimer, as the receiver will see them."
+          }
+        ],
+        "actions": [
+          {
+            "who": "Caterer Manager",
+            "action": "Check each AI-filled field against the original text and confirm it",
+            "result": "The field is no longer marked 'AI-filled'."
+          },
+          {
+            "who": "Caterer Manager",
+            "action": "Correct zone or allergens and save",
+            "result": "Saved through PATCH /api/my/listings/{listingId}; the handling card preview updates."
+          },
+          {
+            "who": "Caterer Manager",
+            "action": "Confirm and post the listing",
+            "result": "The listing reaches Posted and matching starts; the donor goes to the listing's detail page."
+          },
+          {
+            "who": "Caterer Manager",
+            "action": "Go back and correct the original text or fields",
+            "result": "Nothing is posted; the listing stays unposted."
+          }
+        ],
+        "links": [
+          {
+            "to": "/listings/[id]",
+            "label": "Confirm and post listing",
+            "when": "After the donor confirms the fields and the listing is posted, to see its live status."
+          }
+        ],
+        "states": {
+          "empty": "If the AI returned no fields, each field is blank and marked to fill in; allergens show 'unknown — ask donor'.",
+          "loading": "A loading indicator shows while the listing and its extracted fields load; the confirm button stays disabled.",
+          "error": "A failed save shows a message beside the field and the listing stays unposted; a blocked post shows the reason (such as unverified FSSAI number or zone outside launch zones)."
+        },
+        "notes": "Allergens default to 'unknown — ask donor' and are never assumed absent. The listing cannot reach Posted without all four handling card items (consume-by, storage, allergens, disclaimer). The disclaimer text is fixed. No wording may say the food is safe or certified. Zone must be one of the 8 launch zones; a donor outside them is blocked with a clear message. Posting is blocked with the reason if the donor's FSSAI number is unverified, expired or mismatched. If pickup-by is under 30 minutes away, the listing is marked unrescuable and the donor is told why. Intake must not invent quantities or"
+      },
+      "basis": "[\"Listing Confirmation\",\"Confirmation screen where the donor checks each AI-filled field against the original text before the listing is posted. Also on this screen: Add editable zone and allergen fields that save through PATCH /api/my/listings/{listingId}, which must accept zone and allergens, with allergens still defaulting to 'unknown — ask donor'.\",[\"Caterer Manager\"],[[\"Caterer Manager\",\"check AI-filled fields against the original text, correct them, confirm before posting\"]]]",
+      "at": "2026-11-22T12:34:45.540Z"
+    },
+    "/offers": {
+      "detail": {
+        "purpose": "Shows a receiver coordinator the ranked offers of surplus food sent to their organisation, each with the plain-language reason it was chosen, so they can open one to accept or decline it. Also lists problems their organisation has reported and the admin decisions on them.",
+        "layout": [
+          {
+            "area": "Page header",
+            "contents": "Heading 'Offers' with a one-line note that offers are ranked by match and each shows why it was chosen."
+          },
+          {
+            "area": "Ranked offers list",
+            "contents": "Offer cards in rank order, each showing the food items and quantity, consume-by time, distance from the receiver, the reason it was chosen (for example '3.2 km away, can serve 40, arrives 45 min before deadline'), and the donor's zone. Each card has an Open button and a Decline control."
+          },
+          {
+            "area": "Decline reason field",
+            "contents": "When Decline is pressed on a card, an optional reason text field opens with Submit decline and Cancel buttons."
+          },
+          {
+            "area": "Reported problems section",
+            "contents": "Heading 'Reported problems' listing the receiver's flags, each with the listing, the flag status and the admin decision."
+          }
+        ],
+        "shows": [
+          {
+            "item": "Offer cards",
+            "details": "Ranked order, highest match first; each card shows items and quantity, consume-by time, distance, plain-language reason, donor zone."
+          },
+          {
+            "item": "Reported problems",
+            "details": "Each flag with its listing, status and admin decision, from the receiver's own flags."
+          }
+        ],
+        "actions": [
+          {
+            "who": "Everyone",
+            "action": "Open an offer card to review its handling card and decide",
+            "result": "Opens the offer detail screen where the offer can be accepted."
+          },
+          {
+            "who": "Everyone",
+            "action": "Decline an offer, with an optional reason",
+            "result": "The offer is declined with the reason recorded and the next match is offered if one exists; the card leaves the list."
+          },
+          {
+            "who": "Everyone",
+            "action": "Read the status and admin decision on a reported problem",
+            "result": "Shows the flag's current status and decision; nothing changes here."
+          }
+        ],
+        "links": [
+          {
+            "to": "/offers/[id]",
+            "label": "Open",
+            "when": "When the coordinator wants to read the full handling card and accept the offer."
+          }
+        ],
+        "states": {
+          "empty": "No offers right now: a message says new offers appear here when a nearby donor posts surplus food; Reported problems shows 'No reported problems'.",
+          "loading": "Offer cards show placeholders while the ranked list loads.",
+          "error": "A message says offers could not be loaded, with a retry button."
+        },
+        "notes": "Only the receiver's own offers and flags are shown. Decline is available on each offer card; the reason is optional. Copy must not say the food is safe or certified."
+      },
+      "basis": "[\"Offers\",\"Ranked offers of surplus food sent to a receiver, each with the reason it was chosen. Also on this screen: Add a Decline control on each offer card that calls POST /api/my/offers/{offerId}/decline. Also on this screen: Add a Reported problems section listing the receiver's flags with status and admin decision, from GET /api/my/flag-reviews. Also on this screen: The Decline control on each offer card opens an optional reason field, and submitting calls POST /api/my/offers/{offerId}/decline with that reason.\",[\"NGO / Shelter / Community Kitchen Coordinator\"],[[\"NGO / Shelter / Community Kitchen Coordinator\",\"review ranked offers and their reasons; open one to accept\"]]]",
+      "at": "2026-11-22T12:34:44.036Z"
+    },
+    "/listings/new": {
+      "detail": {
+        "purpose": "Where the Caterer Manager posts surplus food after an event, by typing or speaking it or by filling in a three-field form, in under a minute. The post goes to the confirmation screen before anything is listed.",
+        "layout": [
+          {
+            "area": "Page header",
+            "contents": "Heading 'Post surplus food' with a short line saying the post takes about a minute. A small badge shows the donor's FSSAI status ('FSSAI-verified donor' or a blocking notice)."
+          },
+          {
+            "area": "Free-text entry",
+            "contents": "Large text box with placeholder such as '40 plates veg biryani, 10 kg curd rice, pickup by 11:30'. Beside it, a voice note button (labelled 'Speak'). Button 'Read it for me' submits the text."
+          },
+          {
+            "area": "Three-field form",
+            "contents": "Field 1 'What food' (text). Field 2 'How much' (number with unit selector: kg or servings). Field 3 'Pickup-by time' (time picker). Fields have visible labels and screen-reader labels. Below the form, a 'Post' button that goes to the confirmation screen."
+          },
+          {
+            "area": "AI status and follow-up",
+            "contents": "Shows 'Reading your post…' while the AI works, for up to 5 s. If the AI returns one missing-field question (for example the pickup-by time), that single question appears here with an answer box. If the AI is slow or fails, this area shows that the plain form is being used."
+          },
+          {
+            "area": "Blocking and warning messages",
+            "contents": "Plain-language message when posting is blocked: licence missing, expired or mismatched; donor outside the 8 launch zones; or pickup-by time already passed or under 30 minutes away, which means the listing will not be offered. Each message gives the reason."
+          }
+        ],
+        "shows": [
+          {
+            "item": "Donor FSSAI status",
+            "details": "Badge 'FSSAI-verified donor' when verified. If not verified, the reason for blocking (missing, expired or mismatched number) with a link to add the licence number."
+          },
+          {
+            "item": "Donor zone",
+            "details": "The donor's launch zone, used to check that posting is allowed."
+          },
+          {
+            "item": "AI-read fields (during parsing only)",
+            "details": "Items, quantities and pickup-by time the AI pulled from the text, shown as 'AI-filled' drafts. Allergens are not guessed; they show as 'unknown — ask donor'."
+          }
+        ],
+        "actions": [
+          {
+            "who": "Caterer Manager",
+            "action": "Types the surplus in the free-text box and taps 'Read it for me', or speaks it with the voice note button.",
+            "result": "The AI fills in the items, quantities and pickup-by time. The donor is taken to the confirmation screen to check them. Nothing is posted yet."
+          },
+          {
+            "who": "Caterer Manager",
+            "action": "Fills in the three fields (what food, how much, pickup-by time) and taps 'Post'.",
+            "result": "The post goes to the confirmation screen with the fields as entered. No AI is used for form posts."
+          },
+          {
+            "who": "Caterer Manager",
+            "action": "Answers the one follow-up question if the AI asks for a missing field.",
+            "result": "The answer fills the field and the post continues to the confirmation screen. No second question is asked."
+          },
+          {
+            "who": "Caterer Manager",
+            "action": "Confirms a duplicate warning when the same items were posted by this donor within 10 minutes.",
+            "result": "If confirmed, a second listing is created. If not, the post is discarded."
+          }
+        ],
+        "links": [
+          {
+            "to": "/listings/[id]/confirm",
+            "label": "Post (after AI reading or form entry)",
+            "when": "After the donor submits text or the three-field form and the post passes the checks; the donor checks each field there before it is posted."
+          },
+          {
+            "to": "/profile",
+            "label": "Add licence number",
+            "when": "When posting is blocked because the FSSAI licence or registration number is missing, expired or mismatched."
+          }
+        ],
+        "states": {
+          "empty": "Free-text box and the three fields are blank, with the 'Post' and 'Read it for me' buttons available.",
+          "loading": "'Reading your post…' for up to 5 s while the AI parses the text; after 5 s the plain three-field form is shown.",
+          "error": "If the AI is down, slow or returns invalid output, one retry is made, then the plain three-field form appears with a short note. Blocked posts show the reason (licence, zone or time). Duplicate posts"
+        },
+        "notes": "Under 60 seconds on a phone, one-handed on a 360 px screen with large tap targets; form loads in under 2 s on 4G. Posting is blocked with a clear reason if the FSSAI number is unverified, expired or mismatched, and the AI is not called at all in that case. Donors outside the 8 launch zones are blocked with a clear message. A pickup-by time already passed or under 30 minutes away is accepted but marked unrescuable, and the donor is told why. Allergens are never assumed absent. Voice posting is in the PRD's MVP scope but is cut from the demo day (Q9); if speech-to-text is unavailable, text and f"
+      },
+      "basis": "[\"Donor Post\",\"Form and free-text entry where a donor posts what food, how much and the pickup-by time in under a minute.\",[\"Caterer Manager\"],[[\"Caterer Manager\",\"type or speak the surplus, or fill the 3-field form, then submit\"]]]",
+      "at": "2026-11-22T09:12:19.788Z"
+    },
+    "/pickups": {
+      "detail": {
+        "purpose": "Lets a Volunteer Driver see the pickups assigned to them, nearest and soonest first, and open one to collect the food. Other roles do not use this list.",
+        "layout": [
+          {
+            "area": "Page header",
+            "contents": "Heading \"My pickups\" with a short line saying these are the pickups assigned to you, sorted by nearness and time."
+          },
+          {
+            "area": "Sort note",
+            "contents": "Small text stating the order: nearest zone first, then by pickup-by time."
+          },
+          {
+            "area": "Pickups list",
+            "contents": "One card per assigned pickup, each showing the items and quantity, the pickup-by time, the consume-by time, the zone and the current status. Each card is a tap target for the whole card. Large text and tap targets for one-handed use on a 360 px screen."
+          },
+          {
+            "area": "Empty message",
+            "contents": "Shown in place of the list when no pickups are assigned: \"No pickups assigned to you right now.\""
+          }
+        ],
+        "shows": [
+          {
+            "item": "Assigned pickups",
+            "details": "Only pickups assigned to the signed-in volunteer. Sorted by nearness, then by time. Each row: items and quantity, pickup-by time, consume-by time, zone, status (Claimed, Collected, etc., as the live lifecycle states)."
+          },
+          {
+            "item": "Pickup count",
+            "details": "Number of assigned pickups shown near the heading."
+          }
+        ],
+        "actions": [
+          {
+            "who": "Volunteer Driver",
+            "action": "Sees the nearby pickups assigned to them, in nearness and time order.",
+            "result": "The list shows only their own assignments, with their current status."
+          },
+          {
+            "who": "Volunteer Driver",
+            "action": "Opens one pickup to collect it.",
+            "result": "The pickup detail opens, showing the exact pickup point, the handover code entry and status updates."
+          }
+        ],
+        "links": [
+          {
+            "to": "/pickups/[id]",
+            "label": "Each pickup card",
+            "when": "When the volunteer taps a pickup to go and collect it; opens the exact pickup point and handover code entry."
+          }
+        ],
+        "states": {
+          "empty": "Message that no pickups are assigned right now.",
+          "loading": "Skeleton cards while the assigned pickups load.",
+          "error": "Message that pickups could not be loaded, with a retry button."
+        },
+        "notes": "The exact pickup point is shown only on the pickup detail, and only to the assigned volunteer; show the zone on the list, never a street address. The donor's handover code is not shown on this list. Data is synthetic: no real addresses or personal details. The list must update status changes within 5 s (live status). Volunteers see only their own assignments."
+      },
+      "basis": "[\"Pickups\",\"List of pickups assigned to a volunteer, sorted by nearness and time.\",[\"Volunteer Driver\"],[[\"Volunteer Driver\",\"see nearby pickups assigned to them; open one to collect\"]]]",
+      "at": "2026-11-22T09:12:31.930Z"
+    },
+    "/offers/{}": {
+      "detail": {
+        "purpose": "Lets an NGO, shelter or community kitchen coordinator read one food offer in full, check its handling card, temperature and allergens, then accept, decline, or cancel a claim. After delivery, the coordinator confirms the servings received here.",
+        "layout": [
+          {
+            "area": "Page header",
+            "contents": "Back link to Offers; offer title from the listing items; live status badge (Offered, Claimed, Collected, Delivered, Expired or Cancelled); consume-by deadline shown prominently."
+          },
+          {
+            "area": "Handling card",
+            "contents": "Consume-by time; storage guidance; allergens per item, showing 'unknown — ask donor' where unknown; fixed disclaimer 'Not certified safe — follow handling guidance'."
+          },
+          {
+            "area": "Offer summary",
+            "contents": "Items and quantities (kg or servings); quantity this receiver can take; the plain-language reason this offer was chosen; the donor's name, zone and 'FSSAI-verified donor' badge; the offer's sent time and response window (5 minutes)."
+          },
+          {
+            "area": "Temperature and storage check",
+            "contents": "Recorded food temperature and storage type; out-of-range warning if the temperature is outside range, with Accept and Reject buttons and the saved decision with its time once chosen."
+          },
+          {
+            "area": "Accept and volunteer",
+            "contents": "Accept offer button before claim; after claim, the assigned volunteer's ETA to pickup and the status line; Cancel my claim button after accepting; Decline button with an optional reason field."
+          },
+          {
+            "area": "Delivery confirmation",
+            "contents": "Servings received input and a Confirm delivery button; shows the recorded actual quantity once saved."
+          },
+          {
+            "area": "Report a problem",
+            "contents": "Flag a mismatch or report the donor button, with a reason field."
+          }
+        ],
+        "shows": [
+          {
+            "item": "Handling card",
+            "details": "Consume-by time, storage, allergens per item (unknown never shown as absent), fixed disclaimer. Always shown before accepting."
+          },
+          {
+            "item": "Listing items",
+            "details": "Each item with quantity in kg or servings; veg or non-veg tag per item."
+          },
+          {
+            "item": "Offer reason",
+            "details": "Plain-language reason, e.g. distance, quantity and time before deadline."
+          },
+          {
+            "item": "Donor",
+            "details": "Name, zone and 'FSSAI-verified donor' badge. No exact address or full contact."
+          },
+          {
+            "item": "Food temperature",
+            "details": "Recorded value, storage type, out-of-range warning when applicable, and the saved accept or reject decision with its time."
+          },
+          {
+            "item": "Volunteer ETA",
+            "details": "Assigned volunteer's ETA to pickup, shown only after claim. Exact pickup point is not shown to the receiver."
+          },
+          {
+            "item": "Delivery record",
+            "details": "Servings received, once confirmed."
+          }
+        ],
+        "actions": [
+          {
+            "who": "Everyone",
+            "action": "Read the handling card, allergens and consume-by time before accepting.",
+            "result": "Information only; nothing changes."
+          },
+          {
+            "who": "Everyone",
+            "action": "Accept the offer.",
+            "result": "Listing is claimed for this receiver; a volunteer is assigned and the ETA appears. If another receiver accepted first, the offer shows 'already claimed'."
+          },
+          {
+            "who": "Everyone",
+            "action": "Record a temperature decision (Accept or Reject) when the temperature is out of range.",
+            "result": "Decision is saved with its time and shown on the screen; the receiver's choice drives the next step."
+          },
+          {
+            "who": "Everyone",
+            "action": "Cancel my claim after accepting.",
+            "result": "Listing returns to Posted; the volunteer is stood down; the next match is offered if time allows, otherwise the listing expires. The screen shows which applies."
+          },
+          {
+            "who": "Everyone",
+            "action": "Decline the offer, with an optional reason.",
+            "result": "Offer closes; the next match is offered if one exists and is shown here."
+          },
+          {
+            "who": "Everyone",
+            "action": "Enter servings received and confirm delivery.",
+            "result": "Listing becomes Delivered with the actual quantity recorded; impact is counted from this figure."
+          },
+          {
+            "who": "Everyone",
+            "action": "Flag a mismatch at pickup or report the donor, with a reason.",
+            "result": "Report is logged, appears under Reported problems on Offers with its status, and goes to admin review."
+          }
+        ],
+        "links": [
+          {
+            "to": "/offers",
+            "label": "Back to offers",
+            "when": "After declining, or to return to the ranked list."
+          }
+        ],
+        "states": {
+          "empty": "No offer is found for this id: show 'This offer is no longer available' with a link back to Offers.",
+          "loading": "Show the handling card and offer summary skeleton while the offer loads.",
+          "error": "If the offer fails to load or an action fails, show a plain message with a retry button and keep the last saved state visible."
+        },
+        "notes": "[\"Receiver sees the handling card before accepting; allergens marked 'unknown — ask donor' are never shown as absent.\", 'The disclaimer is fixed text; no wording on this screen says the food is safe or certified.', \"Donor badge reads 'FSSAI-verified donor' only.\", 'Exact pickup point is shown only to the assigned volunteer.', 'Out-of-range temperature does not block accepting; the receiver decides to accept or reject.', 'Cancel my claim is offered only after accepting; Decline is offered before accepting.', 'Optional reasons on Decline and report are free text; no personal details required.',"
+      },
+      "basis": "[\"Offer Detail\",\"One offer with its handling card, accept action, volunteer ETA and delivery confirmation. Also on this screen: After accepting, add a Cancel my claim action that calls POST /api/my/offers/{offerId}/cancel and shows that the next match is offered if time allows. Also on this screen: Show the recorded food temperature, storage type and an out-of-range warning, returned by GET /api/my/offers/{offerId}, with the receiver's choice to accept or reject. Also on this screen: Add a Decline action with an optional reason that calls POST /api/my/offers/{offerId}/decline and shows the next match if one is offered. Also on this screen: Add a servings received input to the Delivery confirmation section, saved through POST /api/my/offers/{offerId}/confirm-delivery. Also on this screen: The out-of-range temperature warning gets accept and reject buttons that call POST /api/my/offers/{offerId}/temperature-decision and show the saved decision. Also on this screen: Show the donor's name, zone and FSSAI-verified donor badge, loaded from GET /api/donors/{donorId}. Also on this screen: When the recorded temperature is out of range, show the warning with Accept and Reject buttons that call POST /api/my/offers/{offerId}/temperature-decision, then show the logged decision. Also on this screen: When the recorded temperature is out of range, show Accept and Reject buttons that call POST /api/my/offers/{offerId}/temperature-decision and display the logged decision and its time. Also on this screen: When the food temperature is out of range, show Accept and Reject buttons that call POST /api/my/offers/{offerId}/temperature-decision, and display the saved decision with its time from offers.temperature_decided_at. Also on this screen: When the food temperature is out of range, show accept and reject buttons that call POST /api/my/offers/{offerId}/temperature-decision and show the logged decision.\",[\"NGO / Shelter / Community Kitchen Coordinator\"],[[\"NGO / Shelter / Community Kitchen Coordinator\",\"read handling card and allergens; accept the offer; confirm servings received; flag a mismatch or report the donor\"]]]",
+      "at": "2026-11-22T12:35:02.370Z"
+    },
+    "/pickups/{}": {
+      "detail": {
+        "purpose": "Lets the assigned volunteer driver see the exact pickup point, enter the donor's one-time handover code at collection, and mark the food handed over at the drop-off. Only the assigned volunteer sees the exact pickup point.",
+        "layout": [
+          {
+            "area": "Page header",
+            "contents": "Heading 'Pickup' with the listing reference and current status (Claimed, Collected, Delivered). A back link to Pickups."
+          },
+          {
+            "area": "Pickup point and donor summary",
+            "contents": "Exact pickup point (shown only to the assigned volunteer), donor name, masked donor contact, zone, and the consume-by deadline."
+          },
+          {
+            "area": "Drop-off summary",
+            "contents": "Receiving organisation name, zone and need level for the drop-off, with the items and quantity to deliver."
+          },
+          {
+            "area": "Handover code entry",
+            "contents": "Input for the donor's one-time handover code, with a Confirm handover button. Also inputs for food temperature and storage type, which must be recorded before the status can move to Collected. Shows a wrong-code message and attempts left."
+          },
+          {
+            "area": "Status and actions",
+            "contents": "Current status, a 'Mark handed over' button for the drop-off, and a status timeline of changes with time and actor."
+          }
+        ],
+        "shows": [
+          {
+            "item": "Exact pickup point",
+            "details": "Shown only once this volunteer is assigned to the pickup."
+          },
+          {
+            "item": "Donor summary",
+            "details": "Donor name, masked contact, zone, consume-by deadline."
+          },
+          {
+            "item": "Drop-off summary",
+            "details": "Receiving organisation name, zone, need level; items and quantity to deliver."
+          },
+          {
+            "item": "Listing status",
+            "details": "Current status from Posted, Offered, Claimed, Collected, Delivered, Expired, Cancelled, with changes logged with time and actor."
+          },
+          {
+            "item": "Handover record",
+            "details": "Attempts left for the handover code; recorded food temperature and storage type."
+          }
+        ],
+        "actions": [
+          {
+            "who": "Volunteer Driver",
+            "action": "Enters the donor's one-time handover code at collection, with the food temperature and storage type",
+            "result": "Correct code moves the listing to Collected and logs the change. A wrong code shows an error and reduces attempts left. Collected is blocked until temperature and storage type are recorded."
+          },
+          {
+            "who": "Volunteer Driver",
+            "action": "Presses 'Mark handed over' at the drop-off",
+            "result": "Calls POST /api/my/pickups/{pickupId}/handed-over. The screen shows that the receiver confirms delivery next. Delivered is set only when the receiver confirms servings received."
+          },
+          {
+            "who": "Volunteer Driver",
+            "action": "Views the drop-off receiving organisation, zone and need level",
+            "result": "Details are loaded from GET /api/receivers/{receiverId} and shown beside the pickup."
+          }
+        ],
+        "links": [
+          {
+            "to": "/pickups",
+            "label": "Back to pickups",
+            "when": "After handing over, or to return to the list of nearby pickups sorted by nearness and time."
+          }
+        ],
+        "states": {
+          "empty": "No pickup content is shown until the volunteer is assigned to this pickup.",
+          "loading": "Shows a placeholder for the pickup point, donor and drop-off details while they load.",
+          "error": "Shows a plain message if the pickup or drop-off details cannot load, and keeps the handover code entry available."
+        },
+        "notes": "The exact pickup point is revealed only to the assigned volunteer; the donor's contact is always masked. After three wrong handover codes, the handover is locked for admin review, and the donor sees the volunteer's masked name to confirm in person. If the volunteer is offline at handover, the code is checked on the device and the status shows 'pending sync' until it syncs. Collected needs both a correct code and a recorded food temperature and storage type. The volunteer's part ends at Mark handed over; Delivered is recorded by the receiver's servings confirmation."
+      },
+      "basis": "[\"Pickup Detail\",\"One pickup showing the exact pickup point, the handover code entry and status updates. Also on this screen: Show the donor's masked contact on the pickup summary, returned by GET /api/my/pickups/{pickupId} along with the donor name. Also on this screen: Make the Mark handed over button call POST /api/my/pickups/{pickupId}/handed-over and show that the receiver confirms delivery next. Also on this screen: Show the receiving organisation's name, zone and need level for the drop-off, loaded from GET /api/receivers/{receiverId}.\",[\"Volunteer Driver\"],[[\"Volunteer Driver\",\"see the exact pickup point; enter the donor's handover code; update status to collected and delivered\"]]]",
+      "at": "2026-11-22T12:35:01.788Z"
+    },
+    "/live-status-board": {
+      "detail": {
+        "purpose": "Shows every listing's current status and its change history to all parties, so donors, receivers, volunteers and admins can see what is coming, what is moving and what has stalled. Anyone signed in who is involved with a listing or monitoring the platform uses it.",
+        "layout": [
+          {
+            "area": "Page header",
+            "contents": "Heading \"Live status board\" with a one-line description saying statuses update live and every change is logged; a live indicator showing the board is connected and the time of the last update."
+          },
+          {
+            "area": "Filters",
+            "contents": "Status filter with Posted, Offered, Claimed, Collected, Delivered, Expired and Cancelled; a zone filter; a search box for listing ID or donor name."
+          },
+          {
+            "area": "Listings board",
+            "contents": "One row per listing: listing ID, donor name, items and quantity, consume-by time, current status shown as a colored badge, receiver, assigned volunteer, and time of the last status change. Each row is a link to the listing."
+          },
+          {
+            "area": "Change log",
+            "contents": "Chronological list of status changes across the listings shown: time, listing ID, from status, to status, and actor (person or system). Newest at top."
+          },
+          {
+            "area": "Empty and status notes",
+            "contents": "Short line under the board stating that expired and cancelled listings stay visible with their reason until the end of the day."
+          }
+        ],
+        "shows": [
+          {
+            "item": "Listing status rows",
+            "details": "Listing ID, donor name, items and quantity, consume-by time, status badge, receiver, assigned volunteer, last changed time. Sorted by consume-by time, soonest first. Donor contact is never shown; the exact pickup point is not shown."
+          },
+          {
+            "item": "Status change log",
+            "details": "Each entry: timestamp, listing ID, from status, to status, actor. Every status change appears here; entries are not editable."
+          },
+          {
+            "item": "Status values",
+            "details": "Posted, Offered, Claimed, Collected, Delivered, Expired, Cancelled."
+          }
+        ],
+        "actions": [
+          {
+            "who": "Everyone",
+            "action": "View live status of listings and scan the change log; filter by status or zone.",
+            "result": "The board shows the current status; changes appear within 5 seconds without a page reload."
+          },
+          {
+            "who": "Caterer Manager",
+            "action": "Follow a listing's status through to Delivered.",
+            "result": "Their listing's row and log entries update as the status changes."
+          },
+          {
+            "who": "Everyone",
+            "action": "See what food is coming and its status.",
+            "result": "Listings with status and consume-by time update live for their offers and claims."
+          },
+          {
+            "who": "Volunteer Driver",
+            "action": "See the status of assigned pickups.",
+            "result": "Assigned pickups show their current status; the pickup point is not shown here."
+          },
+          {
+            "who": "Internal Platform Admin",
+            "action": "Monitor status changes across the platform.",
+            "result": "Every change across all listings is visible in the change log."
+          }
+        ],
+        "links": [
+          {
+            "to": "/listings/[id]",
+            "label": "Listing ID or row",
+            "when": "When someone wants the handling card, donation record and details of a listing shown on the board."
+          }
+        ],
+        "states": {
+          "empty": "No listings yet: \"No listings to show yet. Posted food will appear here as its status changes.\"",
+          "loading": "Board skeleton rows with \"Loading live status…\" until the first status snapshot arrives.",
+          "error": "If live updates drop, show \"Live updates paused — reconnecting\" with the last updated time, and keep the last known statuses visible."
+        },
+        "notes": "Read-only screen; no status is changed here. Every status change is logged with time and actor and is shown in the change log. Status changes reach all parties within 5 seconds. Expired and Cancelled listings remain visible. Display no personal contact details; masked data only. Do not show exact pickup points to anyone other than the assigned volunteer. Keep wording free of safety or certification claims."
+      },
+      "basis": "[\"Live Status Board\",\"Live board showing each listing's status for all parties, with every change logged.\",[\"Caterer Manager\",\"Internal Platform Admin\",\"NGO / Shelter / Community Kitchen Coordinator\",\"Volunteer Driver\"],[[\"Caterer Manager\",\"follow listing status through to Delivered\"],[\"Internal Platform Admin\",\"monitor status changes across the platform\"],[\"NGO / Shelter / Community Kitchen Coordinator\",\"see what is coming and its status\"],[\"Volunteer Driver\",\"see status of assigned pickups\"]]]",
+      "at": "2026-11-22T09:12:52.803Z"
+    },
+    "/impact": {
+      "detail": {
+        "purpose": "Shows each delivered rescue's meals, kg and CO2e with the assumption and assumption version behind every number, so a CSR Sponsor can judge the impact. The sponsor can also download the delivery records for each rescue.",
+        "layout": [
+          {
+            "area": "Page header",
+            "contents": "Heading \"Impact\" with a one-line note that only delivered rescues are counted, and that every number shows how it is calculated."
+          },
+          {
+            "area": "Rescue impact table",
+            "contents": "One row per delivered rescue with donor, zone, delivered date, delivered kg, servings, meals saved, CO2e avoided as an estimate range, assumption version used, a \"How we calculate this\" note, and a Download delivery records button."
+          },
+          {
+            "area": "How we calculate this note",
+            "contents": "Expandable note beside each number showing its formula (meals = delivered kg ÷ kg per meal; CO2e = delivered kg × emission factor), its starting assumption value, and the assumption version used."
+          },
+          {
+            "area": "Published assumption versions panel",
+            "contents": "Table of published assumption versions from GET /api/assumption-sets with columns for version, kg per meal, emission factor and rule-table version."
+          },
+          {
+            "area": "Consume-by rule table panel",
+            "contents": "Rows from GET /api/rule-tables that the consume-by deadline uses, with food type, storage, prep time and the time limit each rule gives, plus the rule-table version."
+          },
+          {
+            "area": "Fixed disclaimer",
+            "contents": "The text \"Not certified safe — follow handling guidance\" shown at the foot of the page."
+          }
+        ],
+        "shows": [
+          {
+            "item": "Rescue impact record",
+            "details": "One per delivered listing: donor, zone, delivered date, delivered kg, servings, meals, CO2e avoided (estimate range), assumption version. Ordered by delivered date, newest first. No row for expired or cancelled listings."
+          },
+          {
+            "item": "Meals saved",
+            "details": "Delivered kg ÷ kg per meal, with the formula and starting assumption (0.4 kg per meal) visible beside it."
+          },
+          {
+            "item": "CO2e avoided",
+            "details": "Delivered kg × emission factor, shown as an estimate range, not a precise figure."
+          },
+          {
+            "item": "Assumption versions",
+            "details": "From GET /api/assumption-sets: version, kg per meal, emission factor, rule-table version. Listed as published versions."
+          },
+          {
+            "item": "Consume-by rule rows",
+            "details": "From GET /api/rule-tables: food type, storage, prep time, consume-by limit, rule-table version."
+          },
+          {
+            "item": "Totals",
+            "details": "Count of rescues shown and totals of delivered kg, meals and CO2e range across the rows shown."
+          }
+        ],
+        "actions": [
+          {
+            "who": "CSR Sponsor",
+            "action": "Review each rescue's meals, kg and CO2e and open its \"How we calculate this\" note",
+            "result": "The formula, starting assumption and assumption version for that number are shown; no data changes."
+          },
+          {
+            "who": "CSR Sponsor",
+            "action": "Check the assumption version used for each number against the published assumption versions panel",
+            "result": "The version on each row matches a listed version; the sponsor can see which kg per meal, emission factor and rule-table version applied."
+          },
+          {
+            "who": "CSR Sponsor",
+            "action": "Click Download delivery records on a rescue",
+            "result": "The donation record for that rescue is downloaded from GET /api/impact-records/{impactRecordId}/donation-record."
+          },
+          {
+            "who": "CSR Sponsor",
+            "action": "Read the consume-by rule rows that set each listing's deadline",
+            "result": "The rule rows and their version are shown; no data changes."
+          }
+        ],
+        "links": [],
+        "states": {
+          "empty": "No delivered rescues yet: show \"No delivered rescues yet\" with the assumption and rule-table panels still visible.",
+          "loading": "Show skeleton rows for the rescue table and panels while impact records, assumption sets and rule tables load.",
+          "error": "If assumptions or rule tables fail to load, show raw delivered kg only with a notice; if a download fails, show a retry message beside that rescue."
+        },
+        "notes": "Only delivered listings appear; expired and cancelled listings are never counted. Show the fixed disclaimer \"Not certified safe — follow handling guidance\" on this page. Do not use words such as \"safe\" or \"certified\" about the food, and do not mention tax or legal benefits. CO2e is shown only as an estimate range and only once an emission factor is cited; until then show kg and meals only. Meals use delivered quantity, not posted quantity. The sponsor sees the assumption version for every number. Every delivered rescue should have a complete donation record."
+      },
+      "basis": "[\"Impact\",\"Impact of each rescue, with meals, kg and CO2e, each number's stated assumption and the assumption version used. Also on this screen: Add a Download delivery records action per rescue that calls GET /api/impact-records/{impactRecordId}/donation-record. Also on this screen: Add a panel listing the published assumption versions from GET /api/assumption-sets (kg per meal, emission factor, rule-table version) and the rule-table rows from GET /api/rule-tables that the consume-by deadline uses.\",[\"CSR Sponsor\"],[[\"CSR Sponsor\",\"review each rescue's impact and its assumptions and version\"]]]",
+      "at": "2026-11-22T12:35:17.952Z"
+    },
+    "/weekly-impact-report": {
+      "detail": {
+        "purpose": "Shows a donor's delivered rescues for one week as meals, kg and CO2e, with the assumptions and assumption version behind each number, so the caterer manager can share it with clients. Only delivered listings count; expired and cancelled listings are excluded.",
+        "layout": [
+          {
+            "area": "Page header",
+            "contents": "Heading \"Weekly impact report\", the donor's name (synthetic), the week's date range, and the \"FSSAI-verified donor\" badge."
+          },
+          {
+            "area": "Report summary",
+            "contents": "Short plain-language summary of the week's rescues, worded around the computed numbers. If the wording fails the number check or contains a banned word, the plain template text is shown instead."
+          },
+          {
+            "area": "Totals cards",
+            "contents": "Three cards: Meals saved (count), Food diverted (kg, delivered quantity), CO2e avoided (shown as an estimate range, labelled \"estimate\"). Each card has a \"How we calculate this\" link that expands its formula and assumption version."
+          },
+          {
+            "area": "Rescues table",
+            "contents": "One row per delivered listing this week: listing ID, delivered date, food items, delivered kg or servings, and meals. Ordered by delivered date, newest first. A footer row gives the week's totals."
+          },
+          {
+            "area": "Assumptions panel",
+            "contents": "Kg per meal used (starting value 0.4 kg), emission factor and its source or range, the assumption version number, and the rule-table version. States that only delivered quantities are counted."
+          },
+          {
+            "area": "Disclaimer footer",
+            "contents": "Fixed text: \"Not certified safe — follow handling guidance\". No other wording on the report about safety, certification or tax."
+          }
+        ],
+        "shows": [
+          {
+            "item": "Weekly totals",
+            "details": "Meals saved, kg diverted and CO2e avoided (range) for the donor's delivered rescues in the week; each with its assumption."
+          },
+          {
+            "item": "Delivered rescues in the week",
+            "details": "Listing ID, delivered date, items, delivered kg or servings, meals; only Delivered listings, never Posted, Expired or Cancelled."
+          },
+          {
+            "item": "Assumptions used",
+            "details": "Kg per meal, emission factor, assumption version and rule-table version the report was calculated with."
+          },
+          {
+            "item": "Report text",
+            "details": "Summary sentences generated once a week around the computed numbers; the template is used when the AI output fails the check."
+          }
+        ],
+        "actions": [
+          {
+            "who": "Caterer Manager",
+            "action": "Reads the weekly report and the totals for the week",
+            "result": "Sees the week's meals, kg and CO2e with their assumptions; nothing is changed."
+          },
+          {
+            "who": "Caterer Manager",
+            "action": "Opens \"How we calculate this\" on a number",
+            "result": "The formula, assumption value and assumption version are shown beside the number."
+          },
+          {
+            "who": "Caterer Manager",
+            "action": "Shares the report with clients",
+            "result": "The report is passed on to clients; the sharing method is not specified in the requirements."
+          },
+          {
+            "who": "Caterer Manager",
+            "action": "Downloads the underlying delivery records",
+            "result": "Delivery records for the week are downloaded; the donation record is downloadable per FR-21."
+          }
+        ],
+        "links": [
+          {
+            "to": "/listings/[id]",
+            "label": "Listing ID in a rescues table row",
+            "when": "The manager wants to see the donation record and handling card of one delivered rescue."
+          },
+          {
+            "to": "/impact",
+            "label": "View impact of each rescue",
+            "when": "The manager wants the per-rescue impact view with its assumptions, beyond this week's report."
+          }
+        ],
+        "states": {
+          "empty": "No deliveries that week: no report is generated, and the screen says there were no delivered rescues in the period.",
+          "loading": "The report is prepared weekly in advance, so it opens without delay; while it loads, a simple loading placeholder shows.",
+          "error": "If the AI wording fails the number check or a banned word appears, the plain template report is shown; if the report cannot be shown, the numbers are shown without the AI summary."
+        },
+        "notes": "The report is generated once a week for each donor with at least one delivery that week; it is not regenerated on each view. Numbers come from code; the AI only writes the sentences, and a wrong number is never shown. The disclaimer is fixed. No tax, legal or liability wording is allowed. Sharing with clients and the download format are not specified in the requirements. Only the donor's own report is visible to them."
+      },
+      "basis": "[\"Weekly Impact Report\",\"Weekly report for a donor showing their delivered rescues' meals, kg and CO2e with the assumptions used.\",[\"Caterer Manager\"],[[\"Caterer Manager\",\"read the weekly impact report and share it with clients\"]]]",
+      "at": "2026-11-22T09:13:10.047Z"
+    },
+    "/sponsor-dashboard": {
+      "detail": {
+        "purpose": "Lets a CSR Sponsor see verifiable impact totals (meals, kg, CO2e) by launch zone and per week, with quarterly summaries for the zones they sponsor, so they can decide funding and report on it.",
+        "layout": [
+          {
+            "area": "Page header",
+            "contents": "Heading 'Sponsor Dashboard' with a one-line note that totals count delivered rescues only and show their assumption version."
+          },
+          {
+            "area": "Zone totals table",
+            "contents": "One row per sponsored launch zone (from the 8 launch zones) with columns: zone, rescues delivered, kg diverted, meals saved, CO2e avoided (shown as an estimate range), people reached, assumption version."
+          },
+          {
+            "area": "Weekly totals",
+            "contents": "Totals per week across the sponsor's zones showing week, rescues, kg, meals, CO2e estimate range, each row linking to its assumptions."
+          },
+          {
+            "area": "Quarterly summaries",
+            "contents": "One summary block per sponsored zone for each quarter: totals for the quarter, number of delivered rescues, and the assumption version used, with a 'how we calculate this' note."
+          },
+          {
+            "area": "Assumptions note",
+            "contents": "Plain statement of the assumptions behind the numbers: 0.4 kg per meal, emission factor (when cited), and the version each number uses."
+          }
+        ],
+        "shows": [
+          {
+            "item": "Zone impact totals",
+            "details": "Per zone: delivered rescues, kg diverted, meals saved, CO2e avoided (estimate range), people reached (receiver-confirmed servings), assumption version. Only delivered listings; expired and cancelled are never counted."
+          },
+          {
+            "item": "Weekly totals per zone",
+            "details": "Totals grouped by week, for each zone and across the sponsor's zones, with the same measures as zone totals."
+          },
+          {
+            "item": "Quarterly summaries",
+            "details": "For each sponsored zone and quarter: total meals, kg, CO2e estimate and rescues, with the assumption version used."
+          },
+          {
+            "item": "Assumption and version per number",
+            "details": "Each number shows the assumption version it used, and a 'how we calculate this' note with its formula."
+          }
+        ],
+        "actions": [
+          {
+            "who": "CSR Sponsor",
+            "action": "Review impact totals by zone and per week",
+            "result": "Sees verifiable totals for the zones they sponsor, with assumptions shown beside each number."
+          },
+          {
+            "who": "CSR Sponsor",
+            "action": "Open the 'how we calculate this' note on a number",
+            "result": "Sees the formula, the assumption value and its version."
+          },
+          {
+            "who": "CSR Sponsor",
+            "action": "Review a quarterly summary for a sponsored zone",
+            "result": "Sees that quarter's totals and the assumption version used for the zone."
+          }
+        ],
+        "links": [
+          {
+            "to": "/impact",
+            "label": "View impact of each rescue",
+            "when": "Sponsor wants to see the individual rescues behind a zone's totals and their stated assumptions."
+          },
+          {
+            "to": "/weekly-impact-report",
+            "label": "Weekly impact report",
+            "when": "Sponsor wants the weekly report wording and numbers behind a week's totals."
+          }
+        ],
+        "states": {
+          "empty": "No delivered rescues yet in sponsored zones: show zero totals and a line saying totals count delivered rescues only.",
+          "loading": "Show placeholder rows for the zone table and weekly totals until figures load.",
+          "error": "Show a plain message that totals could not be loaded, with a retry button; no partial or unverified numbers are shown."
+        },
+        "notes": "Only sponsors see this screen's totals for their sponsored zones. Totals must match computed values from delivered listings. Every number must show its assumption version (FR-15, FR-13, FR-16). The CO2e figure is shown as an estimate range, and only once an emission factor is cited; otherwise show kg and meals only. No wording may say food is safe or certified, and no tax or legal benefit may be implied. Data is synthetic."
+      },
+      "basis": "[\"Sponsor Dashboard\",\"Dashboard of impact totals by zone and per week, with quarterly summaries for sponsored zones.\",[\"CSR Sponsor\"],[[\"CSR Sponsor\",\"view impact totals by zone and review quarterly summaries for sponsored zones\"]]]",
+      "at": "2026-11-22T09:13:14.713Z"
+    },
+    "/fssai-verification": {
+      "detail": {
+        "purpose": "Lets the Internal Platform Admin verify donor and receiver FSSAI licence or registration numbers and keep track of when each one expires. A donor whose number is unverified, expired or mismatched cannot post, and an unregistered receiver never appears in matching.",
+        "layout": [
+          {
+            "area": "Page header",
+            "contents": "Heading 'FSSAI Verification' with one line saying that only verified donors can post and only registered receivers can be matched. A count of accounts awaiting verification and a count of licences expiring within 30 days."
+          },
+          {
+            "area": "Filters",
+            "contents": "Role filter (Donor, Receiver), status filter (Verified, Unverified, Expired, Mismatched), and an 'Expiring within 30 days' toggle. A search box for account name or licence number."
+          },
+          {
+            "area": "Verification table",
+            "contents": "One row per donor or receiver account. Columns: account name (synthetic), role, zone, FSSAI licence or registration number, verification status, expiry date, days left, and the check result (name and address on licence match the account or not). Each row has a 'Verify' button for accounts not yet verified and a 'Re-check' button for verified ones. Rows with status Expired or Mismatched are highlighted."
+          },
+          {
+            "area": "Expiry watch panel",
+            "contents": "A list of licences that expire within 30 days, sorted by expiry date soonest first. Each item shows account name, role, expiry date and days left. Items past expiry show 'Posting paused'."
+          },
+          {
+            "area": "Verify result panel",
+            "contents": "Opens beside the selected row. Shows the number entered, the mocked check result (demo: synthetic numbers), the status it sets, the expiry date, and 'Confirm verification' and 'Reject' buttons. Notes that the live FSSAI portal lookup comes in hardening."
+          }
+        ],
+        "shows": [
+          {
+            "item": "Donor and receiver FSSAI accounts",
+            "details": "Account name, role, zone, licence or registration number, verification status, expiry date, days left, name and address match result. Sorted by status with needs-attention rows first, then by expiry date."
+          },
+          {
+            "item": "Expiry watch list",
+            "details": "Licences expiring within 30 days, soonest first, with days left. Expired ones show that posting is paused."
+          },
+          {
+            "item": "Summary counts",
+            "details": "Number of accounts awaiting verification, number verified, number expired, number expiring within 30 days."
+          }
+        ],
+        "actions": [
+          {
+            "who": "Internal Platform Admin",
+            "action": "Verify a donor or receiver FSSAI number using the mocked check",
+            "result": "Status becomes Verified and the expiry date is saved. A verified donor can post; a verified receiver can be matched."
+          },
+          {
+            "who": "Internal Platform Admin",
+            "action": "Reject a number that is invalid, expired or whose name or address does not match the account",
+            "result": "Status becomes Unverified or Mismatched with the reason saved. The donor cannot post, or the receiver is kept out of matching."
+          },
+          {
+            "who": "Internal Platform Admin",
+            "action": "Watch expiry dates in the expiry panel",
+            "result": "Licences due within 30 days are listed with a reminder. When a licence passes its expiry date, the system pauses that donor's posting the same day."
+          },
+          {
+            "who": "Internal Platform Admin",
+            "action": "Re-check a verified number",
+            "result": "The mocked check runs again and the status and expiry date are updated."
+          }
+        ],
+        "links": [
+          {
+            "to": "/users",
+            "label": "Open account",
+            "when": "When the admin needs to change an account's role, see its details, or deactivate it after a failed or expired verification."
+          },
+          {
+            "to": "/flag-review",
+            "label": "View flags",
+            "when": "When a donor or receiver with a licence problem has a flagged listing or locked handover waiting for a decision."
+          }
+        ],
+        "states": {
+          "empty": "No accounts yet: 'No donors or receivers to verify yet. Accounts appear here once they are added in Users.'",
+          "loading": "Table shows skeleton rows while the accounts and expiry dates load.",
+          "error": "If the check or the list fails: 'Verification could not be completed. Nothing was changed. Try again.' Status stays as it was."
+        },
+        "notes": "The demo uses synthetic licence numbers and a mocked check; the live FSSAI portal lookup is planned for hardening. The name and address on the licence must match the account. The verification covers the business, not each dish. The screen must never say that food is safe or certified; the badge 'FSSAI-verified donor' appears on donor profiles elsewhere. Receivers and donors do not use this screen."
+      },
+      "basis": "[\"FSSAI Verification\",\"Screen where donor and receiver FSSAI licence or registration numbers are verified and their expiry is tracked.\",[\"Internal Platform Admin\"],[[\"Internal Platform Admin\",\"verify FSSAI numbers for donors and receivers; watch expiry dates\"]]]",
+      "at": "2026-11-22T09:13:24.762Z"
+    },
+    "/flag-review": {
+      "detail": {
+        "purpose": "Lets the Internal Platform Admin work through flagged listings and locked handovers, check guardrail breaches from the AI agents, and fix offers whose volunteer ETA is at risk. Only the admin uses this screen.",
+        "layout": [
+          {
+            "area": "Page header",
+            "contents": "Heading 'Flag review' with a one-line note: 'Decide each flag, review guardrail breaches and fix at-risk pickups.' Three tabs below: 'Flags', 'Guardrail breaches', 'ETA at risk'."
+          },
+          {
+            "area": "Flags tab: queue",
+            "contents": "List of flagged listings and locked handovers waiting for a decision. Each row shows the item type (Flagged listing or Locked handover), listing reference, donor, reason, time flagged and whether a decision is still open. Selecting a row opens it in the decision panel."
+          },
+          {
+            "area": "Flags tab: decision panel",
+            "contents": "Selected item: listing summary (items, pickup-by, consume-by, status), the flag reason and details, and the time it was raised. Button 'Open listing' links to the listing. Button 'Deactivate donor account' for the listing's donor owner, with a confirmation prompt. Admin decision controls for the item."
+          },
+          {
+            "area": "Guardrail breaches tab",
+            "contents": "Table of rejected and invalid intake calls from the agent call log. Columns: time, call type, the banned claim or injected instruction shown, the outcome (output discarded, template or form used) and review status. Each row has a 'Mark reviewed' button."
+          },
+          {
+            "area": "ETA at risk tab",
+            "contents": "Table of offers whose volunteer ETA is later than the deadline minus 15 minutes. Columns: listing reference, receiver, volunteer, volunteer ETA, consume-by deadline, minutes at risk. Each row has a 'Reassign volunteer' button and shows the logged status event after the action."
+          }
+        ],
+        "shows": [
+          {
+            "item": "Flagged listings and locked handovers",
+            "details": "Each item: type, listing reference, donor, reason, details, time raised. Ordered by time raised, oldest first. Locked handovers come from wrong-code lockouts."
+          },
+          {
+            "item": "Listing summary in the decision panel",
+            "details": "Items, pickup-by time, consume-by deadline, current status, donor name, zone."
+          },
+          {
+            "item": "Guardrail breaches",
+            "details": "Each row: time, call type, banned claim or injected instruction as shown, outcome, reviewed or not."
+          },
+          {
+            "item": "Offers at risk",
+            "details": "Each row: listing reference, receiver, assigned volunteer, volunteer ETA, consume-by deadline, gap in minutes. Only offers where ETA is later than deadline minus 15 minutes."
+          },
+          {
+            "item": "Logged status events",
+            "details": "After a reassignment, the new status event for the listing (from, to, actor, time) appears in that row."
+          }
+        ],
+        "actions": [
+          {
+            "who": "Internal Platform Admin",
+            "action": "Select a flagged listing or locked handover and record a decision",
+            "result": "The item leaves the open queue and the decision is saved with its time."
+          },
+          {
+            "who": "Internal Platform Admin",
+            "action": "Deactivate the listing donor's account from the decision panel",
+            "result": "The donor account is deactivated after confirmation; it can be reactivated from Users."
+          },
+          {
+            "who": "Internal Platform Admin",
+            "action": "Mark a guardrail breach as reviewed",
+            "result": "The row shows as reviewed with the time and admin."
+          },
+          {
+            "who": "Internal Platform Admin",
+            "action": "Reassign volunteer on an at-risk offer",
+            "result": "A volunteer is reassigned, or a receiver collection or donor drop-off is recorded; the logged status event appears in the row."
+          }
+        ],
+        "links": [
+          {
+            "to": "/listings/[id]",
+            "label": "Open listing",
+            "when": "Admin wants to see the full listing, handling card and status before deciding on a flag."
+          },
+          {
+            "to": "/users",
+            "label": "Manage accounts",
+            "when": "After deactivating a donor, admin reviews or reactivates accounts."
+          }
+        ],
+        "states": {
+          "empty": "'No open flags' in the queue, 'No guardrail breaches' and 'No offers at risk' on their tabs.",
+          "loading": "Skeleton rows in the active tab while the queue, breaches or at-risk offers load.",
+          "error": "A message in the affected tab with a retry button; decisions and reassignments are not shown as saved until the server confirms."
+        },
+        "notes": "Only the Internal Platform Admin can see or use this screen. The ETA at risk rule is deadline minus 15 minutes. Reassign options are another available volunteer, receiver collection or donor drop-off. Deactivation affects the donor owner's login only. No wording on this screen may call food safe or certified, or mention tax or legal benefits. Synthetic data only; show masked contact details."
+      },
+      "basis": "[\"Flag Review\",\"Queue of flagged listings and locked handovers waiting for an admin decision. Also on this screen: Add a Guardrail breaches tab listing rejected and invalid intake calls from GET /api/admin/agent-calls, with the banned claim or injected instruction shown and an action to mark it reviewed. Also on this screen: Add an ETA at risk tab listing offers whose volunteer ETA is later than the deadline minus 15 minutes, with a Reassign action that calls POST /api/admin/offers/{offerId}/reassign-volunteer. Also on this screen: In the decision panel, add a Deactivate account action for the listing's donor owner that calls POST /api/admin/users/{userId}/deactivate. Also on this screen: The ETA at risk tab lists offers from GET /api/admin/offers/at-risk, and each row has a Reassign action calling POST /api/admin/offers/{offerId}/reassign-volunteer. Also on this screen: On each row of the ETA at risk tab, add a Reassign action that calls POST /api/admin/offers/{offerId}/reassign-volunteer to assign an available volunteer or record a receiver collection or donor drop-off. Also on this screen: In the ETA at risk tab, add a Reassign volunteer action per offer that calls POST /api/admin/offers/{offerId}/reassign-volunteer and shows the logged status event.\",[\"Internal Platform Admin\"],[[\"Internal Platform Admin\",\"review flagged listings and locked handovers and decide on each\"]]]",
+      "at": "2026-11-22T12:35:20.072Z"
+    },
+    "/assumptions": {
+      "detail": {
+        "purpose": "Lets the Internal Platform Admin view and change the assumption values (kg per meal, CO2e emission factor) and the consume-by rule tables, then publish each change as a new numbered version. Every impact number and report states the version it used.",
+        "layout": [
+          {
+            "area": "Page header",
+            "contents": "Heading 'Assumptions' with a line saying that changes are versioned and that reports show the version they used."
+          },
+          {
+            "area": "Current version panel",
+            "contents": "The version in use: version number, kg per meal, emission factor and its status (estimate range, marked ASSUMPTION until cited), and the rule-table version."
+          },
+          {
+            "area": "Assumption values form",
+            "contents": "Editable field 'kg per meal' (starting value 0.4); editable field 'emission factor' with its unit and an estimate-range note; a note that each value is an assumption to be cited before demo."
+          },
+          {
+            "area": "Consume-by rule table",
+            "contents": "Editable rows of food type, storage, prep time and maximum consume-by limit; an 'Add row' button and a remove control on each row."
+          },
+          {
+            "area": "Draft and publish bar",
+            "contents": "Button 'Publish new version' and button 'Discard changes'; shows that publishing creates the next version number and does not overwrite the current one."
+          },
+          {
+            "area": "Version history",
+            "contents": "List of past versions, newest first, each with its version number, kg per meal, emission factor and rule-table version."
+          }
+        ],
+        "shows": [
+          {
+            "item": "Current AssumptionSet",
+            "details": "Version number, kg per meal, emission factor, rule-table version; the version is the one used by new impact records."
+          },
+          {
+            "item": "Consume-by rule table",
+            "details": "Rows of food type × storage × prep time with the limit they set; the deadline on a listing is the earliest of the donor pickup-by and this limit."
+          },
+          {
+            "item": "Version history",
+            "details": "Each past version with its kg per meal, emission factor and rule-table version, newest first."
+          }
+        ],
+        "actions": [
+          {
+            "who": "Internal Platform Admin",
+            "action": "Edit kg per meal or emission factor in the draft",
+            "result": "The draft shows the new values; the current version stays in use until the draft is published."
+          },
+          {
+            "who": "Internal Platform Admin",
+            "action": "Add, change or remove a rule-table row in the draft",
+            "result": "The draft rule table changes; the current rule table stays in use until the draft is published."
+          },
+          {
+            "who": "Internal Platform Admin",
+            "action": "Publish new version",
+            "result": "A new numbered AssumptionSet is saved with its values and rule-table version; it becomes the version used for new impact records and reports; earlier versions remain in the history."
+          },
+          {
+            "who": "Internal Platform Admin",
+            "action": "Discard changes",
+            "result": "The draft is cleared and the current version is shown again."
+          }
+        ],
+        "links": [],
+        "states": {
+          "empty": "No rule rows yet: show the starting values as version 1 with an empty rule table and an 'Add row' prompt.",
+          "loading": "Current version, rule table and history load before the form can be edited.",
+          "error": "If publishing fails, nothing is saved as a new version and the draft stays for correction with the error shown."
+        },
+        "notes": "['Only the Internal Platform Admin can edit assumptions and rule tables; in the MVP the product owner fills this role.', 'Changes are versioned and never overwrite a published version.', 'Each impact number and report must state the assumption version it used.', 'Emission factor stays labelled ASSUMPTION until a source is cited; show it as an estimate range.', 'Meals saved uses delivered kg only, divided by kg per meal.', 'Not in demo day scope; FR-16 is P1.']"
+      },
+      "basis": "[\"Assumptions\",\"Screen to edit assumption values and rule tables, each change versioned.\",[\"Internal Platform Admin\"],[[\"Internal Platform Admin\",\"edit kg per meal, emission factor and rule tables; publish a new version\"]]]",
+      "at": "2026-11-22T09:13:42.669Z"
+    },
+    "/internal-metrics": {
+      "detail": {
+        "purpose": "Internal page where the Internal Platform Admin reviews the funnel events and the section 4 success metrics computed from them, for a chosen period or a weekly snapshot. It shows each receiver's share of offers sent.",
+        "layout": [
+          {
+            "area": "Page header",
+            "contents": "Heading \"Internal metrics\" with a line saying the funnel and success metrics are computed from logged status events."
+          },
+          {
+            "area": "Period picker",
+            "contents": "Period selector for the live figures, with a switch to the weekly snapshot and a week picker shown when the snapshot is selected."
+          },
+          {
+            "area": "Funnel events panel",
+            "contents": "Counts for post started, posted, offered, claimed, collected, delivered, expired and cancelled over the chosen period."
+          },
+          {
+            "area": "Section 4 metrics table",
+            "contents": "Rows for time to post, time to claim, rescue rate, expiry rate, match acceptance and donor retention. Columns: live value, target, and weekly snapshot value when the snapshot is chosen, shown beside the live value."
+          },
+          {
+            "area": "Receiver offer share table",
+            "contents": "One row per receiver with offers sent and share of all offers in the chosen period, with a period picker above it."
+          }
+        ],
+        "shows": [
+          {
+            "item": "Funnel event counts",
+            "details": "Post started, posted, offered, claimed, collected, delivered, expired, cancelled; counted over the chosen period from the timestamped status-event table."
+          },
+          {
+            "item": "Section 4 metrics",
+            "details": "Time to post (median, target 60 s or less); time to claim (median, target 15 min or less); rescue rate (delivered before deadline ÷ posted, target 70% or more); expiry rate (expired ÷ posted, target under 20%); match acceptance (first offer accepted ÷ first offers, target 50% or more); donor retenti"
+          },
+          {
+            "item": "Weekly snapshot figures",
+            "details": "The same metrics for the chosen week, shown beside the live figures for comparison."
+          },
+          {
+            "item": "Receiver offer share",
+            "details": "Per receiver: offers sent and share of total offers over the chosen period; fairness is monitored from this share."
+          }
+        ],
+        "actions": [
+          {
+            "who": "Internal Platform Admin",
+            "action": "Choose a period for the live figures",
+            "result": "Funnel counts, section 4 metrics and receiver share update for that period."
+          },
+          {
+            "who": "Internal Platform Admin",
+            "action": "Switch to the weekly snapshot and choose a week",
+            "result": "The weekly figures load and appear beside the live figures."
+          },
+          {
+            "who": "Internal Platform Admin",
+            "action": "Read each receiver's share of offers sent",
+            "result": "The per-receiver table shows offers sent and share for the chosen period."
+          }
+        ],
+        "links": [],
+        "states": {
+          "empty": "No events in the chosen period: counts show zero, metrics show no value, and the receiver table is empty.",
+          "loading": "Figures and tables show a loading indicator while the period or week data loads.",
+          "error": "If the metrics fail to load, a plain message says the figures are unavailable and offers a retry."
+        },
+        "notes": "Only the Internal Platform Admin may view this page. Figures are computed from logged status events and are not edited here. Targets are the pilot targets from section 4. Metrics that come from elsewhere (LLM golden-set scores, guardrail breaches, demo reliability) are not computed on this page. Share of offers per receiver is monitored for fairness: the reliability weight is capped at 5% and the need weight is 20%."
+      },
+      "basis": "[\"Internal Metrics\",\"Internal page showing the funnel events and section 4 metrics computed from them. Also on this screen: Show each receiver's share of offers sent over the chosen period, from GET /api/admin/internal-metrics. Also on this screen: Switching to the weekly snapshot and choosing a week calls GET /api/admin/internal-metrics/weekly and shows its figures beside the live ones. Also on this screen: Add a period picker and a per-receiver share table, read from GET /api/admin/offer-share-by-receiver.\",[\"Internal Platform Admin\"],[[\"Internal Platform Admin\",\"review funnel events and success metrics\"]]]",
+      "at": "2026-11-22T12:35:32.310Z"
+    },
+    "/usage": {
+      "detail": {
+        "purpose": "Internal page where the Internal Platform Admin checks daily token usage and cost against the budget, and sees when usage reaches the 70% budget alert. It shows the AI spend that intake parsing and report wording generate.",
+        "layout": [
+          {
+            "area": "Page header",
+            "contents": "Heading 'Token usage and cost' and a line saying usage is logged per call and reviewed daily."
+          },
+          {
+            "area": "Budget alert banner",
+            "contents": "Shows the share of the token budget used this month. Appears as a warning once usage reaches 70% of budget."
+          },
+          {
+            "area": "Summary cards",
+            "contents": "Total tokens used this month, intake tokens, report tokens, estimated cost this month, and cost per listing."
+          },
+          {
+            "area": "Daily usage table",
+            "contents": "One row per day: date, intake tokens, report tokens, total tokens, and cost for that day."
+          },
+          {
+            "area": "Usage by call type",
+            "contents": "Intake parsing and impact report wording shown separately, with call count and tokens per call for each."
+          },
+          {
+            "area": "Estimate reference",
+            "contents": "Planning estimates: about 1,900 tokens per listing and per report, and the per-month totals for the demo, pilot and city-wide scales."
+          }
+        ],
+        "shows": [
+          {
+            "item": "Token usage per call",
+            "details": "Tokens logged for each AI call, split into input and output, grouped by intake parsing and report wording."
+          },
+          {
+            "item": "Daily totals",
+            "details": "Intake tokens, report tokens and total tokens per day, listed by date, most recent first."
+          },
+          {
+            "item": "Monthly totals",
+            "details": "Total tokens used this month, with intake and report tokens shown separately."
+          },
+          {
+            "item": "Budget position",
+            "details": "Percentage of the token budget used, with the 70% alert threshold marked."
+          },
+          {
+            "item": "Cost",
+            "details": "Estimated cost per month and per day, calculated as total tokens ÷ 1,000,000 × the model's blended price per million tokens. Cost per listing shown beside it."
+          },
+          {
+            "item": "Estimates for comparison",
+            "details": "Hackathon demo about 0.5 M tokens per month; Bhubaneswar pilot about 3.3 M; city-wide about 31 M."
+          }
+        ],
+        "actions": [
+          {
+            "who": "Internal Platform Admin",
+            "action": "Check today's token usage against the budget",
+            "result": "Shows the day's and month's tokens and cost, and the budget percentage; if usage is at or above 70%, the alert banner is shown."
+          }
+        ],
+        "links": [],
+        "states": {
+          "empty": "No AI calls logged yet: all totals show zero and the cost shows as not yet calculated until a price is entered.",
+          "loading": "Totals and the daily table show a loading indicator while usage is fetched.",
+          "error": "A message says usage could not be loaded and asks the admin to refresh; no cost figure is estimated in its place."
+        },
+        "notes": "Cost is shown only once the model's blended price per million tokens is known (open question Q3). Posts made with the plain form use no AI and do not appear here. Voice posting's speech-to-text charge is priced separately and is not included in these totals. If the budget runs out, AI features stop, but the plain form and template still work (R9). Figures are for internal use by the Internal Platform Admin only."
+      },
+      "basis": "[\"Usage\",\"Page showing token usage and cost, with the 70% budget alert.\",[\"Internal Platform Admin\"],[[\"Internal Platform Admin\",\"check daily token usage against the budget alert\"]]]",
+      "at": "2026-11-22T09:13:55.942Z"
+    },
+    "/reset-password": {
+      "detail": {
+        "purpose": "Lets any signed-in or invited person set a new password from the emailed link, and lets a newly added user set their first password. It rejects expired or already-used links.",
+        "layout": [
+          {
+            "area": "Page header",
+            "contents": "Heading 'Set a new password' with one line saying the link can be used once and expires."
+          },
+          {
+            "area": "Password form",
+            "contents": "'New password' field and 'Confirm new password' field, both masked with screen-reader labels, and a 'Save password' button with large tap target."
+          },
+          {
+            "area": "Link problem message",
+            "contents": "Hidden until needed. When the link is expired or already used, shows a plain message that the link no longer works, with a 'Request a new link' link."
+          },
+          {
+            "area": "Success panel",
+            "contents": "Replaces the form after a saved password. Says the password is saved and shows a 'Sign in' button."
+          }
+        ],
+        "shows": [],
+        "actions": [
+          {
+            "who": "Everyone",
+            "action": "Enters a new password and the same password again, then presses 'Save password'.",
+            "result": "The password is saved through POST /api/auth/reset-password; the success panel appears and the person can go to sign in."
+          },
+          {
+            "who": "Everyone",
+            "action": "Opens a link that is expired or already used and presses 'Save password'.",
+            "result": "The request is rejected; no password changes; the link problem message appears with a way to request a new link."
+          },
+          {
+            "who": "Everyone",
+            "action": "Newly added user opens the invitation link and sets their first password.",
+            "result": "Same as a reset: the password is saved and they go on to sign in."
+          }
+        ],
+        "links": [
+          {
+            "to": "/login",
+            "label": "Sign in",
+            "when": "After the new password is saved, to sign in with it."
+          }
+        ],
+        "states": {
+          "empty": "The form is shown with empty password fields when a valid link is opened.",
+          "loading": "The save button is disabled and shows progress while the request runs.",
+          "error": "Mismatched passwords or a rejected expired or reused link show a plain message beside the form; no password is changed."
+        },
+        "notes": "Expired and reused links must be rejected. The screen is reached from the emailed link, so it does not ask for the old password. Newly added users set their first password here as well. Form must work one-handed on a 360 px wide screen with large tap targets and screen-reader labels on both fields."
+      },
+      "basis": "[\"Reset Password\",\"Sets a new password from the emailed link using POST /api/auth/reset-password, rejecting expired or reused links; also how newly added users set their first password.\",[\"CSR Sponsor\",\"Caterer Manager\",\"Internal Platform Admin\",\"NGO / Shelter / Community Kitchen Coordinator\",\"Volunteer Driver\"],[]]",
+      "at": "2026-11-22T12:35:32.986Z"
+    }
+  }
+}

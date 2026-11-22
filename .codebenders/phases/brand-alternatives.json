@@ -1,0 +1,114 @@
+{
+  "prdHash": "29e950fc236e00d11f1ae01889758eefa5df9826",
+  "brief": "",
+  "alternatives": [
+    {
+      "id": "dawn-kitchen-ledger",
+      "label": "Dawn Kitchen Ledger",
+      "colors": {
+        "primary": "#B5532F",
+        "secondary": "#7A3B22",
+        "accent": "#E9A531",
+        "bg": "#F7F1E3",
+        "surface": "#FFFBF2",
+        "text": "#1E1915",
+        "muted": "#6E6058",
+        "success": "#6F8F6B",
+        "danger": "#9E2B25"
+      },
+      "typography": {
+        "font_family": "Source Sans 3",
+        "font_family_heading": "Alegreya Sans",
+        "font_family_mono": "IBM Plex Mono"
+      },
+      "spacing": {
+        "base": "4px"
+      },
+      "radius": {
+        "base": "8px"
+      },
+      "reason": "A warm paper base, terracotta and saffron accents, and sage for delivered states give the app the feel of a handwritten kitchen ticket, while dark ink on large cream cards and tabular monospace numerals keep consume-by deadlines fast to read and WCAG AA compliant."
+    },
+    {
+      "id": "night-shift-clock",
+      "label": "Night Shift Clock",
+      "colors": {
+        "primary": "#5B7DB1",
+        "secondary": "#25344F",
+        "accent": "#FFB000",
+        "bg": "#0A1120",
+        "surface": "#141E33",
+        "text": "#E6ECF5",
+        "muted": "#8593AA",
+        "success": "#2FBF8A",
+        "danger": "#F0525F"
+      },
+      "typography": {
+        "font_family": "Inter",
+        "font_family_heading": "Barlow Condensed",
+        "font_family_mono": "JetBrains Mono"
+      },
+      "spacing": {
+        "base": "4px"
+      },
+      "radius": {
+        "base": "8px"
+      },
+      "reason": "A deep slate-navy base keeps late-night phone use low-glare, while amber is reserved solely for deadlines and countdowns so the time-critical numerals are the only things that draw the eye, set in a bold condensed face sized for one-handed reading on a 360 px screen."
+    },
+    {
+      "id": "courier-handover-trail",
+      "label": "Courier Handover Trail",
+      "colors": {
+        "primary": "#0F7C78",
+        "secondary": "#154E4F",
+        "accent": "#E3A21A",
+        "bg": "#F6F4EE",
+        "surface": "#FFFDF8",
+        "text": "#1F2B2C",
+        "muted": "#66706C",
+        "success": "#2F7A4E",
+        "danger": "#B4372B"
+      },
+      "typography": {
+        "font_family": "Nunito, 'Varela Round', system-ui, sans-serif",
+        "font_family_heading": "Quicksand, Nunito, system-ui, sans-serif",
+        "font_family_mono": "'JetBrains Mono', ui-monospace, monospace"
+      },
+      "spacing": {
+        "base": "4px"
+      },
+      "radius": {
+        "base": "8px"
+      },
+      "reason": "Bone-white and pale-stone neutrals keep the screens airy and calm for kitchen-side use, a route teal traces the live status path, and marigold is reserved for handover moments, with rounded type and paired icons so status never relies on colour alone."
+    },
+    {
+      "id": "ledger-of-meals",
+      "label": "Ledger of Meals",
+      "colors": {
+        "primary": "#4A5A3C",
+        "secondary": "#8A6F55",
+        "accent": "#2F5D46",
+        "bg": "#F4F1EA",
+        "surface": "#FBFAF6",
+        "text": "#2B2A26",
+        "muted": "#7A766C",
+        "success": "#3E6B4E",
+        "danger": "#9A4A3A"
+      },
+      "typography": {
+        "font_family": "Inter, system-ui, sans-serif",
+        "font_family_heading": "Newsreader, Georgia, serif",
+        "font_family_mono": "JetBrains Mono, ui-monospace, monospace"
+      },
+      "spacing": {
+        "base": "4px"
+      },
+      "radius": {
+        "base": "8px"
+      },
+      "reason": "A muted olive, clay and warm-grey palette with a restrained deep-green accent for verified impact, paired with an editorial serif for report titles and a neutral sans for data, so the app reads as a credible ledger for sponsors and city officials rather than an urgent rescue alert."
+    }
+  ]
+}

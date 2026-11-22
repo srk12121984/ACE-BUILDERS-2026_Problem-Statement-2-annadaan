@@ -1,0 +1,24 @@
+# macOS system files
+.DS_Store
+
+# Word lock files
+~$*
+
+# Tool-generated logs and session data
+
+# Dependencies and build output
+node_modules/
+dist/
+build/
+
+# Environment secrets
+.env
+.env.*
+
+# TypeScript incremental build info
+*.tsbuildinfo
+
+# Tool-generated planning and build data
+.codebenders/*
+!.codebenders/brand/
+!.codebenders/phases/

@@ -1,0 +1,1058 @@
+{
+  "endpoints": [
+    {
+      "method": "POST",
+      "path": "/api/auth/register",
+      "handler": "auth-1",
+      "auth_required": false,
+      "group": "Auth",
+      "request_shape": "{email: string, password: string, name: string, role: \"caterer_manager\"|\"csr_sponsor\"}",
+      "response_shape": "User",
+      "description": "Creates the caller's own account as a caterer manager or CSR sponsor from the Sign Up screen; any other role is refused, since admins add everyone else through /api/admin/users."
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/login",
+      "handler": "auth-2",
+      "auth_required": false,
+      "group": "Auth",
+      "request_shape": "{email: string, password: string}",
+      "response_shape": "User",
+      "description": "Signs in with email and password from the Login screen and records last_signed_in_at."
+    },
+    {
+      "method": "GET",
+      "path": "/api/auth/demo-users",
+      "handler": "auth-3",
+      "auth_required": false,
+      "group": "Auth",
+      "request_shape": "",
+      "response_shape": "{id: string, name: string, role: string}[]",
+      "description": "Lists the generated synthetic demo accounts (name and role only, no contact details) so the Login screen's role switcher can show them."
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/demo-sign-in",
+      "handler": "auth-4",
+      "auth_required": false,
+      "group": "Auth",
+      "request_shape": "{role: \"caterer_manager\"|\"ngo_shelter_community_kitchen_coordinator\"|\"volunteer_driver\"|\"csr_sponsor\"|\"internal_platform_admin\"}",
+      "response_shape": "User",
+      "description": "Demo role switcher: signs in as the seeded synthetic user for the chosen role with no password, sets the session role and active_role, and is disabled outside the demo build."
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/logout",
+      "handler": "auth-5",
+      "auth_required": true,
+      "group": "Auth",
+      "request_shape": "",
+      "response_shape": "{ok: boolean}",
+      "description": "Ends the session from the Profile screen and records signed_out_at and session_ended_at."
+    },
+    {
+      "method": "GET",
+      "path": "/api/auth/me",
+      "handler": "auth-6",
+      "auth_required": true,
+      "group": "Auth",
+      "request_shape": "",
+      "response_shape": "User",
+      "description": "Returns the signed-in user with role and active_role for the Profile screen and app shell."
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/auth/me",
+      "handler": "auth-7",
+      "auth_required": true,
+      "group": "Auth",
+      "request_shape": "Partial<User>",
+      "response_shape": "User",
+      "description": "Lets the signed-in person change only their own name and email on the Profile screen; role and is_active are ignored here."
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/change-password",
+      "handler": "auth-8",
+      "auth_required": true,
+      "group": "Auth",
+      "request_shape": "{current_password: string, new_password: string}",
+      "response_shape": "{ok: boolean}",
+      "description": "Changes the signed-in user's password from the Profile screen after checking the current password."
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/forgot-password",
+      "handler": "auth-9",
+      "auth_required": false,
+      "group": "Auth",
+      "request_shape": "{email: string}",
+      "response_shape": "{message: string}",
+      "description": "Always answers 200 and emails a signed, expiring reset link to the account if it exists."
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/reset-password",
+      "handler": "auth-10",
+      "auth_required": false,
+      "group": "Auth",
+      "request_shape": "{token: string, password: string}",
+      "response_shape": "{ok: boolean}",
+      "description": "Sets a new password from the emailed link, which is also how a newly added user sets their first password; rejects expired or reused tokens."
+    },
+    {
+      "method": "GET",
+      "path": "/api/home",
+      "handler": "home-11",
+      "auth_required": true,
+      "group": "Home",
+      "request_shape": "",
+      "response_shape": "{role: string, next_action: string, start_post_enabled?: boolean, blocked_reason?: string, pending_count: number}",
+      "description": "Returns the next action for the caller's role on the Home screen: for a caterer, start-a-new-post enabled only when the linked Donor is FSSAI-verified, unexpired and in a launch zone (otherwise blocked with the reason), plus open listings; for receivers, offers waiting; for volunteers, nearby pickups; for sponsors, the dashboard link; for admins, the count of items needing review."
+    },
+    {
+      "method": "GET",
+      "path": "/api/my/donors",
+      "handler": "donors-12",
+      "auth_required": true,
+      "roles": [
+        "Caterer Manager"
+      ],
+      "own_only": true,
+      "group": "Donors",
+      "request_shape": "",
+      "response_shape": "Donor[]",
+      "description": "Lists the caterer's own donor business profile(s) with the FSSAI badge status on the Profile screen."
+    },
+    {
+      "method": "POST",
+      "path": "/api/my/donors",
+      "handler": "donors-13",
+      "auth_required": true,
+      "roles": [
+        "Caterer Manager"
+      ],
+      "own_only": true,
+      "group": "Donors",
+      "request_shape": "Donor",
+      "response_shape": "Donor",
+      "description": "Creates the caterer's donor business from the Sign Up or Profile screen with owner_user_id set to the caller; the zone must be one of the eight launch zones and verification starts as unverified."
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/my/donors/{donorId}",
+      "handler": "donors-14",
+      "auth_required": true,
+      "roles": [
+        "Caterer Manager"
+      ],
+      "own_only": true,
+      "group": "Donors",
+      "request_shape": "Partial<Donor>",
+      "response_shape": "Donor",
+      "description": "Lets the caterer edit their donor name, zone, contact, FSSAI number and business name from the Profile screen; changing fssai_number resets verification to unverified, the zone must be a launch zone, and verification fields are ignored."
+    },
+    {
+      "method": "GET",
+      "path": "/api/donors/{donorId}",
+      "handler": "donors-15",
+      "auth_required": true,
+      "roles": [
+        "NGO / Shelter / Community Kitchen Coordinator",
+        "Volunteer Driver"
+      ],
+      "group": "Donors",
+      "request_shape": "",
+      "response_shape": "Donor",
+      "description": "Returns a donor's name, type, zone and FSSAI badge status so a receiver or volunteer can judge a listing, with contact masked."
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/donors",
+      "handler": "donors-16",
+      "auth_required": true,
+      "roles": [
+        "Internal Platform Admin"
+      ],
+      "group": "Donors",
+      "request_shape": "",
+      "response_shape": "Donor[]",
+      "description": "Lists all donor businesses with FSSAI status and expiry for the admin's FSSAI Verification and Users work."
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/admin/donors/{donorId}",
+      "handler": "donors-17",
+      "auth_required": true,
+      "roles": [
+        "Internal Platform Admin"
+      ],
+      "group": "Donors",
+      "request_shape": "Partial<Donor>",
+      "response_shape": "Donor",
+      "description": "Lets the admin correct any donor field, including zone, name and FSSAI business name, with changes recorded on the record."
+    },
+    {
+      "method": "POST",
+      "path": "/api/admin/donors/{donorId}/fssai-verification",
+      "handler": "donors-18",
+      "auth_required": true,
+      "roles": [
+        "Internal Platform Admin"
+      ],
+      "group": "Donors",
+      "request_shape": "{decision: \"verified\"|\"mismatched\"|\"expired\"|\"rejected\", fssai_expires_on?: string, fssai_business_name?: string}",
+      "response_shape": "Donor",
+      "description": "Records the mocked FSSAI check outcome for a donor: verified needs a future fssai_expires_on and sets verified_at and verified_by; mismatched, expired or rejected blocks posting and the badge."
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/fssai-verification",
+      "handler": "fssai-verification-19",
+      "auth_required": true,
+      "roles": [
+        "Internal Platform Admin"
+      ],
+      "group": "FSSAI Verification",
+      "request_shape": "",
+      "response_shape": "{pending_donors: Donor[], pending_receivers: Receiver[], expiring_within_30_days: {donors: Donor[], receivers: Receiver[]}}",
+      "description": "Returns the FSSAI verification queue: donors and receivers awaiting a decision, plus those whose licence or registration expires within 30 days, for the FSSAI Verification screen."
+    },
+    {
+      "method": "GET",
+      "path": "/api/my/receivers",
+      "handler": "receivers-20",
+      "auth_required": true,
+      "roles": [
+        "NGO / Shelter / Community Kitchen Coordinator"
+      ],
+      "own_only": true,
+      "group": "Receivers",
+      "request_shape": "",
+      "response_shape": "Receiver[]",
+      "description": "Returns the receiver organisation linked to the coordinator's account with its FSSAI status for the Profile screen (read only)."
+    },
+    {
+      "method": "GET",
+      "path": "/api/receivers/{receiverId}",
+      "handler": "receivers-21",
+      "auth_required": true,
+      "roles": [
+        "NGO / Shelter / Community Kitchen Coordinator",
+        "Volunteer Driver"
+      ],
+      "group": "Receivers",
+      "request_shape": "",
+      "response_shape": "Receiver",
+      "description": "Returns a receiver's name, type, zone and need level so a volunteer or coordinator can read who a pickup is for."
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/receivers",
+      "handler": "receivers-22",
+      "auth_required": true,
+      "roles": [
+        "Internal Platform Admin"
+      ],
+      "group": "Receivers",
+      "request_shape": "",
+      "response_shape": "Receiver[]",
+      "description": "Lists all receiver organisations with FSSAI status and active flag for the admin's onboarding and verification work."
+    },
+    {
+      "method": "POST",
+      "path": "/api/admin/receivers",
+      "handler": "receivers-23",
+      "auth_required": true,
+      "roles": [
+        "Internal Platform Admin"
+      ],
+      "group": "Receivers",
+      "request_shape": "Receiver",
+      "response_shape": "Receiver",
+      "description": "Onboards a receiver organisation from the Users screen; it starts unverified and cannot appear in matching until its FSSAI registration is verified."
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/admin/receivers/{receiverId}",
+      "handler": "receivers-24",
+      "auth_required": true,
+      "roles": [
+        "Internal Platform Admin"
+      ],
+      "group": "Receivers",
+      "request_shape": "Partial<Receiver>",
+      "response_shape": "Receiver",
+      "description": "Lets the admin edit receiver details, capacity, dietary restrictions and radius, and deactivate or reactivate it through is_active."
+    },
+    {
+      "method": "POST",
+      "path": "/api/admin/receivers/{receiverId}/fssai-verification",
+      "handler": "receivers-25",
+      "auth_required": true,
+      "roles": [
+        "Internal Platform Admin"
+      ],
+      "group": "Receivers",
+      "request_shape": "{decision: \"verified\"|\"rejected\"|\"expired\", fssai_expires_on?: string, rejection_reason?: string}",
+      "response_shape": "Receiver",
+      "description": "Records the mocked FSSAI registration check for a receiver: verified sets verified_at, verified_by and a future expiry; rejected stores fssai_rejection_reason and keeps the receiver out of matching."
+    },
+    {
+      "method": "GET",
+      "path": "/api/my/volunteers",
+      "handler": "volunteers-26",
+      "auth_required": true,
+      "roles": [
+        "Volunteer Driver"
+      ],
+      "own_only": true,
+      "group": "Volunteers",
+      "request_shape": "",
+      "response_shape": "Volunteer[]",
+      "description": "Returns the caller's own volunteer profile with status, zone, vehicle and availability for the Profile screen."
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/my/volunteers/{volunteerId}",
+      "handler": "volunteers-27",
+      "auth_required": true,
+      "roles": [
+        "Volunteer Driver"
+      ],
+      "own_only": true,
+      "group": "Volunteers",
+      "request_shape": "{status?: \"available\"|\"busy\"|\"offline\", vehicle_type?: \"two_wheeler\"|\"car\", availability_windows?: json}",
+      "response_shape": "Volunteer",
+      "description": "Lets the volunteer update their availability windows, vehicle type and status (available, busy, offline) on the Profile screen; masked_name, zone and is_active stay with the admin."
+    },
+    {
+      "method": "GET",
+      "path": "/api/volunteers/{volunteerId}",
+      "handler": "volunteers-28",
+      "auth_required": true,
+      "roles": [
+        "Caterer Manager",
+        "NGO / Shelter / Community Kitchen Coordinator"
+      ],
+      "group": "Volunteers",
+      "request_shape": "",
+      "response_shape": "Volunteer",
+      "description": "Returns a volunteer's masked name, zone and vehicle so a caterer confirming handover or a coordinator reading an offer can identify the driver."
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/volunteers",
+      "handler": "volunteers-29",
+      "auth_required": true,
+      "roles": [
+        "Internal Platform Admin"
+      ],
+      "group": "Volunteers",
+      "request_shape": "",
+      "response_shape": "Volunteer[]",
+      "description": "Lists all volunteer profiles with status and active flag for the admin's Users screen."
+    },
+    {
+      "method": "POST",
+      "path": "/api/admin/volunteers",
+      "handler": "volunteers-30",
+      "auth_required": true,
+      "roles": [
+        "Internal Platform Admin"
+      ],
+      "group": "Volunteers",
+      "request_shape": "Volunteer",
+      "response_shape": "Volunteer",
+      "description": "Adds a volunteer from the Users screen by linking a user account to a masked name, zone and vehicle type; the account must not already have a volunteer profile."
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/admin/volunteers/{volunteerId}",
+      "handler": "volunteers-31",
+      "auth_required": true,
+      "roles": [
+        "Internal Platform Admin"
+      ],
+      "group": "Volunteers",
+      "request_shape": "Partial<Volunteer>",
+      "response_shape": "Volunteer",
+      "description": "Lets the admin correct a volunteer's masked name, zone, vehicle and active flag, and deactivate them."
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/users",
+      "handler": "users-32",
+      "auth_required": true,
+      "roles": [
+        "Internal Platform Admin"
+      ],
+      "group": "Users",
+      "request_shape": "",
+      "response_shape": "User[]",
+      "description": "Lists every account with role, active_role, active flag and last sign-in for the Users screen."
+    },
+    {
+      "method": "POST",
+      "path": "/api/admin/users",
+      "handler": "users-33",
+      "auth_required": true,
+      "roles": [
+        "Internal Platform Admin"
+      ],
+      "group": "Users",
+      "request_shape": "{email: string, name: string, role: \"caterer_manager\"|\"ngo_shelter_community_kitchen_coordinator\"|\"volunteer_driver\"|\"csr_sponsor\"|\"internal_platform_admin\", donor_id?: string, receiver_id?: string}",
+      "response_shape": "User",
+      "description": "Adds a person from the Users screen with a role, links the donor or receiver record where given, and emails a set-password link instead of inventing a password."
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/admin/users/{userId}",
+      "handler": "users-34",
+      "auth_required": true,
+      "roles": [
+        "Internal Platform Admin"
+      ],
+      "group": "Users",
+      "request_shape": "Partial<User>",
+      "response_shape": "User",
+      "description": "Lets the admin give or change a person's role, name and email, and link donor or receiver records; the caller cannot change their own role."
+    },
+    {
+      "method": "POST",
+      "path": "/api/admin/users/{userId}/deactivate",
+      "handler": "users-35",
+      "auth_required": true,
+      "roles": [
+        "Internal Platform Admin"
+      ],
+      "group": "Users",
+      "request_shape": "",
+      "response_shape": "User",
+      "description": "Deactivates an account from the Users screen, sets is_active false, ends its sessions and blocks sign-in; the record is kept, never deleted."
+    },
+    {
+      "method": "GET",
+      "path": "/api/sponsor-dashboard",
+      "handler": "sponsor-dashboard-36",
+      "auth_required": true,
+      "roles": [
+        "CSR Sponsor"
+      ],
+      "group": "Sponsor Dashboard",
+      "request_shape": "?zone=string&quarter=string",
+      "response_shape": "{zones: {zone: string, meals: number, delivered_kg: number, co2e_kg_estimate_range: string, assumption_version: number}[], weeks: {week_start: string, meals: number, delivered_kg: number}[], quarterly: {quarter: string, zone: string, meals: number, delivered_kg: number}[]}",
+      "description": "Returns impact totals by zone and by week, plus quarterly summaries for sponsored zones: meals = sum of delivered kg of delivered rescues ÷ kg per meal of the stated assumption version; expired and cancelled listings are never counted, and each total shows its assumption version."
+    },
+    {
+      "method": "GET",
+      "path": "/api/my/weekly-impact-report",
+      "handler": "weekly-impact-report-37",
+      "auth_required": true,
+      "roles": [
+        "Caterer Manager"
+      ],
+      "own_only": true,
+      "group": "Weekly Impact Report",
+      "request_shape": "?week=string",
+      "response_shape": "{week_start: string, deliveries: number, meals: number, delivered_kg: number, co2e_kg_estimate_range: string, assumption_version: number, text: string, wording_source: \"llm\"|\"template\"}",
+      "description": "Returns the caterer's weekly report for the chosen week: delivered rescues, meals = delivered kg ÷ kg per meal, kg and CO2e estimate computed in code, with the wording checked against those numbers and the template used if any number or banned word fails; only weeks with a delivery produce a report."
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/internal-metrics",
+      "handler": "internal-metrics-38",
+      "auth_required": true,
+      "roles": [
+        "Internal Platform Admin"
+      ],
+      "group": "Internal Metrics",
+      "request_shape": "?from=string&to=string",
+      "response_shape": "{funnel: {event: string, count: number}[], rescue_rate: number, expiry_rate: number, match_acceptance: number, median_time_to_post_s: number, median_time_to_claim_min: number}",
+      "description": "Returns the funnel event counts and section 4 metrics computed from status events: time to post, rescue rate = delivered before deadline ÷ posted, expiry rate = expired ÷ posted, match acceptance = first offers accepted ÷ first offers sent, for the internal metrics page."
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/usage",
+      "handler": "usage-39",
+      "auth_required": true,
+      "roles": [
+        "Internal Platform Admin"
+      ],
+      "group": "Usage",
+      "request_shape": "?day=string",
+      "response_shape": "{day: string, input_tokens: number, output_tokens: number, cost_usd: number, budget_used_pct: number, alert_70_pct: boolean, by_feature: {feature: string, tokens: number, cost_usd: number}[]}",
+      "description": "Returns daily token usage and cost per feature with the share of the monthly budget used and whether the 70% alert is raised, for the Usage page."
+    },
+    {
+      "method": "POST",
+      "path": "/api/listings/parse",
+      "handler": "listing-intake-40",
+      "auth_required": true,
+      "roles": [
+        "Caterer Manager"
+      ],
+      "group": "Listing Intake",
+      "request_shape": "{raw_input: string, intake_source: \"free_text\" | \"voice\"}",
+      "response_shape": "{status: \"drafted\" | \"needs_pickup_by\" | \"fallback_form\" | \"blocked\", draft?: {items: listing_items[], pickup_by_at?: string, zone?: string, ai_filled_fields: string[], source_highlights: object}, follow_up_question?: string, reason?: string}",
+      "description": "Sends the donor's typed or spoken post to the Anthropic model and returns a draft of items, quantities, units and pickup-by time, each source word highlighted and marked AI-filled; allergens with no evidence in the text are set to 'unknown — ask donor'. Checks first that the donor's FSSAI number is verified and unexpired and that the zone is a launch zone, and parses nothing if either fails. Times out after 5 s, retries once on invalid output, and otherwise returns status 'fallback_form' so the Donor Post screen shows the 3-field form; discards output with a banned claim or injected instruction. Used by the Donor Post screen (/listings/new)."
+    },
+    {
+      "method": "POST",
+      "path": "/api/my/listings",
+      "handler": "listings-41",
+      "auth_required": true,
+      "roles": [
+        "Caterer Manager"
+      ],
+      "own_only": true,
+      "group": "Listings",
+      "request_shape": "{listing: Partial<Listing>, items: listing_items[], confirm_not_duplicate?: boolean}",
+      "response_shape": "Listing",
+      "description": "Creates a draft listing with its items from the 3-field form or the confirmed AI draft, and used by the Donor Post screen (/listings/new). Refuses with a stated reason (422) when the donor's FSSAI number is not verified and unexpired or the zone is not one of the 8 launch zones; sets consume_by_at to the earlier of pickup_by_at and the rule-table limit for the food type and storage; sets the fixed disclaimer and allergens 'unknown — ask donor' where not stated; marks the listing unrescuable with a reason when pickup_by_at is past or under 30 minutes away; returns 409 with the earlier listing id when the same items were posted by this donor within 10 minutes and confirm_not_duplicate is not true."
+    },
+    {
+      "method": "GET",
+      "path": "/api/my/listings",
+      "handler": "listings-42",
+      "auth_required": true,
+      "roles": [
+        "Caterer Manager"
+      ],
+      "own_only": true,
+      "group": "Listings",
+      "request_shape": "?status=draft|posted|offered|claimed|collected|delivered|expired|cancelled (optional)",
+      "response_shape": "Listing[]",
+      "description": "Lists the caller's own listings with status and consume-by time, newest first, optionally filtered by status; used by the Listings screen (/listings) and the caterer's Home screen to show open listings."
+    },
+    {
+      "method": "GET",
+      "path": "/api/my/listings/{listingId}",
+      "handler": "listings-43",
+      "auth_required": true,
+      "roles": [
+        "Caterer Manager"
+      ],
+      "own_only": true,
+      "group": "Listings",
+      "request_shape": "",
+      "response_shape": "{listing: Listing, items: listing_items[], current_offer?: {status: string, receiver_name: string, volunteer_masked_name?: string, volunteer_eta_at?: string}}",
+      "description": "Returns one of the caller's listings with its handling card (consume-by time, storage guidance, allergens, fixed disclaimer), its items, its current status and a summary of the offer on it (receiver, volunteer ETA with masked name); used by the Listing Detail screen (/listings/[id]) and the Listing Confirmation screen (/listings/[id]/confirm)."
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/my/listings/{listingId}",
+      "handler": "listings-44",
+      "auth_required": true,
+      "roles": [
+        "Caterer Manager"
+      ],
+      "own_only": true,
+      "group": "Listings",
+      "request_shape": "Partial<Listing>",
+      "response_shape": "Listing",
+      "description": "Lets the donor correct listing fields (pickup_by_at, prepared_at, storage, exact_pickup_point, raw_input) while the listing is draft or posted and not yet claimed; recomputes consume_by_at, re-runs matching when the total quantity changes by more than 20%, and rejects changes to the fixed disclaimer; used by the Listing Confirmation screen to correct AI-filled fields and by Listing Detail after posting."
+    },
+    {
+      "method": "POST",
+      "path": "/api/my/listings/{listingId}/confirm",
+      "handler": "listings-45",
+      "auth_required": true,
+      "roles": [
+        "Caterer Manager"
+      ],
+      "own_only": true,
+      "group": "Listings",
+      "request_shape": "{confirmed_fields: string[]}",
+      "response_shape": "Listing",
+      "description": "Donor confirms the listing after checking every AI-filled field against the original text, moving it from draft to posted only when all four handling-card parts are present, the pickup-by time is at least 30 minutes away and the donor's FSSAI check still passes; logs a status event with the donor as actor and starts matching; used by the Listing Confirmation screen (/listings/[id]/confirm)."
+    },
+    {
+      "method": "POST",
+      "path": "/api/my/listings/{listingId}/cancel",
+      "handler": "listings-46",
+      "auth_required": true,
+      "roles": [
+        "Caterer Manager"
+      ],
+      "own_only": true,
+      "group": "Listings",
+      "request_shape": "{cancel_reason: string}",
+      "response_shape": "Listing",
+      "description": "Cancels the caller's listing while it is posted; a listing already claimed is also cancelled and the volunteer stood down, and the receiver is told; other states are refused. Used by the Listing Detail screen (/listings/[id])."
+    },
+    {
+      "method": "GET",
+      "path": "/api/my/listings/{listingId}/donation-record",
+      "handler": "listings-47",
+      "auth_required": true,
+      "roles": [
+        "Caterer Manager"
+      ],
+      "own_only": true,
+      "group": "Listings",
+      "request_shape": "",
+      "response_shape": "file: text/csv",
+      "description": "Returns the donation record for the listing (donor, date, items, quantity, prep time, consume-by time, temperature, quantity distributed, area) as a downloadable CSV file; used by the Listing Detail screen to download the donation record."
+    },
+    {
+      "method": "POST",
+      "path": "/api/my/listings/{listingId}/items",
+      "handler": "listing-items-48",
+      "auth_required": true,
+      "roles": [
+        "Caterer Manager"
+      ],
+      "own_only": true,
+      "group": "Listing Items",
+      "request_shape": "listing_items",
+      "response_shape": "listing_items",
+      "description": "Adds an item (name, quantity, unit, veg or non-veg tag) to the caller's listing while it is draft, and to a posted listing before it is claimed (which re-runs matching if the quantity change exceeds 20%); used by the Donor Post and Listing Confirmation screens."
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/my/listings/{listingId}/items/{itemId}",
+      "handler": "listing-items-49",
+      "auth_required": true,
+      "roles": [
+        "Caterer Manager"
+      ],
+      "own_only": true,
+      "group": "Listing Items",
+      "request_shape": "Partial<listing_items>",
+      "response_shape": "listing_items",
+      "description": "Corrects one item's name, quantity, unit or dietary tag while the listing is draft or posted and not yet claimed; used by the Listing Confirmation screen when the donor fixes an AI-filled item."
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/my/listings/{listingId}/items/{itemId}",
+      "handler": "listing-items-50",
+      "auth_required": true,
+      "roles": [
+        "Caterer Manager"
+      ],
+      "own_only": true,
+      "group": "Listing Items",
+      "request_shape": "",
+      "response_shape": "{deleted: boolean}",
+      "description": "Removes an item from the caller's listing while it is still draft, used by the Listing Confirmation screen when the donor rejects an AI-extracted item."
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/listings",
+      "handler": "listings-51",
+      "auth_required": true,
+      "roles": [
+        "Internal Platform Admin"
+      ],
+      "group": "Listings",
+      "request_shape": "?is_flagged=true (optional) &status=... (optional)",
+      "response_shape": "Listing[]",
+      "description": "Lists all listings across donors with status and consume-by time, filterable to flagged ones (is_flagged=true); used by the Listings screen (/listings) for the platform admin to see all listings and filter for flagged ones."
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/listings/{listingId}",
+      "handler": "listings-52",
+      "auth_required": true,
+      "roles": [
+        "Internal Platform Admin"
+      ],
+      "group": "Listings",
+      "request_shape": "",
+      "response_shape": "{listing: Listing, items: listing_items[]}",
+      "description": "Returns any listing with its items, handling card, flag reason and flagged time for the platform admin to review its details and flags; used by the Listing Detail screen (/listings/[id])."
+    },
+    {
+      "method": "GET",
+      "path": "/api/my/offers",
+      "handler": "offers-53",
+      "auth_required": true,
+      "roles": [
+        "NGO / Shelter / Community Kitchen Coordinator"
+      ],
+      "own_only": true,
+      "group": "Offers",
+      "request_shape": "?status=sent|accepted|declined|timed_out|already_claimed|cancelled|delivered (optional)",
+      "response_shape": "Offer[]",
+      "description": "Lists ranked offers sent to the caller's receiver, each with its rank, score, plain-language reason, quantity offered, status and expiry time, ordered by rank; used by the Offers screen (/offers) and the receiver's Home screen to show offers waiting for a reply."
+    },
+    {
+      "method": "GET",
+      "path": "/api/my/offers/{offerId}",
+      "handler": "offers-54",
+      "auth_required": true,
+      "roles": [
+        "NGO / Shelter / Community Kitchen Coordinator"
+      ],
+      "own_only": true,
+      "group": "Offers",
+      "request_shape": "",
+      "response_shape": "{offer: Offer, listing: {zone: string, consume_by_at: string, storage: string, storage_guidance: string, allergens: string, disclaimer: string, items: listing_items[]}, volunteer_eta_at?: string}",
+      "description": "Returns one offer with its handling card (consume-by time, storage guidance, allergens with 'unknown — ask donor' where unconfirmed, the fixed disclaimer, items, zone) and the volunteer ETA once assigned; the exact pickup point is not included; used by the Offer Detail screen (/offers/[id])."
+    },
+    {
+      "method": "POST",
+      "path": "/api/my/offers/{offerId}/accept",
+      "handler": "offers-55",
+      "auth_required": true,
+      "roles": [
+        "NGO / Shelter / Community Kitchen Coordinator"
+      ],
+      "own_only": true,
+      "group": "Offers",
+      "request_shape": "",
+      "response_shape": "Offer",
+      "description": "Accepts a sent offer that has not timed out: the first confirmed write wins (others see already_claimed), a volunteer is assigned with an ETA, the listing moves to claimed and a status event is logged; a claim whose ETA would miss the consume-by deadline minus 15 minutes is refused and re-offered to the next match. Used by the Offer Detail screen (/offers/[id])."
+    },
+    {
+      "method": "POST",
+      "path": "/api/my/offers/{offerId}/decline",
+      "handler": "offers-56",
+      "auth_required": true,
+      "roles": [
+        "NGO / Shelter / Community Kitchen Coordinator"
+      ],
+      "own_only": true,
+      "group": "Offers",
+      "request_shape": "{reason?: string}",
+      "response_shape": "Offer",
+      "description": "Declines a sent offer with an optional reason, so the offer cascades to the next ranked receiver if time allows; used by the Offers screen and the Offer Detail screen."
+    },
+    {
+      "method": "POST",
+      "path": "/api/my/offers/{offerId}/cancel",
+      "handler": "offers-57",
+      "auth_required": true,
+      "roles": [
+        "NGO / Shelter / Community Kitchen Coordinator"
+      ],
+      "own_only": true,
+      "group": "Offers",
+      "request_shape": "{reason: string}",
+      "response_shape": "Offer",
+      "description": "Cancels the receiver's accepted offer after claiming; the listing returns to posted, the volunteer is stood down, the next match is offered if time allows and otherwise the listing expires. Used by the Offer Detail screen."
+    },
+    {
+      "method": "POST",
+      "path": "/api/my/offers/{offerId}/confirm-delivery",
+      "handler": "offers-58",
+      "auth_required": true,
+      "roles": [
+        "NGO / Shelter / Community Kitchen Coordinator"
+      ],
+      "own_only": true,
+      "group": "Offers",
+      "request_shape": "{delivered_quantity: number, servings_received?: number}",
+      "response_shape": "Offer",
+      "description": "Receiver confirms the servings and quantity actually received once the listing is collected; the offer and listing move to delivered, delivered_quantity and delivery_confirmed_at are recorded and the impact is computed from the actual figure. Used by the Offer Detail screen to confirm servings received."
+    },
+    {
+      "method": "GET",
+      "path": "/api/my/pickups",
+      "handler": "pickups-59",
+      "auth_required": true,
+      "roles": [
+        "Volunteer Driver"
+      ],
+      "own_only": true,
+      "group": "Pickups",
+      "request_shape": "",
+      "response_shape": "Offer[]",
+      "description": "Lists the pickups assigned to the caller, sorted by nearness of the pickup zone and then by pickup-by time, each with its status and volunteer ETA; used by the Pickups screen (/pickups)."
+    },
+    {
+      "method": "GET",
+      "path": "/api/my/pickups/{pickupId}",
+      "handler": "pickups-60",
+      "auth_required": true,
+      "roles": [
+        "Volunteer Driver"
+      ],
+      "own_only": true,
+      "group": "Pickups",
+      "request_shape": "",
+      "response_shape": "{offer: Offer, listing: {exact_pickup_point: string, consume_by_at: string, storage: string, allergens: string, disclaimer: string, items: listing_items[]}, handover: {failed_attempts: number, locked: boolean}}",
+      "description": "Returns one assigned pickup (pickupId is the offer id assigned to the caller) with the exact pickup point, which is revealed only to the assigned volunteer, the items, consume-by time and storage, and the handover attempt status but never the code; used by the Pickup Detail screen (/pickups/[id])."
+    },
+    {
+      "method": "POST",
+      "path": "/api/my/pickups/{pickupId}/collect",
+      "handler": "pickups-61",
+      "auth_required": true,
+      "roles": [
+        "Volunteer Driver"
+      ],
+      "own_only": true,
+      "group": "Pickups",
+      "request_shape": "{handover_code: string, storage_type: \"ambient\" | \"chilled\" | \"hot_holding\", food_temperature_c: number, handover_photo_url?: string}",
+      "response_shape": "Offer",
+      "description": "Volunteer enters the donor's one-time handover code with the storage type and food temperature; a correct code with a recorded temperature moves the listing to collected and logs a status event, a missing temperature is refused, an out-of-range temperature flags the listing for the receiver, and three wrong codes lock the handover for admin review. Used by the Pickup Detail screen."
+    },
+    {
+      "method": "GET",
+      "path": "/api/status-events",
+      "handler": "live-status-board-62",
+      "auth_required": true,
+      "roles": [
+        "Caterer Manager",
+        "NGO / Shelter / Community Kitchen Coordinator",
+        "Volunteer Driver",
+        "Internal Platform Admin"
+      ],
+      "group": "Live Status Board",
+      "request_shape": "?listingId=string&toStatus=string&since=datetime",
+      "response_shape": "StatusEvent[]",
+      "description": "Returns the logged status changes (from, to, actor, time) for listings, filterable by listing, target status and time, and feeds the Live Status Board that every party sees; each change is shown within 5 seconds of happening."
+    },
+    {
+      "method": "GET",
+      "path": "/api/impact-records",
+      "handler": "impact-records-63",
+      "auth_required": true,
+      "roles": [
+        "CSR Sponsor",
+        "Internal Platform Admin"
+      ],
+      "group": "Impact Records",
+      "request_shape": "?zone=string&weekStart=date",
+      "response_shape": "(ImpactRecord & {assumption_version: number, kg_per_meal: number, emission_factor_kg_co2e_per_kg: number | null})[]",
+      "description": "Lists delivered rescues with meals_saved = delivered_quantity_kg ÷ kg_per_meal, delivered kg, CO2e estimate and the assumption version used, for the Impact screen; posted, expired or cancelled listings are never included."
+    },
+    {
+      "method": "GET",
+      "path": "/api/impact-records/{impactRecordId}",
+      "handler": "impact-records-64",
+      "auth_required": true,
+      "roles": [
+        "CSR Sponsor",
+        "Internal Platform Admin"
+      ],
+      "group": "Impact Records",
+      "request_shape": "",
+      "response_shape": "ImpactRecord & {assumption_version: number, kg_per_meal: number, emission_factor_kg_co2e_per_kg: number | null, co2e_range_kg: {low: number, high: number} | null, formulas: {meals: string, co2e: string}}",
+      "description": "Returns one rescue's impact with each number's formula (meals = delivered kg ÷ kg per meal, CO2e = delivered kg × emission factor shown as an estimate range) and the assumption set it used, for the 'how we calculate this' note."
+    },
+    {
+      "method": "GET",
+      "path": "/api/my/impact-records/{impactRecordId}/donation-record",
+      "handler": "impact-records-65",
+      "auth_required": true,
+      "roles": [
+        "Caterer Manager"
+      ],
+      "own_only": true,
+      "group": "Impact Records",
+      "request_shape": "",
+      "response_shape": "file download (CSV or PDF) with the donation record fields",
+      "description": "Downloads the donation record (donor, date, items, quantity, prep time, consume-by time, temperature, quantity distributed, area) for one of the caller's delivered listings, used by the Listing Detail download action."
+    },
+    {
+      "method": "GET",
+      "path": "/api/assumption-sets",
+      "handler": "assumption-sets-68",
+      "auth_required": true,
+      "roles": [
+        "Caterer Manager",
+        "NGO / Shelter / Community Kitchen Coordinator",
+        "CSR Sponsor",
+        "Internal Platform Admin"
+      ],
+      "group": "Assumption Sets",
+      "request_shape": "",
+      "response_shape": "AssumptionSet[]",
+      "description": "Lists every published assumption version (kg per meal, emission factor, rule-table version, published by and when) so screens can show the version beside each number."
+    },
+    {
+      "method": "POST",
+      "path": "/api/assumption-sets",
+      "handler": "assumption-sets-69",
+      "auth_required": true,
+      "roles": [
+        "Internal Platform Admin"
+      ],
+      "group": "Assumption Sets",
+      "request_shape": "{kg_per_meal: number, emission_factor_kg_co2e_per_kg?: number, rule_table_version: number, notes?: string}",
+      "response_shape": "AssumptionSet",
+      "description": "Publishes a new assumption version with the next version number, checking that the referenced rule_table_version exists; published versions are never edited, so every report keeps the version it used, and it is used by the Assumptions screen."
+    },
+    {
+      "method": "GET",
+      "path": "/api/rule-tables",
+      "handler": "rule-tables-70",
+      "auth_required": true,
+      "roles": [
+        "Caterer Manager",
+        "NGO / Shelter / Community Kitchen Coordinator",
+        "CSR Sponsor",
+        "Internal Platform Admin"
+      ],
+      "group": "Rule Tables",
+      "request_shape": "?version=number&current=boolean",
+      "response_shape": "RuleTable[]",
+      "description": "Lists rule-table rows (food type, storage, max hours after prep) for one version or the current version, which the consume-by deadline is computed from and which the Assumptions screen shows."
+    },
+    {
+      "method": "POST",
+      "path": "/api/rule-tables",
+      "handler": "rule-tables-71",
+      "auth_required": true,
+      "roles": [
+        "Internal Platform Admin"
+      ],
+      "group": "Rule Tables",
+      "request_shape": "{rows: {food_type: string, storage: 'ambient' | 'chilled' | 'hot_holding', max_hours_after_prep: number}[]}",
+      "response_shape": "RuleTable[]",
+      "description": "Publishes a new rule-table version from the full set of rows, assigning the next version number and making it current while earlier versions stay unchanged so existing listings keep the version they were posted under; used by the Assumptions screen."
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/flag-reviews",
+      "handler": "flag-reviews-72",
+      "auth_required": true,
+      "roles": [
+        "Internal Platform Admin"
+      ],
+      "group": "Flag Reviews",
+      "request_shape": "?status=open|resolved&reason=string",
+      "response_shape": "FlagReview[]",
+      "description": "Lists the flag queue (flagged listings, locked handovers, receiver mismatches and reports, guardrail breaches) with open items first, for the Flag Review screen."
+    },
+    {
+      "method": "POST",
+      "path": "/api/flag-reviews/{flagReviewId}/decide",
+      "handler": "flag-reviews-73",
+      "auth_required": true,
+      "roles": [
+        "Internal Platform Admin"
+      ],
+      "group": "Flag Reviews",
+      "request_shape": "{decision: 'keep' | 'cancel_listing' | 'unlock_handover' | 'expire_listing'}",
+      "response_shape": "FlagReview",
+      "description": "Records the admin decision on an open flag: keep leaves the listing as is, cancel_listing or expire_listing moves the listing to Cancelled or Expired with a status event, and unlock_handover is allowed only for locked_handover reviews; the flag is then resolved with decided_by and decided_at set. Used by the Flag Review screen."
+    },
+    {
+      "method": "POST",
+      "path": "/api/listings/{listingId}/flag-reviews",
+      "handler": "flag-reviews-74",
+      "auth_required": true,
+      "roles": [
+        "Internal Platform Admin"
+      ],
+      "group": "Flag Reviews",
+      "request_shape": "{reason: 'flagged_listing', details: string}",
+      "response_shape": "FlagReview",
+      "description": "Raises an admin flag on a listing, marking the listing as flagged with the reason and time and adding it to the flag queue, used when the admin reviews a listing's details and flags."
+    },
+    {
+      "method": "POST",
+      "path": "/api/offers/{offerId}/flag-reviews",
+      "handler": "flag-reviews-75",
+      "auth_required": true,
+      "roles": [
+        "NGO / Shelter / Community Kitchen Coordinator"
+      ],
+      "group": "Flag Reviews",
+      "request_shape": "{reason: 'receiver_mismatch' | 'receiver_report', details: string}",
+      "response_shape": "FlagReview",
+      "description": "Lets the receiver of this offer report a mismatch at pickup or report the donor; allowed only for the offer's own receiver and only once the offer is accepted or delivered, and the listing is taken from the offer, used by the Offer Detail flag action."
+    },
+    {
+      "method": "GET",
+      "path": "/api/my/flag-reviews",
+      "handler": "flag-reviews-76",
+      "auth_required": true,
+      "roles": [
+        "NGO / Shelter / Community Kitchen Coordinator"
+      ],
+      "own_only": true,
+      "group": "Flag Reviews",
+      "request_shape": "",
+      "response_shape": "FlagReview[]",
+      "description": "Lists the flags the caller's receiver has raised with their status and any admin decision, so the receiver can follow up on its reports."
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/agent-calls",
+      "handler": "agent-calls-77",
+      "auth_required": true,
+      "roles": [
+        "Internal Platform Admin"
+      ],
+      "group": "Agent Calls",
+      "request_shape": "?feature=intake|report_wording&status=string&listingId=string",
+      "response_shape": "AgentCall[]",
+      "description": "Lists every intake and report-wording LLM call with its status, prompt version, model, input, output, token counts and cost, so the admin can review rejected outputs (banned claims or injected instructions) and invalid or timed-out calls."
+    },
+    {
+      "method": "GET",
+      "path": "/api/impact-records/{impactRecordId}/donation-record",
+      "handler": "fix-76",
+      "description": "Lets a sponsor download the donation record behind one delivered rescue as CSV.",
+      "group": "Donation Record"
+    },
+    {
+      "method": "POST",
+      "path": "/api/admin/agent-calls/{agentCallId}/review",
+      "handler": "fix-77",
+      "description": "Marks a rejected or invalid intake call as reviewed by the admin and records the time.",
+      "group": "Review"
+    },
+    {
+      "method": "POST",
+      "path": "/api/admin/offers/{offerId}/reassign-volunteer",
+      "handler": "fix-78",
+      "description": "Admin reassigns an available volunteer to the offer, or records that the receiver collects or the donor drops off, and logs a status event.",
+      "group": "Reassign Volunteer"
+    },
+    {
+      "method": "POST",
+      "path": "/api/my/pickups/{pickupId}/handed-over",
+      "handler": "fix-79",
+      "description": "Volunteer records the hand-off to the receiver with a time; the listing stays Collected until the receiver confirms delivery.",
+      "group": "Handed Over"
+    },
+    {
+      "method": "POST",
+      "path": "/api/admin/users/{userId}/reactivate",
+      "handler": "fix-80",
+      "description": "Sets is_active back to true so the account can sign in again.",
+      "group": "Reactivate"
+    },
+    {
+      "method": "POST",
+      "path": "/api/my/offers/{offerId}/temperature-decision",
+      "handler": "fix-81",
+      "description": "Receiver records accept or reject for an out-of-range food temperature on their accepted offer, and the decision is logged with its time.",
+      "group": "Temperature Decision"
+    },
+    {
+      "method": "POST",
+      "path": "/api/listings/voice-transcribe",
+      "handler": "fix-82",
+      "description": "Accepts a donor's voice note audio, sends it to the speech-to-text service and returns the transcript for POST /api/listings/parse.",
+      "group": "Voice Transcribe"
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/internal-metrics/weekly",
+      "handler": "fix-83",
+      "description": "Returns the funnel event counts and section 4 metrics computed from status events for a chosen week (query parameter week).",
+      "group": "Weekly"
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/offers/at-risk",
+      "handler": "fix-84",
+      "description": "Lists offers whose volunteer_eta_at is later than the listing's consume_by_at minus 15 minutes, with listing, receiver, volunteer and ETA, for the ETA at risk tab.",
+      "group": "At Risk"
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/offer-share-by-receiver",
+      "handler": "fix-85",
+      "description": "Returns each receiver's count and share of offers sent between a from and to date, computed from offers.receiver_id.",
+      "group": "Offer Share By Receiver"
+    }
+  ]
+}

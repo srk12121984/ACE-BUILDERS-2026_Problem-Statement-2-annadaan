@@ -1,0 +1,13 @@
+{
+  "integrations": [
+    {
+      "id": "anthropic",
+      "category": "ai",
+      "sdk": "Anthropic",
+      "env_vars": [
+        "ANTHROPIC_API_KEY"
+      ],
+      "usage_files": []
+    }
+  ]
+}

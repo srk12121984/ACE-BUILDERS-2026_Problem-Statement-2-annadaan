@@ -1,0 +1,63 @@
+{
+  "personas": [
+    {
+      "persona_id": "P-7AA632",
+      "name": "Caterer Manager",
+      "short_description": "Posts surplus food after an event in about a minute, confirms the pickup, and reads the weekly impact report.",
+      "key_responsibilities": [
+        "Post surplus food by free text, voice or form",
+        "Confirm the AI-filled listing before it is posted",
+        "View the handling card with consume-by time, storage, allergens and disclaimer",
+        "Follow live listing status through to Delivered",
+        "Cancel a listing while it is Posted",
+        "Receive the weekly impact report for clients"
+      ]
+    },
+    {
+      "persona_id": "P-72BB70",
+      "name": "NGO / Shelter / Community Kitchen Coordinator",
+      "short_description": "Receives ranked offers, accepts the food they can serve in time, and confirms servings received on delivery.",
+      "key_responsibilities": [
+        "Receive ranked offers, each with a plain-language reason",
+        "Accept an offer, which assigns a volunteer with an ETA",
+        "Read the handling card with allergens and consume-by time before accepting",
+        "Confirm servings received on delivery",
+        "Flag a mismatch at pickup or report a problem with a donor"
+      ]
+    },
+    {
+      "persona_id": "P-55F0C8",
+      "name": "Volunteer Driver",
+      "short_description": "Takes nearby pickups in free time, enters the donor's handover code at collection, and delivers the food.",
+      "key_responsibilities": [
+        "See nearby pickup tasks assigned to them",
+        "Enter the donor's one-time handover code at collection",
+        "Update status as the food is collected and delivered",
+        "Receive the exact pickup point once assigned"
+      ]
+    },
+    {
+      "persona_id": "P-408D8F",
+      "name": "CSR Sponsor",
+      "short_description": "Reviews verifiable impact totals by zone and quarterly summaries to decide funding and report on it.",
+      "key_responsibilities": [
+        "View impact totals by zone on the sponsor dashboard",
+        "View impact of each rescue with its stated assumptions",
+        "See the assumption version used for each number",
+        "Review quarterly summaries for sponsored zones"
+      ]
+    },
+    {
+      "persona_id": "P-E13505",
+      "name": "Internal Platform Admin",
+      "short_description": "Onboards receivers and volunteers, verifies FSSAI registrations, reviews flagged listings and maintains versioned assumptions.",
+      "key_responsibilities": [
+        "Add people who use the app and give them roles",
+        "Onboard receivers and verify their FSSAI registration",
+        "Review flagged listings and locked handovers",
+        "Edit assumption values and rule tables with versioning",
+        "Deactivate accounts"
+      ]
+    }
+  ]
+}

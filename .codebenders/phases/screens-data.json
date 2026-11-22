@@ -1,0 +1,690 @@
+{
+  "version": 1,
+  "data": {
+    "currency": "INR",
+    "today": "2026-11-22",
+    "collections": {
+      "users": [
+        {
+          "id": "u1",
+          "name": "Rashmi Mohapatra",
+          "email": "rashmi@sunrisebanquets.in",
+          "persona": "Caterer Manager",
+          "zone": "Patia",
+          "status": "active"
+        },
+        {
+          "id": "u2",
+          "name": "Biswajit Nayak",
+          "email": "biswajit@kalingacaterers.in",
+          "persona": "Caterer Manager",
+          "zone": "Nayapalli",
+          "status": "active"
+        },
+        {
+          "id": "u3",
+          "name": "Sanjukta Panda",
+          "email": "sanjukta@sahajakitchen.org",
+          "persona": "NGO / Shelter / Community Kitchen Coordinator",
+          "zone": "Old Town",
+          "status": "active"
+        },
+        {
+          "id": "u4",
+          "name": "Deepak Behera",
+          "email": "deepak@jagannathshelter.org",
+          "persona": "NGO / Shelter / Community Kitchen Coordinator",
+          "zone": "Rasulgarh",
+          "status": "active"
+        },
+        {
+          "id": "u5",
+          "name": "Pradeep Sahu",
+          "email": "pradeep.sahu@annadaan-volunteers.in",
+          "persona": "Volunteer Driver",
+          "zone": "Patia",
+          "status": "active"
+        },
+        {
+          "id": "u6",
+          "name": "Mamata Jena",
+          "email": "mamata.jena@annadaan-volunteers.in",
+          "persona": "Volunteer Driver",
+          "zone": "Nayapalli",
+          "status": "deactivated"
+        },
+        {
+          "id": "u7",
+          "name": "Nisha Verma",
+          "email": "nisha.verma@mahanadilogistics.in",
+          "persona": "CSR Sponsor",
+          "zone": "Patia",
+          "status": "active"
+        },
+        {
+          "id": "u8",
+          "name": "Arjun Mishra",
+          "email": "arjun.mishra@odishatilesfoundation.in",
+          "persona": "CSR Sponsor",
+          "zone": "Nayapalli",
+          "status": "active"
+        },
+        {
+          "id": "u9",
+          "name": "Soumya Ranjan Das",
+          "email": "soumya@annadaan.in",
+          "persona": "Internal Platform Admin",
+          "zone": "Saheed Nagar",
+          "status": "active"
+        },
+        {
+          "id": "u10",
+          "name": "Priya Samal",
+          "email": "priya.samal@annadaan.in",
+          "persona": "Internal Platform Admin",
+          "zone": "Old Town",
+          "status": "active"
+        }
+      ],
+      "caterers": [
+        {
+          "id": "c1",
+          "user_id": "u1",
+          "business_name": "Sunrise Banquets, Patia",
+          "type": "event_caterer",
+          "zone": "Patia",
+          "contact_masked": "+91 98XXX XX412"
+        },
+        {
+          "id": "c2",
+          "user_id": "u2",
+          "business_name": "Kalinga Wedding Caterers",
+          "type": "wedding_caterer",
+          "zone": "Nayapalli",
+          "contact_masked": "+91 94XXX XX187"
+        }
+      ],
+      "receivers": [
+        {
+          "id": "r1",
+          "user_id": "u3",
+          "organisation_name": "Sahaja Community Kitchen",
+          "type": "community_kitchen",
+          "zone": "Old Town",
+          "daily_capacity": 180,
+          "dietary_restrictions": "jain_no_onion_garlic",
+          "need_level": "high",
+          "reliability": 0.92
+        },
+        {
+          "id": "r2",
+          "user_id": "u4",
+          "organisation_name": "Jagannath Shelter Trust",
+          "type": "shelter",
+          "zone": "Rasulgarh",
+          "daily_capacity": 120,
+          "dietary_restrictions": "none",
+          "need_level": "high",
+          "reliability": 0.85
+        }
+      ],
+      "volunteers": [
+        {
+          "id": "v1",
+          "user_id": "u5",
+          "zone": "Patia",
+          "vehicle": "two_wheeler",
+          "availability_from": "17:00",
+          "availability_to": "23:30"
+        },
+        {
+          "id": "v2",
+          "user_id": "u6",
+          "zone": "Nayapalli",
+          "vehicle": "car",
+          "availability_from": "18:00",
+          "availability_to": "23:59"
+        }
+      ],
+      "fssai_registrations": [
+        {
+          "id": "f1",
+          "user_id": "u1",
+          "number": "21522011000187",
+          "verification_status": "verified",
+          "expiry_date": "2027-08-31",
+          "name_address_match": "match"
+        },
+        {
+          "id": "f2",
+          "user_id": "u2",
+          "number": "21522011000244",
+          "verification_status": "verified",
+          "expiry_date": "2026-12-10",
+          "name_address_match": "match"
+        },
+        {
+          "id": "f3",
+          "user_id": "u3",
+          "number": "RD-OD-2024-0381",
+          "verification_status": "verified",
+          "expiry_date": "2027-03-14",
+          "name_address_match": "match"
+        },
+        {
+          "id": "f4",
+          "user_id": "u4",
+          "number": "RD-OD-2025-0112",
+          "verification_status": "verified",
+          "expiry_date": "2026-12-05",
+          "name_address_match": "match"
+        }
+      ],
+      "listings": [
+        {
+          "id": "l1",
+          "caterer_id": "c1",
+          "zone": "Patia",
+          "prepared_at": "2026-11-22T19:00",
+          "pickup_by": "2026-11-22T23:15",
+          "consume_by": "2026-11-22T23:00",
+          "storage": "hot_holding",
+          "pickup_point": "Service lane behind Sunrise Banquet Hall, gate 2",
+          "status": "posted"
+        },
+        {
+          "id": "l2",
+          "caterer_id": "c1",
+          "zone": "Patia",
+          "prepared_at": "2026-11-22T18:30",
+          "pickup_by": "2026-11-22T22:45",
+          "consume_by": "2026-11-22T22:30",
+          "storage": "hot_holding",
+          "pickup_point": "Loading bay, Sunrise Banquet Hall, Patia",
+          "status": "offered"
+        },
+        {
+          "id": "l3",
+          "caterer_id": "c1",
+          "zone": "Patia",
+          "prepared_at": "2026-11-22T17:30",
+          "pickup_by": "2026-11-22T21:30",
+          "consume_by": "2026-11-22T20:30",
+          "storage": "hot_holding",
+          "pickup_point": "Side gate, Sunrise Banquet Hall, Patia",
+          "status": "claimed"
+        },
+        {
+          "id": "l4",
+          "caterer_id": "c2",
+          "zone": "Nayapalli",
+          "prepared_at": "2026-11-22T12:00",
+          "pickup_by": "2026-11-22T16:00",
+          "consume_by": "2026-11-22T16:00",
+          "storage": "refrigerated",
+          "pickup_point": "Kitchen door, Kalinga Wedding Caterers, Nayapalli",
+          "status": "collected"
+        },
+        {
+          "id": "l5",
+          "caterer_id": "c1",
+          "zone": "Patia",
+          "prepared_at": "2026-11-20T19:30",
+          "pickup_by": "2026-11-20T23:00",
+          "consume_by": "2026-11-20T22:30",
+          "storage": "hot_holding",
+          "pickup_point": "Service lane behind Sunrise Banquet Hall, gate 2",
+          "status": "delivered"
+        },
+        {
+          "id": "l6",
+          "caterer_id": "c1",
+          "zone": "Patia",
+          "prepared_at": "2026-11-18T18:00",
+          "pickup_by": "2026-11-18T22:30",
+          "consume_by": "2026-11-18T22:00",
+          "storage": "hot_holding",
+          "pickup_point": "Service lane behind Sunrise Banquet Hall, gate 2",
+          "status": "delivered"
+        },
+        {
+          "id": "l7",
+          "caterer_id": "c2",
+          "zone": "Nayapalli",
+          "prepared_at": "2026-11-19T14:00",
+          "pickup_by": "2026-11-19T21:00",
+          "consume_by": "2026-11-19T20:00",
+          "storage": "refrigerated",
+          "pickup_point": "Kitchen door, Kalinga Wedding Caterers, Nayapalli",
+          "status": "expired"
+        },
+        {
+          "id": "l8",
+          "caterer_id": "c1",
+          "zone": "Khandagiri",
+          "prepared_at": "2026-11-23T11:30",
+          "pickup_by": "2026-11-23T15:00",
+          "consume_by": "2026-11-23T15:00",
+          "storage": "hot_holding",
+          "pickup_point": "Marquee lot, Khandagiri venue",
+          "status": "cancelled"
+        }
+      ],
+      "listing_items": [
+        {
+          "id": "li1",
+          "listing_id": "l1",
+          "name": "Veg pulao",
+          "quantity": 60,
+          "unit": "servings",
+          "diet": "veg",
+          "allergens": "unknown — ask donor"
+        },
+        {
+          "id": "li2",
+          "listing_id": "l2",
+          "name": "Paneer butter masala",
+          "quantity": 24,
+          "unit": "servings",
+          "diet": "veg",
+          "allergens": "milk, may contain nuts"
+        },
+        {
+          "id": "li3",
+          "listing_id": "l3",
+          "name": "Chicken biryani",
+          "quantity": 45,
+          "unit": "servings",
+          "diet": "non_veg",
+          "allergens": "unknown — ask donor"
+        },
+        {
+          "id": "li4",
+          "listing_id": "l4",
+          "name": "Mixed veg curry",
+          "quantity": 12,
+          "unit": "kg",
+          "diet": "veg",
+          "allergens": "unknown — ask donor"
+        },
+        {
+          "id": "li5",
+          "listing_id": "l5",
+          "name": "Chicken curry",
+          "quantity": 14,
+          "unit": "kg",
+          "diet": "non_veg",
+          "allergens": "unknown — ask donor"
+        },
+        {
+          "id": "li6",
+          "listing_id": "l6",
+          "name": "Veg khichdi",
+          "quantity": 32,
+          "unit": "kg",
+          "diet": "veg",
+          "allergens": "unknown — ask donor"
+        },
+        {
+          "id": "li7",
+          "listing_id": "l7",
+          "name": "Kheer",
+          "quantity": 6,
+          "unit": "kg",
+          "diet": "veg",
+          "allergens": "milk, may contain nuts"
+        },
+        {
+          "id": "li8",
+          "listing_id": "l8",
+          "name": "Fish fry",
+          "quantity": 5,
+          "unit": "kg",
+          "diet": "non_veg",
+          "allergens": "fish"
+        }
+      ],
+      "offers": [
+        {
+          "id": "o1",
+          "listing_id": "l2",
+          "receiver_id": "r1",
+          "volunteer_id": null,
+          "rank": 1,
+          "distance_km": 3.2,
+          "reason": "3.2 km away, can serve 24, arrives 35 min before deadline",
+          "sent_at": "2026-11-22T19:02",
+          "expires_at": "2026-11-22T19:07",
+          "response_status": "open"
+        },
+        {
+          "id": "o2",
+          "listing_id": "l3",
+          "receiver_id": "r2",
+          "volunteer_id": "v1",
+          "rank": 1,
+          "distance_km": 6.1,
+          "reason": "6.1 km away, can serve 45, arrives 40 min before deadline",
+          "sent_at": "2026-11-22T17:38",
+          "expires_at": "2026-11-22T17:43",
+          "response_status": "accepted"
+        },
+        {
+          "id": "o3",
+          "listing_id": "l4",
+          "receiver_id": "r1",
+          "volunteer_id": "v1",
+          "rank": 1,
+          "distance_km": 2.4,
+          "reason": "2.4 km away, can serve 80, arrives 50 min before deadline",
+          "sent_at": "2026-11-22T12:05",
+          "expires_at": "2026-11-22T12:10",
+          "response_status": "accepted"
+        },
+        {
+          "id": "o4",
+          "listing_id": "l5",
+          "receiver_id": "r1",
+          "volunteer_id": "v2",
+          "rank": 1,
+          "distance_km": 4,
+          "reason": "4.0 km away, can serve 14, arrives 25 min before deadline",
+          "sent_at": "2026-11-20T20:40",
+          "expires_at": "2026-11-20T20:45",
+          "response_status": "accepted"
+        },
+        {
+          "id": "o5",
+          "listing_id": "l7",
+          "receiver_id": "r1",
+          "volunteer_id": null,
+          "rank": 1,
+          "distance_km": 2.9,
+          "reason": "2.9 km away, can serve 6, arrives 1 h before deadline",
+          "sent_at": "2026-11-19T17:08",
+          "expires_at": "2026-11-19T17:13",
+          "response_status": "expired"
+        }
+      ],
+      "status_events": [
+        {
+          "id": "e1",
+          "listing_id": "l1",
+          "from_status": null,
+          "to_status": "posted",
+          "actor_user_id": "u1",
+          "actor_role": "donor",
+          "changed_at": "2026-11-22T18:10"
+        },
+        {
+          "id": "e2",
+          "listing_id": "l2",
+          "from_status": "posted",
+          "to_status": "offered",
+          "actor_user_id": null,
+          "actor_role": "system",
+          "changed_at": "2026-11-22T19:02"
+        },
+        {
+          "id": "e3",
+          "listing_id": "l3",
+          "from_status": "offered",
+          "to_status": "claimed",
+          "actor_user_id": "u4",
+          "actor_role": "receiver",
+          "changed_at": "2026-11-22T17:42"
+        },
+        {
+          "id": "e4",
+          "listing_id": "l4",
+          "from_status": "claimed",
+          "to_status": "collected",
+          "actor_user_id": "u5",
+          "actor_role": "volunteer",
+          "changed_at": "2026-11-22T15:55"
+        },
+        {
+          "id": "e5",
+          "listing_id": "l5",
+          "from_status": "claimed",
+          "to_status": "delivered",
+          "actor_user_id": "u3",
+          "actor_role": "receiver",
+          "changed_at": "2026-11-20T23:10"
+        }
+      ],
+      "listing_flags": [
+        {
+          "id": "fl1",
+          "listing_id": "l4",
+          "reason": "Receiver reports 12 kg short of posted quantity at pickup",
+          "raised_by_user_id": "u3",
+          "raised_at": "2026-11-22T16:10",
+          "status": "open"
+        },
+        {
+          "id": "fl2",
+          "listing_id": "l7",
+          "reason": "Pickup-by passed before any receiver accepted",
+          "raised_by_user_id": "u9",
+          "raised_at": "2026-11-19T21:00",
+          "status": "open"
+        }
+      ],
+      "handovers": [
+        {
+          "id": "h1",
+          "listing_id": "l3",
+          "volunteer_id": "v1",
+          "storage_type": "hot_holding",
+          "food_temperature_c": null,
+          "wrong_code_attempts": 3,
+          "locked_at": "2026-11-22T20:40",
+          "recorded_at": null
+        },
+        {
+          "id": "h2",
+          "listing_id": "l4",
+          "volunteer_id": "v1",
+          "storage_type": "refrigerated",
+          "food_temperature_c": 4.5,
+          "wrong_code_attempts": 0,
+          "locked_at": null,
+          "recorded_at": "2026-11-22T15:52"
+        },
+        {
+          "id": "h3",
+          "listing_id": "l5",
+          "volunteer_id": "v2",
+          "storage_type": "hot_holding",
+          "food_temperature_c": 63,
+          "wrong_code_attempts": 0,
+          "locked_at": null,
+          "recorded_at": "2026-11-20T22:20"
+        }
+      ],
+      "impact_records": [
+        {
+          "id": "ir1",
+          "listing_id": "l5",
+          "assumption_set_id": "as1",
+          "delivered_kg": 14,
+          "servings_received": null,
+          "delivered_on": "2026-11-20"
+        },
+        {
+          "id": "ir2",
+          "listing_id": "l6",
+          "assumption_set_id": "as1",
+          "delivered_kg": 32,
+          "servings_received": 80,
+          "delivered_on": "2026-11-18"
+        }
+      ],
+      "assumption_sets": [
+        {
+          "id": "as1",
+          "version": "v1",
+          "kg_per_meal": 0.4,
+          "emission_factor": 2.1,
+          "rule_table_version": "rt1",
+          "status": "retired"
+        },
+        {
+          "id": "as2",
+          "version": "v2",
+          "kg_per_meal": 0.4,
+          "emission_factor": 2.1,
+          "rule_table_version": "rt2",
+          "status": "current"
+        }
+      ],
+      "consume_rules": [
+        {
+          "id": "cr1",
+          "food_type": "cooked_veg",
+          "storage": "hot_holding",
+          "limit_minutes_after_prep": 240
+        },
+        {
+          "id": "cr2",
+          "food_type": "cooked_non_veg",
+          "storage": "hot_holding",
+          "limit_minutes_after_prep": 180
+        },
+        {
+          "id": "cr3",
+          "food_type": "cooked_veg",
+          "storage": "refrigerated",
+          "limit_minutes_after_prep": 720
+        },
+        {
+          "id": "cr4",
+          "food_type": "dairy_sweet",
+          "storage": "refrigerated",
+          "limit_minutes_after_prep": 360
+        }
+      ],
+      "weekly_reports": [
+        {
+          "id": "wr1",
+          "caterer_id": "c1",
+          "assumption_set_id": "as1",
+          "week_start": "2026-11-16",
+          "week_end": "2026-11-22",
+          "generated_at": "2026-11-22T08:00",
+          "report_text": "Sunrise Banquets delivered 2 rescues this week: 46 kg of food, about 115 meals, on assumption v1 (0.4 kg per meal)."
+        }
+      ],
+      "token_usage": [
+        {
+          "id": "tu1",
+          "call_type": "intake",
+          "occurred_on": "2026-11-22",
+          "listing_id": "l1",
+          "weekly_report_id": null,
+          "input_tokens": 1210,
+          "output_tokens": 260
+        },
+        {
+          "id": "tu2",
+          "call_type": "intake",
+          "occurred_on": "2026-11-21",
+          "listing_id": "l8",
+          "weekly_report_id": null,
+          "input_tokens": 1195,
+          "output_tokens": 248
+        },
+        {
+          "id": "tu3",
+          "call_type": "report",
+          "occurred_on": "2026-11-22",
+          "listing_id": null,
+          "weekly_report_id": "wr1",
+          "input_tokens": 1190,
+          "output_tokens": 255
+        }
+      ],
+      "token_budgets": [
+        {
+          "id": "tb1",
+          "month": "2026-11",
+          "budget_tokens": 500000,
+          "alert_threshold_percent": 70
+        }
+      ],
+      "sponsored_zones": [
+        {
+          "id": "sz1",
+          "user_id": "u7",
+          "zone": "Patia"
+        },
+        {
+          "id": "sz2",
+          "user_id": "u7",
+          "zone": "Old Town"
+        },
+        {
+          "id": "sz3",
+          "user_id": "u8",
+          "zone": "Nayapalli"
+        }
+      ],
+      "funnel_events": [
+        {
+          "id": "fe1",
+          "event_type": "post_started",
+          "listing_id": "l1",
+          "user_id": "u1",
+          "occurred_at": "2026-11-22T18:08"
+        },
+        {
+          "id": "fe2",
+          "event_type": "posted",
+          "listing_id": "l1",
+          "user_id": "u1",
+          "occurred_at": "2026-11-22T18:10"
+        },
+        {
+          "id": "fe3",
+          "event_type": "expired",
+          "listing_id": "l7",
+          "user_id": null,
+          "occurred_at": "2026-11-19T23:59"
+        }
+      ]
+    },
+    "viewers": {
+      "Caterer Manager": "u1",
+      "NGO / Shelter / Community Kitchen Coordinator": "u3",
+      "Volunteer Driver": "u5",
+      "CSR Sponsor": "u7",
+      "Internal Platform Admin": "u9"
+    }
+  },
+  "covers": {
+    "/": "5e933e67cce579aa",
+    "/login": "aec3adf595641d9e",
+    "/signup": "3596415ce92c2c2f",
+    "/profile": "b51dac4101e2a440",
+    "/users": "238c13f361613dd6",
+    "/listings": "fc4595b16dbb5cf2",
+    "/listings/{}": "fafc8507dc0b4c22",
+    "/listings/{}/confirm": "346b896e9c1c931b",
+    "/listings/new": "e02129dad841330f",
+    "/offers": "88ebf1ff356409ef",
+    "/offers/{}": "ff150f5629455a61",
+    "/pickups": "c499d6b440e339be",
+    "/pickups/{}": "c1fa2815c49490b3",
+    "/live-status-board": "8d72b1dd43a8e54f",
+    "/impact": "6363dad5e7e39b38",
+    "/weekly-impact-report": "0c7bcb7292098647",
+    "/sponsor-dashboard": "9f1705e05e5f8e73",
+    "/fssai-verification": "d76abeea0cb0e3b5",
+    "/flag-review": "05bc9afbf119f49b",
+    "/assumptions": "5dcd0e20bcfd1f28",
+    "/internal-metrics": "da4410303cf75567",
+    "/usage": "2652c24c6c51f4d5"
+  },
+  "at": "2026-11-22T09:17:40.502Z"
+}

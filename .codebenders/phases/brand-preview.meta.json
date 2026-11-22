@@ -1,0 +1,15 @@
+{
+  "prdHash": "cf726da4414029585614604a679a5eb7b53bcc5c",
+  "generatedAt": "2026-11-22T09:05:47.202Z",
+  "agent_type": "brand-preview-html",
+  "designSpec": {
+    "layout_archetype": "hero-led marketing page with split listing preview and feature grid",
+    "nav_pattern": "sticky top bar with brand left, text links center, outline and primary actions right",
+    "surface": "tinted warm-neutral background with white card surfaces",
+    "card_treatment": "1px border with small shadow, lifted hero card with large shadow",
+    "density": "comfortable, generous section spacing",
+    "elevation": "subtle layered shadows reserved for hero and key cards",
+    "radius_language": "consistent rounded corners with pill badges and status chips",
+    "signature_motifs": "handling card with consume-by and allergens, ranked offer list with rank badges, handover code in mono, lifecycle status"
+  }
+}

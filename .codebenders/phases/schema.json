@@ -1,0 +1,1251 @@
+{
+  "orm": "prisma",
+  "models": [
+    {
+      "name": "users",
+      "fields": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "nullable": false,
+          "pk": true
+        },
+        {
+          "name": "created_at",
+          "type": "datetime",
+          "nullable": false,
+          "default": "now"
+        },
+        {
+          "name": "updated_at",
+          "type": "datetime",
+          "nullable": false,
+          "default": "now"
+        },
+        {
+          "name": "email",
+          "type": "string",
+          "nullable": false,
+          "unique": true
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "nullable": false
+        },
+        {
+          "name": "role",
+          "type": "enum(caterer_manager|ngo_shelter_community_kitchen_coordinator|volunteer_driver|csr_sponsor|internal_platform_admin)",
+          "nullable": false
+        },
+        {
+          "name": "active_role",
+          "type": "enum(caterer_manager|ngo_shelter_community_kitchen_coordinator|volunteer_driver|csr_sponsor|internal_platform_admin)",
+          "nullable": true
+        },
+        {
+          "name": "is_active",
+          "type": "boolean",
+          "nullable": false,
+          "default": "true"
+        },
+        {
+          "name": "donor_id",
+          "type": "uuid",
+          "nullable": true,
+          "fk": "donors.id"
+        },
+        {
+          "name": "receiver_id",
+          "type": "uuid",
+          "nullable": true,
+          "fk": "receivers.id"
+        },
+        {
+          "name": "last_signed_in_at",
+          "type": "datetime",
+          "nullable": true
+        },
+        {
+          "name": "signed_out_at",
+          "type": "datetime",
+          "nullable": true
+        },
+        {
+          "name": "session_ended_at",
+          "type": "datetime",
+          "nullable": true
+        },
+        {
+          "name": "zone",
+          "type": "String",
+          "nullable": true
+        },
+        {
+          "name": "contact",
+          "type": "String",
+          "nullable": true
+        },
+        {
+          "name": "password_hash",
+          "type": "String",
+          "nullable": true
+        },
+        {
+          "name": "password_reset_token_hash",
+          "type": "String",
+          "nullable": true
+        },
+        {
+          "name": "password_reset_expires_at",
+          "type": "DateTime",
+          "nullable": true
+        },
+        {
+          "name": "password_reset_used_at",
+          "type": "DateTime",
+          "nullable": true
+        }
+      ],
+      "persona_access": {
+        "Caterer Manager": "read",
+        "NGO / Shelter / Community Kitchen Coordinator": "read",
+        "Volunteer Driver": "read",
+        "CSR Sponsor": "read",
+        "Internal Platform Admin": "full"
+      }
+    },
+    {
+      "name": "donors",
+      "fields": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "nullable": false,
+          "pk": true
+        },
+        {
+          "name": "created_at",
+          "type": "datetime",
+          "nullable": false,
+          "default": "now"
+        },
+        {
+          "name": "updated_at",
+          "type": "datetime",
+          "nullable": false,
+          "default": "now"
+        },
+        {
+          "name": "owner_user_id",
+          "type": "uuid",
+          "nullable": false,
+          "fk": "users.id"
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "nullable": false
+        },
+        {
+          "name": "type",
+          "type": "enum(event_caterer|wedding_caterer)",
+          "nullable": false
+        },
+        {
+          "name": "zone",
+          "type": "string",
+          "nullable": false
+        },
+        {
+          "name": "contact",
+          "type": "string",
+          "nullable": true
+        },
+        {
+          "name": "fssai_number",
+          "type": "string",
+          "nullable": true,
+          "unique": true
+        },
+        {
+          "name": "fssai_business_name",
+          "type": "string",
+          "nullable": true
+        },
+        {
+          "name": "fssai_verification_status",
+          "type": "enum(unverified|verified|expired|mismatched|rejected)",
+          "nullable": false,
+          "default": "unverified"
+        },
+        {
+          "name": "fssai_expires_on",
+          "type": "date",
+          "nullable": true
+        },
+        {
+          "name": "fssai_verified_at",
+          "type": "datetime",
+          "nullable": true
+        },
+        {
+          "name": "fssai_verified_by_user_id",
+          "type": "uuid",
+          "nullable": true,
+          "fk": "users.id"
+        },
+        {
+          "name": "is_active",
+          "type": "Boolean",
+          "nullable": true
+        },
+        {
+          "name": "fssai_rejection_reason",
+          "type": "String",
+          "nullable": true
+        }
+      ],
+      "persona_access": {
+        "Caterer Manager": "read_write_own",
+        "NGO / Shelter / Community Kitchen Coordinator": "read",
+        "Volunteer Driver": "read",
+        "CSR Sponsor": "none",
+        "Internal Platform Admin": "full"
+      }
+    },
+    {
+      "name": "receivers",
+      "fields": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "nullable": false,
+          "pk": true
+        },
+        {
+          "name": "created_at",
+          "type": "datetime",
+          "nullable": false,
+          "default": "now"
+        },
+        {
+          "name": "updated_at",
+          "type": "datetime",
+          "nullable": false,
+          "default": "now"
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "nullable": false
+        },
+        {
+          "name": "type",
+          "type": "enum(ngo|community_kitchen|shelter)",
+          "nullable": false
+        },
+        {
+          "name": "zone",
+          "type": "string",
+          "nullable": false
+        },
+        {
+          "name": "daily_capacity",
+          "type": "int",
+          "nullable": false
+        },
+        {
+          "name": "dietary_restrictions",
+          "type": "json",
+          "nullable": true
+        },
+        {
+          "name": "need_level",
+          "type": "enum(low|medium|high)",
+          "nullable": false,
+          "default": "medium"
+        },
+        {
+          "name": "max_radius_km",
+          "type": "decimal",
+          "nullable": false,
+          "default": "8"
+        },
+        {
+          "name": "reliability_score",
+          "type": "decimal",
+          "nullable": false,
+          "default": "1"
+        },
+        {
+          "name": "is_active",
+          "type": "boolean",
+          "nullable": false,
+          "default": "true"
+        },
+        {
+          "name": "fssai_registration_number",
+          "type": "string",
+          "nullable": true,
+          "unique": true
+        },
+        {
+          "name": "fssai_verification_status",
+          "type": "enum(unverified|verified|expired|rejected)",
+          "nullable": false,
+          "default": "unverified"
+        },
+        {
+          "name": "fssai_expires_on",
+          "type": "date",
+          "nullable": true
+        },
+        {
+          "name": "fssai_verified_at",
+          "type": "datetime",
+          "nullable": true
+        },
+        {
+          "name": "fssai_verified_by_user_id",
+          "type": "uuid",
+          "nullable": true,
+          "fk": "users.id"
+        },
+        {
+          "name": "fssai_rejection_reason",
+          "type": "text",
+          "nullable": true
+        }
+      ],
+      "persona_access": {
+        "Caterer Manager": "none",
+        "NGO / Shelter / Community Kitchen Coordinator": "read",
+        "Volunteer Driver": "read",
+        "CSR Sponsor": "none",
+        "Internal Platform Admin": "full"
+      }
+    },
+    {
+      "name": "volunteers",
+      "fields": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "nullable": false,
+          "pk": true
+        },
+        {
+          "name": "created_at",
+          "type": "datetime",
+          "nullable": false,
+          "default": "now"
+        },
+        {
+          "name": "updated_at",
+          "type": "datetime",
+          "nullable": false,
+          "default": "now"
+        },
+        {
+          "name": "user_id",
+          "type": "uuid",
+          "nullable": false,
+          "unique": true,
+          "fk": "users.id"
+        },
+        {
+          "name": "masked_name",
+          "type": "string",
+          "nullable": false
+        },
+        {
+          "name": "zone",
+          "type": "string",
+          "nullable": false
+        },
+        {
+          "name": "vehicle_type",
+          "type": "enum(two_wheeler|car)",
+          "nullable": false
+        },
+        {
+          "name": "availability_windows",
+          "type": "json",
+          "nullable": true
+        },
+        {
+          "name": "status",
+          "type": "enum(available|busy|offline)",
+          "nullable": false,
+          "default": "offline"
+        },
+        {
+          "name": "is_active",
+          "type": "boolean",
+          "nullable": false,
+          "default": "true"
+        }
+      ],
+      "persona_access": {
+        "Caterer Manager": "read",
+        "NGO / Shelter / Community Kitchen Coordinator": "read",
+        "Volunteer Driver": "read_write_own",
+        "CSR Sponsor": "none",
+        "Internal Platform Admin": "full"
+      }
+    },
+    {
+      "name": "listings",
+      "fields": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "nullable": false,
+          "pk": true
+        },
+        {
+          "name": "created_at",
+          "type": "datetime",
+          "nullable": false,
+          "default": "now"
+        },
+        {
+          "name": "updated_at",
+          "type": "datetime",
+          "nullable": false,
+          "default": "now"
+        },
+        {
+          "name": "user_id",
+          "type": "uuid",
+          "nullable": false,
+          "fk": "users.id"
+        },
+        {
+          "name": "donor_id",
+          "type": "uuid",
+          "nullable": false,
+          "fk": "donors.id"
+        },
+        {
+          "name": "status",
+          "type": "enum(draft|posted|offered|claimed|collected|delivered|expired|cancelled)",
+          "nullable": false,
+          "default": "draft"
+        },
+        {
+          "name": "intake_source",
+          "type": "enum(form|free_text|voice)",
+          "nullable": false,
+          "default": "form"
+        },
+        {
+          "name": "raw_input",
+          "type": "text",
+          "nullable": true
+        },
+        {
+          "name": "pickup_by_at",
+          "type": "datetime",
+          "nullable": false
+        },
+        {
+          "name": "consume_by_at",
+          "type": "datetime",
+          "nullable": true
+        },
+        {
+          "name": "prepared_at",
+          "type": "datetime",
+          "nullable": true
+        },
+        {
+          "name": "storage",
+          "type": "enum(ambient|chilled|hot_holding)",
+          "nullable": true
+        },
+        {
+          "name": "storage_guidance",
+          "type": "text",
+          "nullable": true
+        },
+        {
+          "name": "allergens",
+          "type": "string",
+          "nullable": true,
+          "default": "unknown — ask donor"
+        },
+        {
+          "name": "disclaimer",
+          "type": "string",
+          "nullable": false,
+          "default": "Not certified safe — follow handling guidance"
+        },
+        {
+          "name": "zone",
+          "type": "string",
+          "nullable": false
+        },
+        {
+          "name": "exact_pickup_point",
+          "type": "string",
+          "nullable": true
+        },
+        {
+          "name": "is_rescuable",
+          "type": "boolean",
+          "nullable": false,
+          "default": "true"
+        },
+        {
+          "name": "rescuable_reason",
+          "type": "text",
+          "nullable": true
+        },
+        {
+          "name": "ai_filled_fields",
+          "type": "json",
+          "nullable": true
+        },
+        {
+          "name": "confirmed_at",
+          "type": "datetime",
+          "nullable": true
+        },
+        {
+          "name": "posted_at",
+          "type": "datetime",
+          "nullable": true
+        },
+        {
+          "name": "cancelled_at",
+          "type": "datetime",
+          "nullable": true
+        },
+        {
+          "name": "cancel_reason",
+          "type": "text",
+          "nullable": true
+        },
+        {
+          "name": "is_flagged",
+          "type": "boolean",
+          "nullable": false,
+          "default": "false"
+        },
+        {
+          "name": "flag_reason",
+          "type": "text",
+          "nullable": true
+        },
+        {
+          "name": "flagged_at",
+          "type": "datetime",
+          "nullable": true
+        },
+        {
+          "name": "post_started_at",
+          "type": "DateTime",
+          "nullable": true
+        }
+      ],
+      "persona_access": {
+        "Caterer Manager": "read_write_own",
+        "NGO / Shelter / Community Kitchen Coordinator": "read",
+        "Volunteer Driver": "read",
+        "CSR Sponsor": "none",
+        "Internal Platform Admin": "full"
+      }
+    },
+    {
+      "name": "listing_items",
+      "fields": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "nullable": false,
+          "pk": true
+        },
+        {
+          "name": "created_at",
+          "type": "datetime",
+          "nullable": false,
+          "default": "now"
+        },
+        {
+          "name": "updated_at",
+          "type": "datetime",
+          "nullable": false,
+          "default": "now"
+        },
+        {
+          "name": "listing_id",
+          "type": "uuid",
+          "nullable": false,
+          "fk": "listings.id"
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "nullable": false
+        },
+        {
+          "name": "quantity",
+          "type": "decimal",
+          "nullable": false
+        },
+        {
+          "name": "quantity_unit",
+          "type": "enum(servings|plates|kg|litres|handi|vessel)",
+          "nullable": false
+        },
+        {
+          "name": "dietary_tag",
+          "type": "enum(veg|non_veg|unknown)",
+          "nullable": false,
+          "default": "unknown"
+        }
+      ],
+      "persona_access": {
+        "Caterer Manager": "read_write_own",
+        "NGO / Shelter / Community Kitchen Coordinator": "read",
+        "Volunteer Driver": "read",
+        "CSR Sponsor": "none",
+        "Internal Platform Admin": "full"
+      }
+    },
+    {
+      "name": "offers",
+      "fields": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "nullable": false,
+          "pk": true
+        },
+        {
+          "name": "created_at",
+          "type": "datetime",
+          "nullable": false,
+          "default": "now"
+        },
+        {
+          "name": "updated_at",
+          "type": "datetime",
+          "nullable": false,
+          "default": "now"
+        },
+        {
+          "name": "listing_id",
+          "type": "uuid",
+          "nullable": false,
+          "fk": "listings.id"
+        },
+        {
+          "name": "receiver_id",
+          "type": "uuid",
+          "nullable": false,
+          "fk": "receivers.id"
+        },
+        {
+          "name": "volunteer_id",
+          "type": "uuid",
+          "nullable": true,
+          "fk": "volunteers.id"
+        },
+        {
+          "name": "rank",
+          "type": "int",
+          "nullable": false
+        },
+        {
+          "name": "score",
+          "type": "decimal",
+          "nullable": false
+        },
+        {
+          "name": "reason",
+          "type": "text",
+          "nullable": false
+        },
+        {
+          "name": "quantity_offered",
+          "type": "decimal",
+          "nullable": false
+        },
+        {
+          "name": "status",
+          "type": "enum(sent|accepted|declined|timed_out|already_claimed|cancelled|delivered)",
+          "nullable": false,
+          "default": "sent"
+        },
+        {
+          "name": "sent_at",
+          "type": "datetime",
+          "nullable": false
+        },
+        {
+          "name": "expires_at",
+          "type": "datetime",
+          "nullable": false
+        },
+        {
+          "name": "responded_at",
+          "type": "datetime",
+          "nullable": true
+        },
+        {
+          "name": "volunteer_eta_at",
+          "type": "datetime",
+          "nullable": true
+        },
+        {
+          "name": "handover_code_hash",
+          "type": "string",
+          "nullable": true
+        },
+        {
+          "name": "handover_failed_attempts",
+          "type": "int",
+          "nullable": false,
+          "default": "0"
+        },
+        {
+          "name": "handover_locked",
+          "type": "boolean",
+          "nullable": false,
+          "default": "false"
+        },
+        {
+          "name": "handover_locked_at",
+          "type": "datetime",
+          "nullable": true
+        },
+        {
+          "name": "handover_confirmed_at",
+          "type": "datetime",
+          "nullable": true
+        },
+        {
+          "name": "storage_type",
+          "type": "enum(ambient|chilled|hot_holding)",
+          "nullable": true
+        },
+        {
+          "name": "food_temperature_c",
+          "type": "decimal",
+          "nullable": true
+        },
+        {
+          "name": "temperature_flagged",
+          "type": "boolean",
+          "nullable": false,
+          "default": "false"
+        },
+        {
+          "name": "sync_status",
+          "type": "enum(synced|pending_sync)",
+          "nullable": false,
+          "default": "synced"
+        },
+        {
+          "name": "delivered_quantity",
+          "type": "decimal",
+          "nullable": true
+        },
+        {
+          "name": "delivery_confirmed_at",
+          "type": "datetime",
+          "nullable": true
+        },
+        {
+          "name": "handover_code",
+          "type": "String",
+          "nullable": true
+        },
+        {
+          "name": "handed_over_at",
+          "type": "DateTime",
+          "nullable": true
+        },
+        {
+          "name": "servings_delivered",
+          "type": "Int",
+          "nullable": true
+        },
+        {
+          "name": "temperature_decision",
+          "type": "String",
+          "nullable": true
+        },
+        {
+          "name": "decline_reason",
+          "type": "String",
+          "nullable": true
+        },
+        {
+          "name": "temperature_decided_at",
+          "type": "DateTime",
+          "nullable": true
+        }
+      ],
+      "persona_access": {
+        "Caterer Manager": "read",
+        "NGO / Shelter / Community Kitchen Coordinator": "read_write_own",
+        "Volunteer Driver": "read_write_own",
+        "CSR Sponsor": "none",
+        "Internal Platform Admin": "full"
+      }
+    },
+    {
+      "name": "status_events",
+      "fields": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "nullable": false,
+          "pk": true
+        },
+        {
+          "name": "created_at",
+          "type": "datetime",
+          "nullable": false,
+          "default": "now"
+        },
+        {
+          "name": "updated_at",
+          "type": "datetime",
+          "nullable": false,
+          "default": "now"
+        },
+        {
+          "name": "listing_id",
+          "type": "uuid",
+          "nullable": false,
+          "fk": "listings.id"
+        },
+        {
+          "name": "from_status",
+          "type": "enum(draft|posted|offered|claimed|collected|delivered|expired|cancelled)",
+          "nullable": true
+        },
+        {
+          "name": "to_status",
+          "type": "enum(draft|posted|offered|claimed|collected|delivered|expired|cancelled)",
+          "nullable": false
+        },
+        {
+          "name": "actor_type",
+          "type": "enum(donor|receiver|volunteer|admin|system)",
+          "nullable": false
+        },
+        {
+          "name": "actor_user_id",
+          "type": "uuid",
+          "nullable": true,
+          "fk": "users.id"
+        },
+        {
+          "name": "reason",
+          "type": "text",
+          "nullable": true
+        },
+        {
+          "name": "occurred_at",
+          "type": "datetime",
+          "nullable": false
+        }
+      ],
+      "persona_access": {
+        "Caterer Manager": "read",
+        "NGO / Shelter / Community Kitchen Coordinator": "read",
+        "Volunteer Driver": "read",
+        "CSR Sponsor": "none",
+        "Internal Platform Admin": "read"
+      }
+    },
+    {
+      "name": "impact_records",
+      "fields": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "nullable": false,
+          "pk": true
+        },
+        {
+          "name": "created_at",
+          "type": "datetime",
+          "nullable": false,
+          "default": "now"
+        },
+        {
+          "name": "updated_at",
+          "type": "datetime",
+          "nullable": false,
+          "default": "now"
+        },
+        {
+          "name": "listing_id",
+          "type": "uuid",
+          "nullable": false,
+          "unique": true,
+          "fk": "listings.id"
+        },
+        {
+          "name": "assumption_set_id",
+          "type": "uuid",
+          "nullable": false,
+          "fk": "assumption_sets.id"
+        },
+        {
+          "name": "delivered_quantity_kg",
+          "type": "decimal",
+          "nullable": false
+        },
+        {
+          "name": "servings_delivered",
+          "type": "int",
+          "nullable": true
+        },
+        {
+          "name": "meals_saved",
+          "type": "decimal",
+          "nullable": false
+        },
+        {
+          "name": "co2e_kg_estimate",
+          "type": "decimal",
+          "nullable": true
+        },
+        {
+          "name": "zone",
+          "type": "string",
+          "nullable": false
+        },
+        {
+          "name": "delivered_at",
+          "type": "datetime",
+          "nullable": false
+        }
+      ],
+      "persona_access": {
+        "Caterer Manager": "read",
+        "NGO / Shelter / Community Kitchen Coordinator": "read",
+        "Volunteer Driver": "none",
+        "CSR Sponsor": "read",
+        "Internal Platform Admin": "full"
+      }
+    },
+    {
+      "name": "assumption_sets",
+      "fields": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "nullable": false,
+          "pk": true
+        },
+        {
+          "name": "created_at",
+          "type": "datetime",
+          "nullable": false,
+          "default": "now"
+        },
+        {
+          "name": "updated_at",
+          "type": "datetime",
+          "nullable": false,
+          "default": "now"
+        },
+        {
+          "name": "version",
+          "type": "int",
+          "nullable": false,
+          "unique": true
+        },
+        {
+          "name": "kg_per_meal",
+          "type": "decimal",
+          "nullable": false,
+          "default": "0.4"
+        },
+        {
+          "name": "emission_factor_kg_co2e_per_kg",
+          "type": "decimal",
+          "nullable": true
+        },
+        {
+          "name": "rule_table_version",
+          "type": "int",
+          "nullable": false
+        },
+        {
+          "name": "published_at",
+          "type": "datetime",
+          "nullable": false
+        },
+        {
+          "name": "published_by_user_id",
+          "type": "uuid",
+          "nullable": false,
+          "fk": "users.id"
+        },
+        {
+          "name": "notes",
+          "type": "text",
+          "nullable": true
+        }
+      ],
+      "persona_access": {
+        "Caterer Manager": "read",
+        "NGO / Shelter / Community Kitchen Coordinator": "read",
+        "Volunteer Driver": "none",
+        "CSR Sponsor": "read",
+        "Internal Platform Admin": "full"
+      }
+    },
+    {
+      "name": "rule_tables",
+      "fields": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "nullable": false,
+          "pk": true
+        },
+        {
+          "name": "created_at",
+          "type": "datetime",
+          "nullable": false,
+          "default": "now"
+        },
+        {
+          "name": "updated_at",
+          "type": "datetime",
+          "nullable": false,
+          "default": "now"
+        },
+        {
+          "name": "version",
+          "type": "int",
+          "nullable": false
+        },
+        {
+          "name": "food_type",
+          "type": "string",
+          "nullable": false
+        },
+        {
+          "name": "storage",
+          "type": "enum(ambient|chilled|hot_holding)",
+          "nullable": false
+        },
+        {
+          "name": "max_hours_after_prep",
+          "type": "decimal",
+          "nullable": false
+        },
+        {
+          "name": "is_current",
+          "type": "boolean",
+          "nullable": false,
+          "default": "false"
+        },
+        {
+          "name": "published_by_user_id",
+          "type": "uuid",
+          "nullable": false,
+          "fk": "users.id"
+        }
+      ],
+      "persona_access": {
+        "Caterer Manager": "read",
+        "NGO / Shelter / Community Kitchen Coordinator": "read",
+        "Volunteer Driver": "none",
+        "CSR Sponsor": "read",
+        "Internal Platform Admin": "full"
+      }
+    },
+    {
+      "name": "flag_reviews",
+      "fields": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "nullable": false,
+          "pk": true
+        },
+        {
+          "name": "created_at",
+          "type": "datetime",
+          "nullable": false,
+          "default": "now"
+        },
+        {
+          "name": "updated_at",
+          "type": "datetime",
+          "nullable": false,
+          "default": "now"
+        },
+        {
+          "name": "listing_id",
+          "type": "uuid",
+          "nullable": false,
+          "fk": "listings.id"
+        },
+        {
+          "name": "offer_id",
+          "type": "uuid",
+          "nullable": true,
+          "fk": "offers.id"
+        },
+        {
+          "name": "raised_by_user_id",
+          "type": "uuid",
+          "nullable": false,
+          "fk": "users.id"
+        },
+        {
+          "name": "reason",
+          "type": "enum(flagged_listing|receiver_mismatch|receiver_report|locked_handover|guardrail_breach)",
+          "nullable": false
+        },
+        {
+          "name": "details",
+          "type": "text",
+          "nullable": true
+        },
+        {
+          "name": "status",
+          "type": "enum(open|resolved)",
+          "nullable": false,
+          "default": "open"
+        },
+        {
+          "name": "decision",
+          "type": "enum(none|keep|cancel_listing|unlock_handover|expire_listing)",
+          "nullable": false,
+          "default": "none"
+        },
+        {
+          "name": "decided_by_user_id",
+          "type": "uuid",
+          "nullable": true,
+          "fk": "users.id"
+        },
+        {
+          "name": "decided_at",
+          "type": "datetime",
+          "nullable": true
+        },
+        {
+          "name": "review_type",
+          "type": "String",
+          "nullable": true
+        }
+      ],
+      "persona_access": {
+        "Caterer Manager": "none",
+        "NGO / Shelter / Community Kitchen Coordinator": "read_write_own",
+        "Volunteer Driver": "none",
+        "CSR Sponsor": "none",
+        "Internal Platform Admin": "full"
+      }
+    },
+    {
+      "name": "agent_calls",
+      "fields": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "nullable": false,
+          "pk": true
+        },
+        {
+          "name": "created_at",
+          "type": "datetime",
+          "nullable": false,
+          "default": "now"
+        },
+        {
+          "name": "updated_at",
+          "type": "datetime",
+          "nullable": false,
+          "default": "now"
+        },
+        {
+          "name": "feature",
+          "type": "enum(intake|report_wording)",
+          "nullable": false
+        },
+        {
+          "name": "status",
+          "type": "enum(ok|invalid_output|timeout|fallback_used|rejected_banned_claim|rejected_injection)",
+          "nullable": false
+        },
+        {
+          "name": "listing_id",
+          "type": "uuid",
+          "nullable": true,
+          "fk": "listings.id"
+        },
+        {
+          "name": "prompt_version",
+          "type": "string",
+          "nullable": false
+        },
+        {
+          "name": "model",
+          "type": "string",
+          "nullable": false
+        },
+        {
+          "name": "input",
+          "type": "json",
+          "nullable": false
+        },
+        {
+          "name": "output",
+          "type": "json",
+          "nullable": true
+        },
+        {
+          "name": "input_tokens",
+          "type": "int",
+          "nullable": false,
+          "default": "0"
+        },
+        {
+          "name": "output_tokens",
+          "type": "int",
+          "nullable": false,
+          "default": "0"
+        },
+        {
+          "name": "cost_usd",
+          "type": "decimal",
+          "nullable": true
+        },
+        {
+          "name": "called_at",
+          "type": "datetime",
+          "nullable": false
+        },
+        {
+          "name": "reviewed_at",
+          "type": "DateTime",
+          "nullable": true
+        }
+      ],
+      "persona_access": {
+        "Caterer Manager": "none",
+        "NGO / Shelter / Community Kitchen Coordinator": "none",
+        "Volunteer Driver": "none",
+        "CSR Sponsor": "none",
+        "Internal Platform Admin": "full"
+      }
+    }
+  ]
+}
