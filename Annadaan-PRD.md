@@ -1,20 +1,21 @@
-&#91;image: Annadaan — Feed people, not landfills.\]
+![Annadaan — Feed people, not landfills.](public/Annadaan-logo.png)
 
 # Annadaan — Product Requirements Document
 
-Nov 21, 2026 · @Soumya
+Author and product owner: Soumya
 
-**Author and product owner:** @Soumya · **Current version:** 1.4
+**Author and product owner:** @Soumya · **Current version:** 1.5
 
 | Version | Date | Author | Status | Changes |
 | --- | --- | --- | --- | --- |
-| 1.4 | Nov 22, 2026 | @Soumya | Final for MVP (baseline) | Updated to match the build: AI post parsing on Groq (Qwen 3.8 27B, fallback gpt-oss-120b) with a code-based allergen map; golden smoke-set results; Vite + React on Vercel with browser storage (database deferred); public repo under Apache-2.0; open questions Q2, Q3 and Q11 answered |
+| 1.5 | Nov 23, 2026 | @Soumya | Final for MVP submission | Live at annadaan-three.vercel.app. AI-fill fixes after live testing: times are clock-only and must match the donor's words (date added in code); every AI fill resets the form; no default quantity. Golden set grown to 22 cases (2 time cases). 84 unit tests passing. Demo video recorded |
+| 1.4 | Nov 22, 2026 | @Soumya | Superseded by 1.5 | Updated to match the build: AI post parsing on Groq (Qwen 3.8 27B, fallback gpt-oss-120b) with a code-based allergen map; golden smoke-set results; Vite + React on Vercel with browser storage (database deferred); public repo under Apache-2.0; open questions Q2, Q3 and Q11 answered |
 | 1.3 | Nov 22, 2026 | @Soumya | Superseded by 1.4 | MVP scope cut: handover code moved into the MVP; scheduler-based automation, notifications, volunteer self-serve pickups and listing splits deferred to the hardening phase and pilot (about 840k tokens saved) |
 | 1.2 | Nov 22, 2026 | @Soumya | Superseded by 1.3 | Food safety requirements added: FSSAI-verified donors and receivers, handover temperature, donation records (FR-17 to FR-22) |
 | 1.1 | Nov 21, 2026 | @Soumya | Draft | Launch city changed to Bhubaneswar; AI evaluations added (golden dataset, AI failure handling, cost at scale) |
 | 1.0 | Nov 21, 2026 | @Soumya | Draft | First draft |
 
-This PRD is a living document. Version 1.4 is the final baseline for the MVP and the hackathon demo; any change after it is logged here as version 1.5 onwards, with the date and the reason.
+This PRD is a living document. Version 1.5 is the final baseline for the MVP and the hackathon submission; any change after it is logged here as version 1.6 onwards, with the date and the reason.
 
 ## Overview
 
@@ -155,7 +156,21 @@ One listing moves from a caterer's phone to a receiver's kitchen in six steps, w
 5. **Collect (volunteer):** the volunteer enters the donor's one-time code at handover.
 6. **Deliver and count (receiver, system):** the receiver confirms servings received; impact is recorded and appears in the reports.
 
-&#91;embedded content: Listing status lifecycle · 6 main states, 1 loop, expiry\]
+```mermaid
+stateDiagram-v2
+    [*] --> Draft
+    Draft --> Posted: donor confirms (AI-parsed post)
+    Posted --> Offered: top match sent
+    Offered --> Posted: declined or 5-min timeout
+    Offered --> Claimed: receiver accepts
+    Claimed --> Collected: handover code
+    Collected --> Delivered: quantity confirmed
+    Posted --> Expired: deadline passed
+    Offered --> Expired: deadline passed
+    Claimed --> Expired: deadline passed
+    Posted --> Cancelled: donor cancels
+    Delivered --> [*]
+```
 
 Delivery is reached only through a claim; any listing still unclaimed or undelivered at its deadline expires. A donor can cancel while a listing is Posted, and a claim whose ETA would miss the deadline is re-offered.
 
@@ -201,7 +216,21 @@ Live lookup against the FSSAI licensing portal is planned for the hardening phas
 
 Five agents run under one orchestrator; only two use an LLM, so deadlines and matching stay predictable, testable and cheap.
 
-&#91;embedded content: Agent architecture · 3 apps, orchestrator, 5 agents, database\]
+```mermaid
+flowchart TD
+    A1[Donor app] --> O
+    A2[Receiver and volunteer app] --> O
+    A3[Impact and sponsor dashboard] --> O
+    O[Orchestrator: status state machine, offer timers, expiry, decision log] --> AG
+    subgraph AG[Agents]
+        I[Intake Agent - LLM: text or voice post to items, quantity, pickup-by, storage, allergens]
+        S[Safety and Handling Agent - Rules: consume-by deadline, handling card, disclaimer]
+        M[Matching Agent - Rules: filter and score receivers and volunteers, with a reason]
+        C[Coordination Agent - Rules: offers, cascade, escalation, expiry]
+        P[Impact Agent - Rules + LLM: meals, kg, CO2e; weekly report wording]
+    end
+    AG --> DB[(Database: listings, matches, status events, impact records, assumption versions)]
+```
 
 Highlighted agents call an LLM. Every agent has a typed input and output schema, a list of things it must never do, a fallback when it fails, and at least five test cases.
 
@@ -344,6 +373,8 @@ No build is deployed unless the LLM features pass a hand-checked golden dataset;
 
 What I learned: the model extracted every dish, quantity and time correctly but missed implicit allergens (paneer, kheer) in an early run. I fixed this with a food-to-allergen map in code, which only ever adds allergens to the AI's list and never removes one; mapped allergens show as "Possible allergen — confirm with donor". The eval runs cases one at a time with a 10-second gap to stay within the free tier's tokens-per-minute limit. The full 105-case golden set remains due by Dec 6.
 
+**Live testing (Nov 22–23, 2026, annadaan-three.vercel.app)** found three AI-fill bugs the golden set had not covered: a model-invented date ("2024-05-23") for "before 10:30 pm", values carried over between AI fills, and a default 5 kg left when only plates or litres were given. Fixes: the model returns clock times only, each time must match the donor's own words (including am/pm), and today's date is added in code; every fill resets the form; quantity stays empty unless the donor states kilograms. Two time cases (g21, g22) were added to the golden set, and 12 unit tests cover the fixes. Re-tested live: all three posts now fill correctly.
+
 ### 5.9 AI features: when AI is wrong, how users check, what it costs
 
 The AI only drafts; a person or a code check confirms every AI output before anyone acts on it, so an AI mistake costs a correction, not a meal. Matching, deadlines and impact numbers are plain code, not AI.
@@ -441,7 +472,15 @@ The biggest risks are food missing its deadline and a solo builder running out o
 
 The hackathon demo is Nov 22, 2026 (end of day); the proposed Bhubaneswar launch is Feb 15, 2027, after validation, hardening and a 4-week closed pilot. Dates after the demo are my current plan; I will confirm them at the end of the validation phase.
 
-&#91;embedded content: Rollout plan · 6 phases and the demo milestone (proposed dates)\]
+| Phase | Dates |
+| --- | --- |
+| Hackathon demo | Nov 22, 2026 |
+| Validate | Nov 23 – Dec 6, 2026 |
+| Harden for pilot | Dec 7 – Dec 27, 2026 |
+| Closed pilot | Jan 4 – Jan 31, 2027 |
+| Go / no-go review | Feb 8, 2027 |
+| Bhubaneswar launch | Feb 15, 2027 |
+| Add donor types | Mar 1 – Mar 31, 2027 |
 
 **Today: hackathon demo scope**
 
@@ -472,7 +511,7 @@ Demo the core loop end to end; add a stretch feature only if the core is deploye
 
 **Deferred from the MVP (v1.3 scope cut)**
 
-I kept an item in the MVP only if a stakeholder can see it in a 3-minute demo, it protects the core story (fast, responsible, measurable food rescue), and it fits today's time and tokens. Timer-driven features fail the first test, because nobody waits 5 minutes during a pitch. Deferring these six saves about 840k tokens.
+I kept an item in the MVP only if a stakeholder can see it in a 3-minute demo, it protects the core story (fast, responsible, measurable food rescue), and it fits today's time and tokens. Timer-driven features fail the first test, because nobody waits 5 minutes during a pitch. Deferring the first six saved about 840k tokens; the last three were added in v1.4.
 
 | Deferred item | Requirement | Est. tokens | What the demo shows instead | Built in |
 | --- | --- | --- | --- | --- |
